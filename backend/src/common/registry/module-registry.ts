@@ -19,6 +19,12 @@ export class ModuleRegistry<TModule = unknown> {
       .map((entry) => entry.module);
   }
 
+  list(tag?: string): Array<{ id: string; tags: string[] }> {
+    return [...this.entries.entries()]
+      .filter(([, entry]) => (tag === undefined ? true : entry.tags.includes(tag)))
+      .map(([id, entry]) => ({ id, tags: [...entry.tags] }));
+  }
+
   has(id: string): boolean {
     return this.entries.has(id);
   }

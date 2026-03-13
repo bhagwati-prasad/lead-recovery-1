@@ -7,6 +7,7 @@ import { CorrelationIdService } from './common/logger/correlation-id.service';
 async function bootstrap(): Promise<void> {
   const app = await NestFactory.create(AppModule, { bufferLogs: true });
   app.setGlobalPrefix('api');
+  app.enableCors();
 
   const configService = app.get(AppConfigService);
   const correlationIdService = app.get(CorrelationIdService);

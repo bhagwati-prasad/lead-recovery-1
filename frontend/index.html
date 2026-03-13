@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lead Recovery - Phase 1 Frontend</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="layout">
+      <header class="hero card">
+        <p class="eyebrow">Lead Recovery</p>
+        <h1>Phase 1 Frontend Scaffold</h1>
+        <p class="subtext">Vanilla JS console for health checks and workflow module execution.</p>
+      </header>
+
+      <section class="card">
+        <h2>Backend Connection</h2>
+        <label for="apiBaseUrl">API Base URL</label>
+        <input id="apiBaseUrl" type="text" value="http://localhost:3000/api" />
+        <div class="actions">
+          <button id="btnHealth" type="button">Check Health</button>
+          <button id="btnLoadModules" type="button" class="secondary">Load Workflow Modules</button>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Execute Workflow Module</h2>
+        <label for="moduleId">Module ID</label>
+        <select id="moduleId"></select>
+
+        <label for="moduleInput">Module Input (JSON)</label>
+        <textarea id="moduleInput" rows="8">{
+  "leadId": "lead-001"
+}</textarea>
+
+        <label for="executionContext">Execution Context (JSON, optional)</label>
+        <textarea id="executionContext" rows="7">{
+  "customerId": "cust-001",
+  "funnelId": "funnel-001",
+  "stageId": "phase-1"
+}</textarea>
+
+        <div class="actions">
+          <button id="btnExecute" type="button">Execute Module</button>
+        </div>
+      </section>
+
+      <section class="card output">
+        <h2>Response</h2>
+        <pre id="responseBox">No requests yet.</pre>
+      </section>
+    </main>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
