@@ -40,7 +40,7 @@ describe('AppLoggerService', () => {
     expect(serialized).toContain('*******arma');
     expect(serialized).toContain('*********0001');
     expect(serialized).toContain('************.com');
-  });
+  });""
 
   it('includes correlation id when present', () => {
     const configService = {
