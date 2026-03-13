@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { AnalyticsPipeline } from './analytics-pipeline';
 import { InMemoryAnalyticsStore } from './in-memory-analytics-store';
 
 export type AnalyticsEvent =
@@ -11,9 +12,13 @@ export type AnalyticsEvent =
 
 @Injectable()
 export class EventBus {
-  constructor(private readonly analyticsStore: InMemoryAnalyticsStore) {}
+  constructor(
+    private readonly analyticsStore: InMemoryAnalyticsStore,
+    private readonly analyticsPipeline: AnalyticsPipeline,
+  ) {}
 
   emit(event: AnalyticsEvent): void {
     this.analyticsStore.recordEvent(event);
+    this.analyticsPipeline.process(event);
   }
 }

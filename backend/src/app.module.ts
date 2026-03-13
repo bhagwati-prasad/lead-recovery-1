@@ -7,11 +7,14 @@ import { HealthModule } from './health/health.module';
 import { CRMAdapterModule } from './adapters/crm/crm-adapter.module';
 import { CallInitiationModule } from './modules/call-initiation/call-initiation.module';
 import { CallPreparationModule } from './modules/call-preparation/call-preparation.module';
+import { AccomplishmentAssessmentModule } from './modules/accomplishment-assessment/accomplishment-assessment.module';
 import { ConversationLoggingModule } from './modules/conversation-logging/conversation-logging.module';
 import { ConversationLoopModule } from './modules/conversation-loop/conversation-loop.module';
 import { CustomerDataRetrievalModule } from './modules/customer-data-retrieval/customer-data-retrieval.module';
 import { CustomerContextAcquisitionModule } from './modules/customer-context-acquisition/customer-context-acquisition.module';
 import { ExceptionHandlingModule } from './modules/exception-handling/exception-handling.module';
+import { EscalationModule } from './modules/escalation/escalation.module';
+import { ObjectionsModule } from './modules/objections/objections.module';
 import { ResponseProcessingModule } from './modules/response-processing/response-processing.module';
 import { WelcomeMessageModule } from './modules/welcome-message/welcome-message.module';
 import { WorkflowModule } from './workflow/workflow.module';
@@ -25,6 +28,7 @@ import { WorkflowModule } from './workflow/workflow.module';
     ModuleRegistryModule,
     HealthModule,
     WorkflowModule,
+    AccomplishmentAssessmentModule,
     CustomerDataRetrievalModule,
     CustomerContextAcquisitionModule,
     CallPreparationModule,
@@ -34,6 +38,8 @@ import { WorkflowModule } from './workflow/workflow.module';
     ConversationLoopModule,
     ExceptionHandlingModule,
     ConversationLoggingModule,
+    EscalationModule,
+    ObjectionsModule,
   ],
   exports: [ModuleRegistryModule, CRMAdapterModule],
 })

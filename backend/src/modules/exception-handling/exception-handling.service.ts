@@ -8,6 +8,7 @@ import { WorkflowModule } from '../../common/interfaces/workflow-module.interfac
 import { AppLoggerService } from '../../common/logger/app-logger.service';
 import { TranscriptEntry } from '../../common/models/call-session.model';
 import { Objection } from '../../common/models/funnel.model';
+import { EscalationService } from '../../services/escalation.service';
 import { ConversationStrategy } from '../phase2.types';
 
 export type ExceptionAction = 'none' | 'steer' | 'redirect' | 'escalate';
@@ -36,6 +37,7 @@ export class ExceptionHandlingService
 
   constructor(
     @Inject(CRM_ADAPTER) private readonly crmAdapter: CRMAdapter,
+    private readonly escalationService: EscalationService,
     private readonly loggerFactory: AppLoggerService,
   ) {
     this.logger = this.loggerFactory.createLogger(this.id);
@@ -52,12 +54,26 @@ export class ExceptionHandlingService
     const lastCustomerMessage = [...input.currentTranscript].reverse().find((entry) => entry.speaker === 'customer');
 
     if (lastCustomerMessage && /\b(human|person|agent|representative)\b/i.test(lastCustomerMessage.text)) {
-      await this.crmAdapter.updateLeadStatus(input.leadId, 'escalated');
+      await this.escalationService.escalate({
+        leadId: input.leadId,
+        callSessionId: 'unknown',
+        reason: 'customer requested a human agent',
+        deviationSignals: [{ type: 'explicit-human-request', confidence: 1, evidenceTurns: [input.intentHistory.length] }],
+        transcript: input.currentTranscript.map((entry) => `${entry.speaker}: ${entry.text}`),
+        topObjections: input.detectedObjections.slice(0, 3),
+      });
       return this.buildEscalation('customer requested a human agent');
     }
 
     if (repeatedObjection && repeatedObjection.count >= 3) {
-      await this.crmAdapter.updateLeadStatus(input.leadId, 'escalated');
+      await this.escalationService.escalate({
+        leadId: input.leadId,
+        callSessionId: 'unknown',
+        reason: `repeated objection detected: ${repeatedObjection.id}`,
+        deviationSignals: [{ type: 'circular-objection', confidence: 0.9, evidenceTurns: [input.intentHistory.length] }],
+        transcript: input.currentTranscript.map((entry) => `${entry.speaker}: ${entry.text}`),
+        topObjections: input.detectedObjections.slice(0, 3),
+      });
       return this.buildEscalation(`repeated objection detected: ${repeatedObjection.id}`);
     }
 

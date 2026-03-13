@@ -9,6 +9,7 @@ import { WorkflowModule } from '../../common/interfaces/workflow-module.interfac
 import { AppLoggerService } from '../../common/logger/app-logger.service';
 import { CallSession, TranscriptEntry } from '../../common/models/call-session.model';
 import { Objection } from '../../common/models/funnel.model';
+import { PendingObjectionQueueService } from '../../services/pending-objection-queue.service';
 import { AssessmentResult } from '../phase2.types';
 
 export interface ConversationLoggingInput extends ModuleInput {
@@ -41,6 +42,7 @@ export class ConversationLoggingService
   constructor(
     private readonly analyticsStore: InMemoryAnalyticsStore,
     private readonly eventBus: EventBus,
+    private readonly pendingObjectionQueueService: PendingObjectionQueueService,
     private readonly loggerFactory: AppLoggerService,
   ) {
     this.logger = this.loggerFactory.createLogger(this.id);
@@ -75,6 +77,17 @@ export class ConversationLoggingService
     const events = this.buildEvents(logId, input, outcome);
     for (const event of events) {
       this.eventBus.emit(event);
+    }
+
+    const unknownObjections = input.detectedObjections.filter((objection) => objection.id.startsWith('unknown'));
+    for (const objection of unknownObjections) {
+      this.pendingObjectionQueueService.enqueue({
+        callSessionId: input.callSessionId,
+        funnelId: input.funnelId,
+        stageId: input.stageId,
+        customerText: objection.description,
+        similarObjectionIds: [],
+      });
     }
 
     this.logger.info('Conversation logged', {

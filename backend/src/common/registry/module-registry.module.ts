@@ -1,4 +1,6 @@
 import { Module } from '@nestjs/common';
+import { AccomplishmentAssessmentModule } from '../../modules/accomplishment-assessment/accomplishment-assessment.module';
+import { AccomplishmentAssessmentService } from '../../modules/accomplishment-assessment/accomplishment-assessment.service';
 import { CallInitiationModule } from '../../modules/call-initiation/call-initiation.module';
 import { CallInitiationService } from '../../modules/call-initiation/call-initiation.service';
 import { CallPreparationModule } from '../../modules/call-preparation/call-preparation.module';
@@ -22,6 +24,7 @@ import { ModuleRegistry } from './module-registry';
 @Module({
   imports: [
     CustomerDataRetrievalModule,
+    AccomplishmentAssessmentModule,
     CustomerContextAcquisitionModule,
     CallPreparationModule,
     CallInitiationModule,
@@ -36,6 +39,7 @@ import { ModuleRegistry } from './module-registry';
       provide: ModuleRegistry,
       inject: [
         CustomerDataRetrievalService,
+        AccomplishmentAssessmentService,
         CustomerContextAcquisitionService,
         CallPreparationService,
         CallInitiationService,
@@ -47,6 +51,7 @@ import { ModuleRegistry } from './module-registry';
       ],
       useFactory: (
         customerDataRetrievalService: CustomerDataRetrievalService,
+        accomplishmentAssessmentService: AccomplishmentAssessmentService,
         customerContextAcquisitionService: CustomerContextAcquisitionService,
         callPreparationService: CallPreparationService,
         callInitiationService: CallInitiationService,
@@ -58,6 +63,7 @@ import { ModuleRegistry } from './module-registry';
       ) => {
         const registry = new ModuleRegistry();
         registry.register(customerDataRetrievalService.id, customerDataRetrievalService, ['workflow']);
+        registry.register(accomplishmentAssessmentService.id, accomplishmentAssessmentService, ['workflow', 'phase-4']);
         registry.register(customerContextAcquisitionService.id, customerContextAcquisitionService, ['workflow']);
         registry.register(callPreparationService.id, callPreparationService, ['workflow', 'phase-2']);
         registry.register(callInitiationService.id, callInitiationService, ['workflow', 'phase-2']);
