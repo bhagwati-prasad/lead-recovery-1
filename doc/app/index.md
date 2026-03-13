@@ -13,5 +13,7 @@ An AI-powered system to recover lost leads and re-engage them in sales funnels.
 - [Call Workflow Plan](conversation.md)
 
 ## Tech Stack
+- NestJS (backend)
+- HTML, CSS, and vanilla JavaScript (frontend)
 - Sarvam AI
 - Eleven Labs

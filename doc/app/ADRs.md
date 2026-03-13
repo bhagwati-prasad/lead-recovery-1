@@ -3,9 +3,9 @@
 ## ADR 1: Tech Stack Selection
 **Date:** March 10, 2026  
 **Status:** Accepted  
-**Context:** Need AI and voice services for lead recovery calls.  
-**Decision:** Use Sarvam AI for conversation AI and Eleven Labs for text-to-speech/voice. Start with minimum services for MVP, club internal steps.  
-**Consequences:** Enables rapid prototyping; potential vendor lock-in; evaluate alternatives later.
+**Context:** Need a stable application stack for a modular lead recovery platform while keeping third-party service choices outside architecture decisions.  
+**Decision:** Use NestJS for the backend application layer and HTML, CSS, and vanilla JavaScript for the frontend. Keep third-party vendor selection outside ADRs and define provider-agnostic adapter interfaces for LLM, speech, and telephony capabilities.  
+**Consequences:** Backend gains a structured module system, DI, controllers, and testing conventions through NestJS; frontend remains framework-free and close to browser APIs; third-party services remain replaceable behind adapters.
 
 ## ADR 2: Modular Architecture
 **Date:** March 10, 2026  

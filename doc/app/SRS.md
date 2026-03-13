@@ -9,7 +9,7 @@ The system will ingest dropped lead data, score leads, initiate AI-driven calls,
 
 ## 2. Overall Description
 ### 2.1 Product Perspective
-Ancillary to sales funnels, integrating with Sarvam AI and Eleven Labs for AI and voice services.
+Ancillary to sales funnels, integrating with Sarvam AI and Eleven Labs for AI and voice services. The backend application shall use NestJS, and the frontend shall use HTML, CSS, and vanilla JavaScript.
 
 ### 2.2 User Characteristics
 - AI Agents: Automated entities handling calls.
@@ -63,7 +63,7 @@ Ancillary to sales funnels, integrating with Sarvam AI and Eleven Labs for AI an
 - Dashboard UI for monitoring.
 
 #### 3.3.1 User Interface Requirements
-The system shall provide a web-based user interface designed to resemble Visual Studio Code (online version), with responsive layout, sidebar navigation, and tabbed content areas. All icons shall be from Icons8. The UI shall be implemented using HTML and vanilla JavaScript only, leveraging standard web APIs for interactivity, without external frameworks or libraries.
+The system shall provide a web-based user interface designed to resemble Visual Studio Code (online version), with responsive layout, sidebar navigation, and tabbed content areas. All icons shall be from Icons8. The UI shall be implemented using HTML, CSS, and vanilla JavaScript only, leveraging standard web APIs for interactivity, without external frontend frameworks or libraries.
 
 ##### 3.3.1.1 General UI Components
 - **Layout**: Header with breadcrumb selector (Organization > Product > Funnel > Lead), sidebar with tabs, main content area with panels.
