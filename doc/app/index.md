@@ -10,6 +10,7 @@ An AI-powered system to recover lost leads and re-engage them in sales funnels.
 - [Architecture Decision Records (ADRs)](ADRs.md)
 - [Implementation Phases](Implementation_Phases.md)
 - [Original Plan](plan.md)
+- [Call Workflow Plan](conversation.md)
 
 ## Tech Stack
 - Sarvam AI
