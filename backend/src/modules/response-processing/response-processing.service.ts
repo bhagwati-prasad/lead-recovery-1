@@ -1,0 +1,152 @@
+import { Injectable } from '@nestjs/common';
+import { LocalAudioCache } from '../../adapters/audio-cache/local-audio-cache';
+import { LLMMessage } from '../../adapters/llm/llm-adapter.interface';
+import { MockLLMAdapter } from '../../adapters/llm/mock-llm-adapter';
+import { MockSTTAdapter } from '../../adapters/stt/mock-stt-adapter';
+import { MockTelephonyAdapter } from '../../adapters/telephony/mock-telephony-adapter';
+import { MockTTSAdapter } from '../../adapters/tts/mock-tts-adapter';
+import { WorkflowModuleError } from '../../common/errors/workflow-module.error';
+import { ExecutionContext } from '../../common/interfaces/execution-context.interface';
+import { ModuleInput, ModuleOutput, ValidationError } from '../../common/interfaces/module.types';
+import { WorkflowModule } from '../../common/interfaces/workflow-module.interface';
+import { AppLoggerService } from '../../common/logger/app-logger.service';
+import { TranscriptEntry } from '../../common/models/call-session.model';
+import { Objection } from '../../common/models/funnel.model';
+import { IntentClassifierService } from '../../services/intent-classifier.service';
+import { ConversationStrategy } from '../phase2.types';
+
+export interface ResponseProcessingInput extends ModuleInput {
+  providerCallId: string;
+  audioBuffer: Buffer;
+  conversationHistory: TranscriptEntry[];
+  conversationStrategy: ConversationStrategy;
+}
+
+export interface ResponseProcessingOutput extends ModuleOutput {
+  customerText: string;
+  agentText: string;
+  agentAudioRef: string;
+  intentLabel: string;
+  detectedObjection?: Objection;
+  turnNumber: number;
+}
+
+@Injectable()
+export class ResponseProcessingService
+  implements WorkflowModule<ResponseProcessingInput, ResponseProcessingOutput>
+{
+  readonly id = 'response-processing';
+  private readonly logger: ReturnType<AppLoggerService['createLogger']>;
+
+  constructor(
+    private readonly sttAdapter: MockSTTAdapter,
+    private readonly llmAdapter: MockLLMAdapter,
+    private readonly ttsAdapter: MockTTSAdapter,
+    private readonly telephonyAdapter: MockTelephonyAdapter,
+    private readonly audioCache: LocalAudioCache,
+    private readonly intentClassifierService: IntentClassifierService,
+    private readonly loggerFactory: AppLoggerService,
+  ) {
+    this.logger = this.loggerFactory.createLogger(this.id);
+  }
+
+  async execute(input: ResponseProcessingInput, _context: ExecutionContext): Promise<ResponseProcessingOutput> {
+    const validationErrors = this.validateInputs(input);
+    if (validationErrors.length > 0) {
+      throw new WorkflowModuleError(validationErrors[0].message, this.id);
+    }
+
+    const sttResult = await this.sttAdapter.transcribe({
+      audioBuffer: input.audioBuffer,
+      language: input.conversationStrategy.agentPersona.language,
+      sampleRateHz: 16000,
+      encoding: 'wav',
+    });
+
+    const intent = this.intentClassifierService.classify(
+      sttResult.transcript,
+      input.conversationStrategy.anticipatedObjections,
+    );
+
+    const historyMessages: LLMMessage[] = input.conversationHistory.slice(-10).map((entry) => ({
+      role: entry.speaker === 'agent' ? 'assistant' : 'user',
+      content: entry.text,
+    } as LLMMessage));
+
+    const messages: LLMMessage[] = [
+      { role: 'system', content: input.conversationStrategy.systemPrompt },
+      ...historyMessages,
+      { role: 'user', content: sttResult.transcript },
+    ];
+
+    const llmResult = await this.llmAdapter.complete({
+      messages,
+      maxTokens: 256,
+      temperature: 0.2,
+    });
+
+    const synthesized = await this.ttsAdapter.synthesize({
+      text: llmResult.content,
+      voiceId: input.conversationStrategy.agentPersona.voiceId,
+      language: input.conversationStrategy.agentPersona.language,
+    });
+
+    const cacheHit = await this.audioCache.get(synthesized.cacheKey);
+    if (!cacheHit) {
+      await this.audioCache.put(synthesized.cacheKey, {
+        buffer: synthesized.audioBuffer,
+        durationSeconds: synthesized.durationSeconds,
+        reference: `audio://${synthesized.cacheKey}`,
+      });
+    }
+
+    await this.telephonyAdapter.streamAudio(input.providerCallId, synthesized.audioBuffer);
+
+    const turnNumber = input.conversationHistory.filter((entry) => entry.speaker === 'customer').length + 1;
+    const output: ResponseProcessingOutput = {
+      customerText: sttResult.transcript,
+      agentText: llmResult.content,
+      agentAudioRef: `audio://${synthesized.cacheKey}`,
+      intentLabel: intent.intentLabel,
+      detectedObjection: intent.detectedObjection,
+      turnNumber,
+    };
+
+    this.logger.info('Processed conversation turn', {
+      providerCallId: input.providerCallId,
+      turnNumber,
+      intentLabel: output.intentLabel,
+    });
+
+    return output;
+  }
+
+  validateInputs(input: ResponseProcessingInput): ValidationError[] {
+    const errors: ValidationError[] = [];
+    if (typeof input.providerCallId !== 'string' || input.providerCallId.trim().length === 0) {
+      errors.push({ field: 'providerCallId', message: 'providerCallId is required' });
+    }
+    if (!Buffer.isBuffer(input.audioBuffer)) {
+      errors.push({ field: 'audioBuffer', message: 'audioBuffer must be a Buffer' });
+    }
+    if (!Array.isArray(input.conversationHistory)) {
+      errors.push({ field: 'conversationHistory', message: 'conversationHistory must be an array' });
+    }
+    if (!input.conversationStrategy || typeof input.conversationStrategy.systemPrompt !== 'string') {
+      errors.push({ field: 'conversationStrategy', message: 'conversationStrategy is required' });
+    }
+    return errors;
+  }
+
+  getDependencies(): string[] {
+    return ['welcome-message'];
+  }
+
+  isFusable(adjacentModuleId: string): boolean {
+    return adjacentModuleId === 'conversation-loop';
+  }
+
+  canSkip(_context: ExecutionContext): boolean {
+    return false;
+  }
+}

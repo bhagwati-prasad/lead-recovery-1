@@ -7,7 +7,6 @@ const responseBox = document.getElementById('responseBox');
 const healthButton = document.getElementById('btnHealth');
 const loadModulesButton = document.getElementById('btnLoadModules');
 const executeButton = document.getElementById('btnExecute');
-const simulateButton = document.getElementById('btnSimulate');
 
 const FALLBACK_MODULES = ['customer-data-retrieval', 'customer-context-acquisition'];
 
@@ -109,32 +108,6 @@ executeButton.addEventListener('click', async () => {
     renderResponse('Module execution response', result);
   } catch (error) {
     renderResponse('Module execution failed', { error: error.message });
-  }
-});
-
-simulateButton.addEventListener('click', async () => {
-  try {
-    const inputPayload = readJson(moduleInput.value, 'Module Input');
-    const leadId = typeof inputPayload.leadId === 'string' && inputPayload.leadId.trim().length > 0
-      ? inputPayload.leadId
-      : 'lead_001';
-
-    const scriptedUtterances = [
-      'I did not receive otp',
-      'yes, continue',
-    ];
-
-    const result = await requestJson('/workflow/simulate-call', {
-      method: 'POST',
-      body: JSON.stringify({
-        leadId,
-        scriptedCustomerUtterances: scriptedUtterances,
-      }),
-    });
-
-    renderResponse('Phase 2 simulated call response', result);
-  } catch (error) {
-    renderResponse('Phase 2 simulation failed', { error: error.message });
   }
 });
 

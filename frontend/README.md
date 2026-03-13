@@ -45,6 +45,7 @@ Default API base URL in the page is:
 - `GET /api/health`
 - `GET /api/workflow/modules`
 - `POST /api/workflow/execute`
+- `POST /api/workflow/simulate-call`
 
 ### Sample execute payload
 
@@ -52,7 +53,7 @@ Default API base URL in the page is:
 {
   "moduleId": "customer-data-retrieval",
   "input": {
-    "leadId": "lead-001"
+    "leadId": "lead_001"
   },
   "context": {
     "customerId": "cust-001",

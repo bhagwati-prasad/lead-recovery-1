@@ -23,7 +23,7 @@
       <section class="card">
         <h2>Backend Connection</h2>
         <label for="apiBaseUrl">API Base URL</label>
-        <input id="apiBaseUrl" type="text" value="https://verbose-broccoli-q6grrx4p95f49j5-3000.app.github.dev/api" />
+        <input id="apiBaseUrl" type="text" value="http://localhost:3000/api" />
         <div class="actions">
           <button id="btnHealth" type="button">Check Health</button>
           <button id="btnLoadModules" type="button" class="secondary">Load Workflow Modules</button>
@@ -37,7 +37,7 @@
 
         <label for="moduleInput">Module Input (JSON)</label>
         <textarea id="moduleInput" rows="8">{
-  "leadId": "lead_001"
+  "leadId": "lead-001"
 }</textarea>
 
         <label for="executionContext">Execution Context (JSON, optional)</label>
@@ -49,7 +49,6 @@
 
         <div class="actions">
           <button id="btnExecute" type="button">Execute Module</button>
-          <button id="btnSimulate" type="button" class="secondary">Run Phase 2 Simulated Call</button>
         </div>
       </section>
 

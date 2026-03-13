@@ -13,7 +13,14 @@ import { ModuleInput, ModuleOutput } from '../common/interfaces/module.types';
 import { WorkflowModule } from '../common/interfaces/workflow-module.interface';
 import { AppLoggerService } from '../common/logger/app-logger.service';
 import { CorrelationIdService } from '../common/logger/correlation-id.service';
+import { TranscriptEntry } from '../common/models/call-session.model';
 import { ModuleRegistry } from '../common/registry/module-registry';
+import { CallInitiationInput, CallInitiationOutput } from '../modules/call-initiation/call-initiation.service';
+import { CallPreparationInput, CallPreparationOutput } from '../modules/call-preparation/call-preparation.service';
+import { ConversationLoopInput, ConversationLoopOutput } from '../modules/conversation-loop/conversation-loop.service';
+import { CustomerContextAcquisitionInput, CustomerContextAcquisitionOutput } from '../modules/customer-context-acquisition/customer-context-acquisition.service';
+import { CustomerDataRetrievalInput, CustomerDataRetrievalOutput } from '../modules/customer-data-retrieval/customer-data-retrieval.service';
+import { WelcomeMessageInput, WelcomeMessageOutput } from '../modules/welcome-message/welcome-message.service';
 
 interface ExecuteModuleRequest {
   moduleId: string;
@@ -29,6 +36,11 @@ interface ExecuteModuleRequest {
 interface ExecuteModuleResponse {
   moduleId: string;
   output: ModuleOutput;
+}
+
+interface SimulateCallRequest {
+  leadId: string;
+  scriptedCustomerUtterances?: string[];
 }
 
 @Controller('workflow')
@@ -75,6 +87,105 @@ export class WorkflowController {
     }
   }
 
+  @Post('simulate-call')
+  async simulateCall(@Body() requestBody: unknown): Promise<{
+    leadId: string;
+    callSessionId: string;
+    providerCallId: string;
+    endReason: string;
+    turnCount: number;
+    finalTranscript: TranscriptEntry[];
+    assessment: unknown;
+  }> {
+    const payload = this.validateSimulationRequest(requestBody);
+    const executionContext = this.createExecutionContext({
+      moduleId: 'simulate-call',
+      input: {
+        leadId: payload.leadId,
+      },
+    });
+
+    const dataRetrieval = this.moduleRegistry.get<
+      WorkflowModule<CustomerDataRetrievalInput, CustomerDataRetrievalOutput>
+    >('customer-data-retrieval');
+    const contextAcquisition = this.moduleRegistry.get<
+      WorkflowModule<CustomerContextAcquisitionInput, CustomerContextAcquisitionOutput>
+    >('customer-context-acquisition');
+    const callPreparation = this.moduleRegistry.get<WorkflowModule<CallPreparationInput, CallPreparationOutput>>(
+      'call-preparation',
+    );
+    const callInitiation = this.moduleRegistry.get<WorkflowModule<CallInitiationInput, CallInitiationOutput>>(
+      'call-initiation',
+    );
+    const welcomeMessage = this.moduleRegistry.get<WorkflowModule<WelcomeMessageInput, WelcomeMessageOutput>>(
+      'welcome-message',
+    );
+    const conversationLoop = this.moduleRegistry.get<WorkflowModule<ConversationLoopInput, ConversationLoopOutput>>(
+      'conversation-loop',
+    );
+
+    const retrievalOutput = await dataRetrieval.execute({ leadId: payload.leadId }, executionContext);
+    const contextOutput = await contextAcquisition.execute(
+      {
+        customerId: retrievalOutput.customer.id,
+        funnelId: retrievalOutput.lead.funnelId,
+      },
+      executionContext,
+    );
+    const preparationOutput = await callPreparation.execute(
+      {
+        customer: retrievalOutput.customer,
+        lead: retrievalOutput.lead,
+        funnelContext: contextOutput.funnelContext,
+      },
+      executionContext,
+    );
+    const initiationOutput = await callInitiation.execute(
+      {
+        customer: retrievalOutput.customer,
+        lead: retrievalOutput.lead,
+        callbackBaseUrl: 'http://localhost:3000/api',
+      },
+      executionContext,
+    );
+    const welcomeOutput = await welcomeMessage.execute(
+      {
+        providerCallId: initiationOutput.providerCallId,
+        customer: retrievalOutput.customer,
+        funnelContext: contextOutput.funnelContext,
+        agentPersona: preparationOutput.conversationStrategy.agentPersona,
+      },
+      executionContext,
+    );
+    const conversationOutput = await conversationLoop.execute(
+      {
+        providerCallId: initiationOutput.providerCallId,
+        callSessionId: initiationOutput.callSessionId,
+        conversationStrategy: preparationOutput.conversationStrategy,
+        initialTranscript: [
+          {
+            timestamp: welcomeOutput.deliveredAt,
+            speaker: 'agent',
+            text: welcomeOutput.welcomeText,
+            audioRef: welcomeOutput.welcomeAudioRef,
+          },
+        ],
+        scriptedCustomerUtterances: payload.scriptedCustomerUtterances,
+      },
+      executionContext,
+    );
+
+    return {
+      leadId: payload.leadId,
+      callSessionId: initiationOutput.callSessionId,
+      providerCallId: initiationOutput.providerCallId,
+      endReason: conversationOutput.endReason,
+      turnCount: conversationOutput.turnCount,
+      finalTranscript: conversationOutput.finalTranscript,
+      assessment: conversationOutput.assessment,
+    };
+  }
+
   private validateRequest(requestBody: unknown): ExecuteModuleRequest {
     if (!isRecord(requestBody)) {
       throw new BadRequestException('Request body must be an object');
@@ -110,6 +221,29 @@ export class WorkflowController {
       config: this.configService.getConfig(),
       logger: this.logger,
       stepOutputs: new Map(),
+    };
+  }
+
+  private validateSimulationRequest(requestBody: unknown): SimulateCallRequest {
+    if (!isRecord(requestBody)) {
+      throw new BadRequestException('Request body must be an object');
+    }
+    if (typeof requestBody.leadId !== 'string' || requestBody.leadId.trim().length === 0) {
+      throw new BadRequestException('leadId is required');
+    }
+    if (
+      requestBody.scriptedCustomerUtterances !== undefined
+      && (
+        !Array.isArray(requestBody.scriptedCustomerUtterances)
+        || requestBody.scriptedCustomerUtterances.some((entry) => typeof entry !== 'string')
+      )
+    ) {
+      throw new BadRequestException('scriptedCustomerUtterances must be an array of strings when provided');
+    }
+
+    return {
+      leadId: requestBody.leadId,
+      scriptedCustomerUtterances: requestBody.scriptedCustomerUtterances,
     };
   }
 }
