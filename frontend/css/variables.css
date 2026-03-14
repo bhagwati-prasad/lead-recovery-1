@@ -1,0 +1,120 @@
+:root {
+  --titlebar-bg: #3c3c3c;
+  --titlebar-fg: #cccccc;
+  --activitybar-bg: #333333;
+  --activitybar-fg: #ffffff66;
+  --activitybar-active-border: #0078d4;
+  --sidebar-bg: #252526;
+  --sidebar-border: #2b2b2b;
+  --editor-bg: #1e1e1e;
+  --editor-fg: #cccccc;
+  --editor-muted: #8a8a8a;
+  --panel-bg: #252526;
+  --panel-border: #3c3c3c;
+  --input-bg: #3c3c3c;
+  --input-fg: #cccccc;
+  --input-border: #3c3c3c;
+  --button-bg: #0e639c;
+  --button-hover: #1177bb;
+  --button-fg: #ffffff;
+  --button-secondary-bg: #3a3d41;
+  --button-secondary-hover: #45494e;
+  --table-row-hover: #2a2d2e;
+  --statusbar-bg: #007acc;
+  --statusbar-fg: #ffffff;
+  --focus-border: #007fd4;
+  --ok: #89d185;
+  --warn: #cca700;
+  --danger: #f14c4c;
+  --font-ui: 'Segoe UI', 'Ubuntu', 'Droid Sans', sans-serif;
+  --font-mono: 'Consolas', 'Courier New', monospace;
+  --text-primary: var(--editor-fg);
+  --text-muted: var(--editor-muted);
+  --border: var(--panel-border);
+  --surface-1: var(--panel-bg);
+  --surface-2: var(--sidebar-bg);
+}
+
+body {
+  min-height: 100vh;
+  background: var(--editor-bg);
+  color: var(--editor-fg);
+  font-family: var(--font-ui);
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+a {
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 1px solid var(--focus-border);
+  outline-offset: -1px;
+}
+
+:root[data-theme='light'] {
+  --titlebar-bg: #dddddd;
+  --titlebar-fg: #333333;
+  --activitybar-bg: #ffffff99;
+  --activitybar-fg: #2c2c2c;
+  --activitybar-active-border: #005fb8;
+  --sidebar-bg: #f3f3f3;
+  --sidebar-border: #e5e5e5;
+  --editor-bg: #ffffff;
+  --editor-fg: #333333;
+  --editor-muted: #616161;
+  --panel-bg: #f8f8f8;
+  --panel-border: #e5e5e5;
+  --input-bg: #ffffff;
+  --input-fg: #333333;
+  --input-border: #cecece;
+  --button-bg: #0e639c;
+  --button-hover: #1177bb;
+  --button-fg: #ffffff;
+  --button-secondary-bg: #f3f3f3;
+  --button-secondary-hover: #e8e8e8;
+  --table-row-hover: #f0f6ff;
+  --statusbar-bg: #007acc;
+  --statusbar-fg: #ffffff;
+  --focus-border: #005fb8;
+  --text-primary: var(--editor-fg);
+  --text-muted: var(--editor-muted);
+  --border: var(--panel-border);
+  --surface-1: var(--panel-bg);
+  --surface-2: var(--sidebar-bg);
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme]) {
+    --titlebar-bg: #dddddd;
+    --titlebar-fg: #333333;
+    --activitybar-bg: #2c2c2c;
+    --activitybar-fg: #ffffff99;
+    --activitybar-active-border: #005fb8;
+    --sidebar-bg: #f3f3f3;
+    --sidebar-border: #e5e5e5;
+    --editor-bg: #ffffff;
+    --editor-fg: #333333;
+    --editor-muted: #616161;
+    --panel-bg: #f8f8f8;
+    --panel-border: #e5e5e5;
+    --input-bg: #ffffff;
+    --input-fg: #333333;
+    --input-border: #cecece;
+    --button-bg: #0e639c;
+    --button-hover: #1177bb;
+    --button-fg: #ffffff;
+    --button-secondary-bg: #f3f3f3;
+    --button-secondary-hover: #e8e8e8;
+    --table-row-hover: #f0f6ff;
+    --statusbar-bg: #007acc;
+    --statusbar-fg: #ffffff;
+    --focus-border: #005fb8;
+    --text-primary: var(--editor-fg);
+    --text-muted: var(--editor-muted);
+    --border: var(--panel-border);
+    --surface-1: var(--panel-bg);
+    --surface-2: var(--sidebar-bg);
+  }
+}
