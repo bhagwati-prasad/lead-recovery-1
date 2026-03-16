@@ -1,0 +1,1952 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Icon Design Guidelines v3 — Illustrated Examples</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@300;400;500;600&display=swap');
+
+:root {
+--bg: #1e1e1e;
+--s1: #252526;
+--s2: #2d2d30;
+--s3: #333337;
+--s4: #3e3e42;
+--border: #3e3e42;
+--text: #d4d4d4;
+--dim: #858585;
+--muted: #555;
+--accent: #007acc;
+--teal: #4ec9b0;
+--green: #22c55e;
+--amber: #f59e0b;
+--red: #ef4444;
+--purple: #c586c0;
+--mono: 'JetBrains Mono', monospace;
+--sans: 'Inter', system-ui, sans-serif;
+--ok: #22c55e;
+--bad: #ef4444;
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;font-size:14px;}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.6;}
+
+/* ── Layout ── */
+.layout{display:flex;min-height:100vh;}
+.sidebar{
+width:230px;flex-shrink:0;position:sticky;top:0;height:100vh;
+background:var(--s1);border-right:1px solid var(--border);
+overflow-y:auto;padding:0 0 40px;
+scrollbar-width:thin;scrollbar-color:var(--s4) transparent;
+}
+.sidebar-head{
+padding:20px 18px 16px;
+border-bottom:1px solid var(--border);
+margin-bottom:8px;
+}
+.sidebar-head h1{font-family:var(--mono);font-size:12px;font-weight:700;color:#fff;letter-spacing:-0.3px;line-height:1.4;}
+.sidebar-head p{font-size:10px;color:var(--dim);font-family:var(--mono);margin-top:3px;}
+.nav-item{
+display:block;padding:7px 18px;font-size:11.5px;color:var(--dim);
+text-decoration:none;border-left:2px solid transparent;
+transition:all .12s;
+}
+.nav-item:hover{color:var(--text);background:var(--s2);border-left-color:var(--accent);}
+.nav-group-label{
+padding:16px 18px 5px;font-size:9px;font-family:var(--mono);
+font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+color:var(--muted);
+}
+
+.main{flex:1;overflow-x:hidden;max-width:calc(100vw - 230px);}
+
+/* ── Page header ── */
+.page-header{
+padding:36px 48px 28px;border-bottom:1px solid var(--border);
+background:var(--s1);
+}
+.page-header h1{font-family:var(--mono);font-size:20px;font-weight:700;color:#fff;letter-spacing:-.5px;}
+.page-header p{margin-top:8px;color:var(--dim);font-size:12.5px;max-width:640px;line-height:1.7;}
+.header-pills{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap;}
+
+/* ── Sections ── */
+section{padding:40px 48px;border-bottom:1px solid var(--border);}
+.section-title{
+font-family:var(--mono);font-size:10px;font-weight:700;
+letter-spacing:2px;text-transform:uppercase;color:var(--dim);
+padding-bottom:10px;border-bottom:1px solid var(--border);
+margin-bottom:24px;
+}
+.section-sub{
+font-size:13px;color:var(--dim);margin-bottom:24px;
+line-height:1.7;max-width:680px;
+}
+
+/* ── Pills ── */
+.pill{
+display:inline-flex;align-items:center;gap:5px;
+font-family:var(--mono);font-size:10px;font-weight:600;
+padding:3px 8px;border-radius:4px;letter-spacing:.3px;
+white-space:nowrap;
+}
+.pill-ok{background:rgba(34,197,94,.15);color:var(--green);border:1px solid rgba(34,197,94,.3);}
+.pill-bad{background:rgba(239,68,68,.12);color:var(--red);border:1px solid rgba(239,68,68,.3);}
+.pill-amber{background:rgba(245,158,11,.12);color:var(--amber);border:1px solid rgba(245,158,11,.3);}
+.pill-info{background:rgba(0,122,204,.15);color:#4fc1ff;border:1px solid rgba(0,122,204,.3);}
+.pill-neutral{background:rgba(255,255,255,.05);color:var(--dim);border:1px solid var(--border);}
+
+/* ── Rule rows (correct vs wrong) ── */
+.rule-row{
+background:var(--s1);border:1px solid var(--border);border-radius:8px;
+padding:20px 24px;margin-bottom:16px;
+}
+.rule-label{
+font-family:var(--mono);font-size:11px;font-weight:600;
+color:#fff;margin-bottom:16px;letter-spacing:.2px;
+}
+.rule-cols{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.col{background:var(--s2);border-radius:6px;padding:16px;border:1px solid var(--s4);}
+.col-correct{border-color:rgba(34,197,94,.2);}
+.col-wrong{border-color:rgba(239,68,68,.15);}
+.col-head{margin-bottom:12px;}
+.icon-stage{
+display:flex;gap:12px;flex-wrap:wrap;align-items:center;
+padding:16px;background:var(--s3);border-radius:5px;
+min-height:80px;justify-content:center;margin-bottom:10px;
+}
+.col-note{font-size:11.5px;color:var(--dim);line-height:1.6;}
+.extra-note{
+margin-top:12px;padding:10px 14px;border-radius:5px;
+background:rgba(255,255,255,.03);border-left:3px solid var(--accent);
+font-size:11.5px;color:var(--dim);line-height:1.6;
+}
+
+/* ── Demo rows ── */
+.demo-row{background:var(--s1);border:1px solid var(--border);border-radius:8px;padding:20px 24px;margin-bottom:16px;}
+.demo-label{font-family:var(--mono);font-size:11px;font-weight:600;color:#fff;margin-bottom:16px;}
+.demo-cols{display:flex;gap:16px;flex-wrap:wrap;}
+.demo-col{background:var(--s2);border-radius:6px;padding:16px;border:1px solid var(--s4);min-width:140px;flex:1;}
+
+/* ── SVG wrap ── */
+.svg-wrap{display:flex;flex-direction:column;align-items:center;gap:6px;}
+.svg-label{font-family:var(--mono);font-size:9.5px;color:var(--dim);text-align:center;}
+
+/* ── Code blocks ── */
+.code-block{
+background:var(--s2);border:1px solid var(--s4);border-radius:6px;
+padding:14px 16px;font-family:var(--mono);font-size:11px;color:#9CDCFE;
+overflow-x:auto;line-height:1.65;margin:12px 0;white-space:pre;
+}
+.code-block code{background:none;padding:0;}
+
+/* ── Size comparison ── */
+.size-compare{display:flex;align-items:center;gap:20px;flex-wrap:wrap;padding:16px;background:var(--s2);border-radius:8px;border:1px solid var(--s4);}
+.size-item{display:flex;flex-direction:column;align-items:center;gap:10px;}
+.size-label{display:flex;flex-direction:column;align-items:center;gap:4px;font-size:11px;color:var(--dim);text-align:center;}
+.size-equals{font-family:var(--mono);font-size:22px;color:var(--dim);padding:0 4px;}
+
+/* ── Corner grid ── */
+.corner-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+@media(max-width:900px){.corner-grid{grid-template-columns:repeat(2,1fr);}}
+.corner-case{background:var(--s2);border:1px solid var(--s4);border-radius:7px;padding:16px;display:flex;flex-direction:column;align-items:center;gap:10px;}
+.corner-label{width:100%;}
+.corner-note{font-size:11px;color:var(--dim);text-align:center;line-height:1.5;}
+
+/* ── DOM diagram ── */
+.dom-diagram{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+@media(max-width:800px){.dom-diagram{grid-template-columns:1fr;}}
+.dom-col{background:var(--s2);border:1px solid var(--s4);border-radius:7px;padding:16px;}
+.dom-title{margin-bottom:12px;}
+.dom-tree{font-family:var(--mono);font-size:10.5px;line-height:2;padding:10px;background:var(--s3);border-radius:5px;margin-bottom:10px;}
+.dom-node{padding-left:0;}
+.dom-symbol{color:#569CD6;}
+.dom-core{color:#4EC9B0;padding-left:14px;}
+.dom-badge{color:#22C55E;padding-left:14px;}
+.dom-path{color:#CE9178;padding-left:28px;}
+.dom-loose{color:#EF4444;padding-left:14px;}
+
+/* ── Badge catalog ── */
+.badge-grid{display:flex;flex-wrap:wrap;gap:12px;}
+.badge-item{
+background:var(--s2);border:1px solid var(--s4);border-radius:7px;
+padding:14px 12px;display:flex;flex-direction:column;
+align-items:center;gap:6px;min-width:100px;
+}
+.badge-name{font-family:var(--mono);font-size:11px;color:#fff;font-weight:600;}
+.badge-desc{font-size:10px;color:var(--dim);text-align:center;line-height:1.4;}
+
+/* ── CSS addressability demo ── */
+.css-demo-wrap{background:var(--s2);border:1px solid var(--s4);border-radius:8px;padding:20px;}
+.css-demo-title{font-family:var(--mono);font-size:11px;font-weight:600;color:var(--dim);margin-bottom:14px;}
+.css-demo-row{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px;}
+.css-demo-card{
+background:var(--s3);border:1px solid var(--s4);border-radius:6px;
+padding:12px;display:flex;flex-direction:column;align-items:center;gap:6px;
+cursor:pointer;transition:border-color .15s;
+}
+.css-demo-card:hover{border-color:var(--accent);}
+.css-demo-label{font-family:var(--mono);font-size:10px;color:var(--dim);}
+.controls{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;}
+.ctrl-btn{
+font-family:var(--mono);font-size:10.5px;padding:5px 12px;border-radius:4px;
+border:1px solid var(--s4);background:var(--s3);color:var(--dim);cursor:pointer;
+transition:all .12s;
+}
+.ctrl-btn:hover{border-color:var(--accent);color:var(--text);background:var(--s2);}
+.ctrl-btn.active{border-color:var(--teal);color:var(--teal);background:rgba(78,201,176,.08);}
+
+/* CSS state overrides (applied by JS) */
+.state-dim-core .icon-core { opacity: 0.3; }
+.state-hide-badge .icon-badge { display: none; }
+.state-pulse-badge .icon-badge { animation: pulse-badge 1s ease-in-out infinite; }
+.state-color-swap .icon-badge { stroke: #c586c0 !important; }
+
+@keyframes pulse-badge {
+0%,100% { opacity: 1; transform: scale(1); }
+50% { opacity: 0.4; transform: scale(0.85); }
+}
+
+/* ── JS live demo ── */
+.js-demo-wrap{background:var(--s2);border:1px solid var(--s4);border-radius:8px;padding:20px;display:flex;gap:32px;flex-wrap:wrap;align-items:flex-start;}
+.js-demo-left{display:flex;flex-direction:column;align-items:center;gap:12px;}
+.js-demo-right{flex:1;min-width:240px;}
+.js-demo-title{font-family:var(--mono);font-size:11px;color:var(--dim);font-weight:600;}
+.js-controls{display:flex;flex-direction:column;gap:8px;margin-top:8px;}
+.js-ctrl{
+font-family:var(--mono);font-size:10.5px;padding:6px 14px;border-radius:4px;
+border:1px solid var(--s4);background:var(--s3);color:var(--dim);cursor:pointer;
+transition:all .12s;text-align:left;
+}
+.js-ctrl:hover{border-color:var(--teal);color:var(--teal);}
+.js-state-display{
+margin-top:12px;font-family:var(--mono);font-size:10px;
+color:var(--teal);background:var(--s3);border-radius:4px;
+padding:8px 12px;border:1px solid var(--s4);min-height:36px;
+}
+
+/* ── Principle callout ── */
+.principle{
+border-left:3px solid var(--teal);background:rgba(78,201,176,.05);
+border-radius:0 6px 6px 0;padding:12px 16px;margin:16px 0;
+font-size:12.5px;color:var(--text);line-height:1.7;
+}
+.principle strong{color:var(--teal);}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar{width:5px;height:5px;}
+::-webkit-scrollbar-track{background:transparent;}
+::-webkit-scrollbar-thumb{background:var(--s4);border-radius:3px;}
+
+</style>
+</head>
+<body>
+
+<div class="layout">
+
+<!-- ── Sidebar ── -->
+<aside class="sidebar">
+<div class="sidebar-head">
+<h1>Guidelines v3<br>Examples</h1>
+<p>Illustrated Reference</p>
+</div>
+<span class="nav-group-label">Principles</span>
+<a class="nav-item" href="#p1">P1 · Consistent Icon Size</a>
+<a class="nav-item" href="#p2">P2 · Badge as Overlay</a>
+<a class="nav-item" href="#p3">P3 · Independent Layers</a>
+<a class="nav-item" href="#p4">P4 · Semantic Color</a>
+<a class="nav-item" href="#p5">P5 · Strokes Only</a>
+<a class="nav-item" href="#p6">P6 · No Invisible Mass</a>
+<span class="nav-group-label">Structure</span>
+<a class="nav-item" href="#s1">DOM Structure</a>
+<a class="nav-item" href="#s2">Corner Priority</a>
+<a class="nav-item" href="#s3">Badge Catalog</a>
+<a class="nav-item" href="#s4">Exclusion Zones</a>
+<span class="nav-group-label">Addressability</span>
+<a class="nav-item" href="#a1">CSS Targeting</a>
+<a class="nav-item" href="#a2">JS / Animation</a>
+<span class="nav-group-label">Anti-patterns</span>
+<a class="nav-item" href="#ap1">AP1 · Scaled Core</a>
+<a class="nav-item" href="#ap2">AP2 · Skipping Free Corner</a>
+<a class="nav-item" href="#ap2b">AP2b · Badge in Occupied Corner</a>
+<a class="nav-item" href="#ap3">AP3 · Loose Paths</a>
+<a class="nav-item" href="#ap4">AP4 · Badge Container</a>
+<a class="nav-item" href="#ap5">AP5 · Compensated Stroke</a>
+<a class="nav-item" href="#ap6">AP6 · Embedded Dot</a>
+<a class="nav-item" href="#ap7">AP7 · Sub-pixel Coords</a>
+<a class="nav-item" href="#ap8">AP8 · Same-color Badge</a>
+<a class="nav-item" href="#ap9">AP9 · Ignoring Secondary Elements</a>
+</aside>
+
+<!-- ── Main ── -->
+<main class="main">
+
+<div class="page-header">
+<h1>Icon Design Guidelines v3 — Illustrated Examples</h1>
+<p>Every principle, pattern, and anti-pattern from the v3 spec shown with live SVG renderings.
+Correct and incorrect applications are placed side-by-side so the difference is immediately visible
+at any scale.</p>
+<div class="header-pills">
+<span class="pill pill-info">viewBox 0 0 24 24</span>
+<span class="pill pill-info">stroke-width 1.5 — uniform</span>
+<span class="pill pill-info">TR → BR → TL → BL priority</span>
+<span class="pill pill-info">icon-core / icon-badge groups</span>
+<span class="pill pill-info">No scale() on core</span>
+</div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════
+PRINCIPLE 1 — Consistent Icon Size
+═══════════════════════════════════════════════════════════════ -->
+<section id="p1"><h2 class="section-title">P1 — Consistent Icon Size</h2><p class="section-sub">The icon core is always drawn at full canvas size. A badge-carrying icon and its solo counterpart have identical core dimensions. The badge is an additive overlay — it never causes the core to shrink, scale, or translate.</p>
+
+<div class="principle">
+<strong>Rule:</strong> Solo icons and badged icons must have <strong>visually identical cores</strong>.
+The only structural difference between <code>calls</code> and <code>answered-calls</code> is the presence of a <code>&lt;g class="icon-badge"&gt;</code> element. The core path coordinates are byte-for-byte identical.
+</div>
+
+
+<div class="size-compare">
+<div class="size-item">
+<svg viewBox="0 0 24 24" width="96" height="96" fill="none" stroke-linecap="round" stroke-linejoin="round">
+<!-- canvas boundary -->
+<rect x="0.5" y="0.5" width="23" height="23" fill="none" stroke="rgba(255,255,255,0.07)" stroke-width="0.3"/>
+<!-- usable area -->
+<rect x="1" y="1" width="22" height="22" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="0.25" stroke-dasharray="1 0.7"/>
+<g class="icon-core" stroke="#4EC9B0" stroke-width="1.5">
+<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" fill="none"/>
+</g>
+</svg>
+<div class="size-label">
+<span class="pill pill-ok">Mode A — Solo</span>
+<span>No badge · core fills canvas</span>
+</div>
+</div>
+<div class="size-equals">=</div>
+<div class="size-item">
+<svg viewBox="0 0 24 24" width="96" height="96" fill="none" stroke-linecap="round" stroke-linejoin="round">
+<rect x="0.5" y="0.5" width="23" height="23" fill="none" stroke="rgba(255,255,255,0.07)" stroke-width="0.3"/>
+<rect x="1" y="1" width="22" height="22" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="0.25" stroke-dasharray="1 0.7"/>
+<!-- TR exclusion zone highlight -->
+<rect x="16.5" y="0.5" width="7" height="7" fill="rgba(34,197,94,0.06)" stroke="rgba(34,197,94,0.3)" stroke-width="0.25" stroke-dasharray="0.8 0.4"/>
+<g class="icon-core" stroke="#4EC9B0" stroke-width="1.5">
+<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" fill="none"/>
+</g>
+<g class="icon-badge" stroke="#22C55E" stroke-width="1.5">
+<polyline points="17.5,4 19.5,6.5 22.5,1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+</svg>
+<div class="size-label">
+<span class="pill pill-ok">Mode B — Badged</span>
+<span>Badge overlaid · core unchanged</span>
+</div>
+</div>
+<div class="size-equals">≠</div>
+<div class="size-item">
+<svg viewBox="0 0 24 24" width="96" height="96" fill="none" stroke-linecap="round" stroke-linejoin="round">
+<rect x="0.5" y="0.5" width="23" height="23" fill="none" stroke="rgba(255,255,255,0.07)" stroke-width="0.3"/>
+<rect x="1" y="1" width="22" height="22" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="0.25" stroke-dasharray="1 0.7"/>
+<g transform="scale(0.68) translate(0,1.5)" stroke="#4EC9B0" stroke-width="2.2">
+<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<polyline points="17.5,4 19.5,6.5 22.5,1.5" stroke="#22C55E" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+<div class="size-label">
+<span class="pill pill-bad">❌ v1 Anti-pattern</span>
+<span>Core scaled to 68% — WRONG</span>
+</div>
+</div>
+</div>
+
+
+<div class="rule-row">
+<div class="rule-label">Core size: solo vs badged</div>
+<div class="rule-cols">
+<div class="col col-correct">
+<div class="col-head"><span class="pill pill-ok">✓ CORRECT</span></div>
+<div class="icon-stage"><div class="svg-wrap">
+<svg viewBox="0 0 24 24" width="88" height="88" style="display:block"><g class="icon-core" stroke="#4EC9B0" stroke-width="1.5">
+<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<g class="icon-core" stroke="#4EC9B0" stroke-width="1.5">
+<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<g class="icon-badge" stroke="#22C55E" stroke-width="1.5">
+<polyline points="17.5,4 19.5,6.5 22.5,1.5" fill="none"
+stroke-linecap="round" stroke-linejoin="round"/>
+</g></svg>
+
+</div></div>
+<p class="col-note">Both solo and badged icons share identical core paths. The phone handset is the same size in both.</p>
+</div>
+<div class="col col-wrong">
+<div class="col-head"><span class="pill pill-bad">✗ WRONG</span></div>
+<div class="icon-stage"><div class="svg-wrap">
+<svg viewBox="0 0 24 24" width="88" height="88" style="display:block"><g transform="scale(0.68) translate(0,1.5)" stroke="#4EC9B0" stroke-width="2.2">
+<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<polyline points="17.5,4 19.5,6.5 22.5,1.5" stroke="#22C55E" stroke-width="1.5" fill="none"
+stroke-linecap="round" stroke-linejoin="round"/></svg>
+
+</div></div>
+<p class="col-note">Core scaled to 68% via <code>scale(0.68)</code> to make room for badge. Core is visibly smaller than the solo version.</p>
+</div>
+</div>
+<p class="extra-note">The scaled core also requires a compensated <code>stroke-width='2.2'</code> to maintain visual weight — an additional violation. Both problems disappear when the core is never scaled.</p>
+</div>
+
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+PRINCIPLE 2 — Badge as Overlay
+═══════════════════════════════════════════════════════════════ -->
+<section id="p2"><h2 class="section-title">P2 — Badge as Additive Overlay</h2><p class="section-sub">The badge sits on top of the icon in whichever corner has no icon core strokes. It does not push, move, or resize the core. If the preferred corner is occupied, the badge moves to the next free corner.</p>
+
+<div class="principle">
+<strong>Rule:</strong> The badge is a small, independent overlay. The core never moves to accommodate it.
+Whichever corner of the 24×24 canvas has no icon strokes — that is where the badge goes.
+</div>
+
+
+<div class="rule-row">
+<div class="rule-label">Badge as overlay — phone icon family</div>
+<div class="rule-cols">
+<div class="col col-correct">
+<div class="col-head"><span class="pill pill-ok">✓ CORRECT</span></div>
+<div class="icon-stage"><div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap">
+<div class="svg-wrap">
+<svg viewBox="0 0 24 24" width="72" height="72" style="display:block"><g class="icon-core" stroke="#4EC9B0" stroke-width="1.5">
+<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</g></svg>
+<div class="svg-label">calls<br>solo</div>
+</div>
+<div class="svg-wrap">
+<svg viewBox="0 0 24 24" width="72" height="72" style="display:block"><g class="icon-core" stroke="#4EC9B0" stroke-width="1.5">
+<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<g class="icon-badge" stroke="#22C55E" stroke-width="1.5">
+<polyline points="17.5,4 19.5,6.5 22.5,1.5" fill="none"
+stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<!-- TR exclusion zone (7x7) -->
+<rect x="16.5" y="0.5" width="7" height="7"
+fill="rgba(239,68,68,0.08)" stroke="rgba(239,68,68,0.5)"
+stroke-width="0.25" stroke-dasharray="0.8 0.4"/>
+<!-- TR symbol box (5x5) -->
+<rect x="17.5" y="1.5" width="5" height="5"
+fill="none" stroke="rgba(245,158,11,0.6)"
+stroke-width="0.2" stroke-dasharray="0.5 0.4"/>
+<!-- anchor dot -->
+<circle cx="20" cy="4" r="0.5" fill="rgba(239,68,68,0.7)" stroke="none"/></svg>
+<div class="svg-label">answered<br>TR badge</div>
+</div>
+<div class="svg-wrap">
+<svg viewBox="0 0 24 24" width="72" height="72" style="display:block"><g class="icon-core" stroke="#4EC9B0" stroke-width="1.5">
+<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<g class="icon-badge" stroke="#EF4444" stroke-width="1.5">
+<line x1="17.5" y1="1.5" x2="22.5" y2="6.5" stroke-linecap="round"/>
+<line x1="22.5" y1="1.5" x2="17.5" y2="6.5" stroke-linecap="round"/>
+</g>
+<!-- TR exclusion zone (7x7) -->
+<rect x="16.5" y="0.5" width="7" height="7"
+fill="rgba(239,68,68,0.08)" stroke="rgba(239,68,68,0.5)"
+stroke-width="0.25" stroke-dasharray="0.8 0.4"/>
+<!-- TR symbol box (5x5) -->
+<rect x="17.5" y="1.5" width="5" height="5"
+fill="none" stroke="rgba(245,158,11,0.6)"
+stroke-width="0.2" stroke-dasharray="0.5 0.4"/>
+<!-- anchor dot -->
+<circle cx="20" cy="4" r="0.5" fill="rgba(239,68,68,0.7)" stroke="none"/></svg>
+<div class="svg-label">missed<br>TR badge</div>
+</div>
+<div class="svg-wrap">
+<svg viewBox="0 0 24 24" width="72" height="72" style="display:block"><g class="icon-core" stroke="#4EC9B0" stroke-width="1.5">
+<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<g class="icon-badge" stroke="#F59E0B" stroke-width="1.5">
+<line x1="18" y1="7" x2="22" y2="1" stroke-linecap="round"/>
+</g>
+<!-- TR exclusion zone (7x7) -->
+<rect x="16.5" y="0.5" width="7" height="7"
+fill="rgba(239,68,68,0.08)" stroke="rgba(239,68,68,0.5)"
+stroke-width="0.25" stroke-dasharray="0.8 0.4"/>
+<!-- TR symbol box (5x5) -->
+<rect x="17.5" y="1.5" width="5" height="5"
+fill="none" stroke="rgba(245,158,11,0.6)"
+stroke-width="0.2" stroke-dasharray="0.5 0.4"/>
+<!-- anchor dot -->
+<circle cx="20" cy="4" r="0.5" fill="rgba(239,68,68,0.7)" stroke="none"/></svg>
+<div class="svg-label">dropped<br>TR badge</div>
+</div>
+<div class="svg-wrap">
+<svg viewBox="0 0 24 24" width="72" height="72" style="display:block"><g class="icon-core" stroke="#4EC9B0" stroke-width="1.5">
+<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<g class="icon-badge" fill="#22C55E">
+<circle cx="20" cy="4" r="2" stroke="none"/>
+</g>
+<!-- TR exclusion zone (7x7) -->
+<rect x="16.5" y="0.5" width="7" height="7"
+fill="rgba(239,68,68,0.08)" stroke="rgba(239,68,68,0.5)"
+stroke-width="0.25" stroke-dasharray="0.8 0.4"/>
+<!-- TR symbol box (5x5) -->
+<rect x="17.5" y="1.5" width="5" height="5"
+fill="none" stroke="rgba(245,158,11,0.6)"
+stroke-width="0.2" stroke-dasharray="0.5 0.4"/>
+<!-- anchor dot -->
+<circle cx="20" cy="4" r="0.5" fill="rgba(239,68,68,0.7)" stroke="none"/></svg>
+<div class="svg-label">active<br>TR dot</div>
+</div>
+</div></div>
+<p class="col-note">Same core path in every icon. Badge is additive. Green zone shows the exclusion zone — core never enters it.</p>
+</div>
+<div class="col col-wrong">
+<div class="col-head"><span class="pill pill-bad">✗ WRONG</span></div>
+<div class="icon-stage"><div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap">
+<div class="svg-wrap">
+<svg viewBox="0 0 24 24" width="72" height="72" style="display:block"><g transform="scale(0.68) translate(0,1.5)" stroke="#4EC9B0" stroke-width="2.2">
+<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<polyline points="17.5,4 19.5,6.5 22.5,1.5" stroke="#22C55E" stroke-width="1.5" fill="none"
+stroke-linecap="round" stroke-linejoin="round"/></svg>
+<div class="svg-label">Scaled core</div>
+</div>
+<div class="svg-wrap">
+<svg viewBox="0 0 24 24" width="72" height="72" style="display:block"><g class="icon-core" stroke="#4EC9B0" stroke-width="1.5">
+<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="19" cy="5" r="2" fill="#22C55E" stroke="none"/>
+</g></svg>
+<div class="svg-label">Dot in body</div>
+</div>
+</div></div>
+<p class="col-note">Left: core shrunk to 68%. Right: green dot placed at (19,5) inside the exclusion zone as part of the core, not as a badge.</p>
+</div>
+</div>
+
+</div>
+
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+PRINCIPLE 3 — Independent Layers (DOM Structure)
+═══════════════════════════════════════════════════════════════ -->
+<section id="s1"><h2 class="section-title">P3 — Independent Layers &amp; DOM Structure</h2><p class="section-sub">Every icon — solo or badged — uses a strict two-group structure: <code>&lt;g class='icon-core'&gt;</code> and (if badged) <code>&lt;g class='icon-badge'&gt;</code>. This makes each layer independently addressable via CSS, JavaScript, and animation libraries.</p>
+
+<div class="principle">
+<strong>Rule:</strong> All icon paths belong to either <code>icon-core</code> or <code>icon-badge</code>.
+No paths are allowed loose inside <code>&lt;symbol&gt;</code>. The groups are the public API of the icon.
+</div>
+
+
+<div class="dom-diagram">
+<div class="dom-col">
+<div class="dom-title"><span class="pill pill-ok">Mode A — Solo</span></div>
+<div class="dom-tree">
+<div class="dom-node dom-symbol">&lt;symbol id="calls"&gt;</div>
+<div class="dom-node dom-core">&lt;g class="<strong>icon-core</strong>" stroke="#4EC9B0"&gt;</div>
+<div class="dom-node dom-path">&lt;path d="M22 16.92…"/&gt;</div>
+<div class="dom-node dom-core">&lt;/g&gt;</div>
+<div class="dom-node dom-symbol">&lt;/symbol&gt;</div>
+</div>
+<p class="col-note">One group only. No badge group in solo mode.</p>
+</div>
+<div class="dom-col">
+<div class="dom-title"><span class="pill pill-ok">Mode B — Badged</span></div>
+<div class="dom-tree">
+<div class="dom-node dom-symbol">&lt;symbol id="answered-calls"&gt;</div>
+<div class="dom-node dom-core">&lt;g class="<strong>icon-core</strong>" stroke="#4EC9B0"&gt;</div>
+<div class="dom-node dom-path">&lt;path d="M22 16.92…"/&gt;</div>
+<div class="dom-node dom-core">&lt;/g&gt;</div>
+<div class="dom-node dom-badge">&lt;g class="<strong>icon-badge</strong>" stroke="#22C55E"&gt;</div>
+<div class="dom-node dom-path">&lt;polyline points="17.5,4…"/&gt;</div>
+<div class="dom-node dom-badge">&lt;/g&gt;</div>
+<div class="dom-node dom-symbol">&lt;/symbol&gt;</div>
+</div>
+<p class="col-note">Two independent groups. Each addressable separately.</p>
+</div>
+<div class="dom-col">
+<div class="dom-title"><span class="pill pill-bad">❌ Wrong — Loose paths</span></div>
+<div class="dom-tree">
+<div class="dom-node dom-symbol">&lt;symbol id="calls"&gt;</div>
+<div class="dom-node dom-loose">&lt;path d="…" stroke="#4EC9B0"/&gt;</div>
+<div class="dom-node dom-loose">&lt;polyline … stroke="#22C55E"/&gt;</div>
+<div class="dom-node dom-symbol">&lt;/symbol&gt;</div>
+</div>
+<p class="col-note">Paths not wrapped in groups. Cannot target core or badge independently.</p>
+</div>
+</div>
+
+
+<div class="rule-row">
+<div class="rule-label">Group structure: named groups vs loose paths</div>
+<div class="rule-cols">
+<div class="col col-correct">
+<div class="col-head"><span class="pill pill-ok">✓ CORRECT</span></div>
+<div class="icon-stage"><div class="svg-wrap">
+<svg viewBox="0 0 24 24" width="88" height="88" style="display:block"><g class="icon-core" stroke="#4EC9B0" stroke-width="1.5">
+<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<g class="icon-badge" stroke="#22C55E" stroke-width="1.5">
+<polyline points="17.5,4 19.5,6.5 22.5,1.5" fill="none"
+stroke-linecap="round" stroke-linejoin="round"/>
+</g></svg>
+
+</div></div>
+<p class="col-note"><code>&lt;g class='icon-core'&gt;</code> and <code>&lt;g class='icon-badge'&gt;</code> wrap all paths. Each group is independently targetable.</p>
+</div>
+<div class="col col-wrong">
+<div class="col-head"><span class="pill pill-bad">✗ WRONG</span></div>
+<div class="icon-stage"><div class="svg-wrap">
+<svg viewBox="0 0 24 24" width="88" height="88" style="display:block"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" stroke="#4EC9B0" stroke-width="1.5" fill="none"
+stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="17.5,4 19.5,6.5 22.5,1.5" stroke="#22C55E" stroke-width="1.5" fill="none"
+stroke-linecap="round" stroke-linejoin="round"/></svg>
+
+</div></div>
+<p class="col-note">Paths scattered directly inside <code>&lt;symbol&gt;</code> with no group wrapper. Cannot target core or badge independently from CSS or JS.</p>
+</div>
+</div>
+
+</div>
+
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+CORNER PRIORITY
+═══════════════════════════════════════════════════════════════ -->
+<section id="s2"><h2 class="section-title">Corner Priority — TR → BR → TL → BL</h2><p class="section-sub">Use the first corner whose 7×7 exclusion zone is completely empty — no strokes from any source (icon-core or icon-badge). Dashed red = zone occupied. Dashed green = zone empty = badge placed here.</p>
+
+<div class="principle">
+<strong>Rule:</strong> Always try Top-Right first. A corner is only eligible if its exclusion zone contains
+<strong>zero existing strokes</strong> — from either <code>icon-core</code> or any already-placed
+<code>icon-badge</code>. A single line endpoint, a baseline, or a tick mark inside a zone blocks that corner
+just as firmly as the main body does. Never skip a free corner out of preference; never use an occupied corner.
+</div>
+
+
+<div class="corner-grid">
+
+<div class="corner-case">
+<div class="corner-label"><span class="pill pill-ok">Case 1 — TR free (default)</span></div>
+<svg viewBox="0 0 24 24" width="96" height="96" fill="none" stroke-linecap="round" stroke-linejoin="round">
+<rect x="16.5" y="0.5" width="7" height="7" fill="rgba(34,197,94,0.1)" stroke="rgba(34,197,94,0.45)" stroke-width="0.3" stroke-dasharray="0.8 0.4"/>
+<g class="icon-core" stroke="#4EC9B0" stroke-width="1.5">
+<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" fill="none"/>
+</g>
+<g class="icon-badge" stroke="#22C55E" stroke-width="1.5">
+<polyline points="17.5,4 19.5,6.5 22.5,1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+</svg>
+<p class="corner-note">Phone body is lower-left area.<br>TR zone has no path coords.<br>Badge → <strong>TR</strong> ✓</p>
+</div>
+
+<div class="corner-case">
+<div class="corner-label"><span class="pill pill-amber">Case 2 — TR+BR occupied</span></div>
+<svg viewBox="0 0 24 24" width="96" height="96" fill="none" stroke-linecap="round" stroke-linejoin="round">
+<rect x="16.5" y="0.5" width="7" height="7" fill="rgba(239,68,68,0.07)" stroke="rgba(239,68,68,0.35)" stroke-width="0.3" stroke-dasharray="0.8 0.4"/>
+<rect x="16.5" y="16.5" width="7" height="7" fill="rgba(239,68,68,0.07)" stroke="rgba(239,68,68,0.35)" stroke-width="0.3" stroke-dasharray="0.8 0.4"/>
+<rect x="0.5" y="0.5" width="7" height="7" fill="rgba(34,197,94,0.1)" stroke="rgba(34,197,94,0.45)" stroke-width="0.3" stroke-dasharray="0.8 0.4"/>
+<g class="icon-core" stroke="#DCDCAA" stroke-width="1.5">
+<line x1="18" y1="20" x2="18" y2="4" stroke-linecap="round"/>
+<line x1="12" y1="20" x2="12" y2="8" stroke-linecap="round"/>
+<line x1="6" y1="20" x2="6" y2="14" stroke-linecap="round"/>
+<line x1="2" y1="20" x2="22" y2="20"/>
+</g>
+<g class="icon-badge" stroke="#22C55E" stroke-width="1.5">
+<line x1="4" y1="1.5" x2="4" y2="6.5" stroke-linecap="round"/>
+<line x1="1.5" y1="4" x2="6.5" y2="4" stroke-linecap="round"/>
+</g>
+</svg>
+<p class="corner-note">Bar top (18,4) → TR.<br>Bar bottom (18,20) → BR.<br>TL free → Badge → <strong>TL</strong> ✓</p>
+</div>
+
+<div class="corner-case">
+<div class="corner-label"><span class="pill pill-amber">Case 3 — TR+BR+TL occupied</span></div>
+<svg viewBox="0 0 24 24" width="96" height="96" fill="none" stroke-linecap="round" stroke-linejoin="round">
+<rect x="16.5" y="0.5" width="7" height="7" fill="rgba(239,68,68,0.07)" stroke="rgba(239,68,68,0.35)" stroke-width="0.3" stroke-dasharray="0.8 0.4"/>
+<rect x="16.5" y="16.5" width="7" height="7" fill="rgba(239,68,68,0.07)" stroke="rgba(239,68,68,0.35)" stroke-width="0.3" stroke-dasharray="0.8 0.4"/>
+<rect x="0.5" y="0.5" width="7" height="7" fill="rgba(239,68,68,0.07)" stroke="rgba(239,68,68,0.35)" stroke-width="0.3" stroke-dasharray="0.8 0.4"/>
+<rect x="0.5" y="16.5" width="7" height="7" fill="rgba(34,197,94,0.1)" stroke="rgba(34,197,94,0.45)" stroke-width="0.3" stroke-dasharray="0.8 0.4"/>
+<g class="icon-core" stroke="#4EC9B0" stroke-width="1.5">
+<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="15 3 21 3 21 9" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="10" y1="14" x2="21" y2="3" stroke-linecap="round"/>
+</g>
+<g class="icon-badge" stroke="#22C55E" stroke-width="1.5">
+<polyline points="1.5,20 3.5,22.5 6.5,17.5" fill="none"
+stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+</svg>
+<p class="corner-note">Arrow (21,3)→TR · Phone M22,16.92→BR<br>Arc endpoint (4.11,2)→TL<br>BL free → Badge → <strong>BL</strong> ✓</p>
+</div>
+
+<div class="corner-case">
+<div class="corner-label"><span class="pill pill-amber">Case 4 — All corners occupied</span></div>
+<svg viewBox="0 0 24 24" width="96" height="96" fill="none" stroke-linecap="round" stroke-linejoin="round">
+<rect x="16.5" y="0.5" width="7" height="7" fill="rgba(239,68,68,0.07)" stroke="rgba(239,68,68,0.35)" stroke-width="0.3" stroke-dasharray="0.8 0.4"/>
+<rect x="16.5" y="16.5" width="7" height="7" fill="rgba(239,68,68,0.07)" stroke="rgba(239,68,68,0.35)" stroke-width="0.3" stroke-dasharray="0.8 0.4"/>
+<rect x="0.5" y="0.5" width="7" height="7" fill="rgba(239,68,68,0.07)" stroke="rgba(239,68,68,0.35)" stroke-width="0.3" stroke-dasharray="0.8 0.4"/>
+<rect x="0.5" y="16.5" width="7" height="7" fill="rgba(239,68,68,0.07)" stroke="rgba(239,68,68,0.35)" stroke-width="0.3" stroke-dasharray="0.8 0.4"/>
+<g class="icon-core" stroke="#4EC9B0" stroke-width="1.5">
+<circle cx="12" cy="12" r="9" fill="none"/>
+<circle cx="12" cy="12" r="5" fill="#4EC9B0" fill-opacity="0.12" stroke="#4EC9B0"/>
+<circle cx="12" cy="12" r="1.5" fill="#4EC9B0" stroke="none"/>
+</g>
+<g class="icon-badge" fill="#22C55E">
+<circle cx="4" cy="20" r="2" stroke="none"/>
+</g>
+</svg>
+<p class="corner-note">Circle r=9 extremes reach all corners.<br>No free corner found until BL.<br>Badge → <strong>BL</strong> ✓</p>
+</div>
+
+</div>
+
+
+<div class="rule-row">
+<div class="rule-label">make-call icon — three corners occupied, badge must go BL</div>
+<div class="rule-cols">
+<div class="col col-correct">
+<div class="col-head"><span class="pill pill-ok">✓ CORRECT</span></div>
+<div class="icon-stage"><div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+<svg viewBox="0 0 24 24" width="112" height="112" fill="none" stroke-linecap="round" stroke-linejoin="round">
+<rect x="16.5" y="0.5" width="7" height="7" fill="rgba(239,68,68,0.08)" stroke="rgba(239,68,68,0.45)" stroke-width="0.3" stroke-dasharray="0.8 0.4"/>
+<rect x="16.5" y="16.5" width="7" height="7" fill="rgba(239,68,68,0.08)" stroke="rgba(239,68,68,0.45)" stroke-width="0.3" stroke-dasharray="0.8 0.4"/>
+<rect x="0.5" y="0.5" width="7" height="7" fill="rgba(239,68,68,0.08)" stroke="rgba(239,68,68,0.45)" stroke-width="0.3" stroke-dasharray="0.8 0.4"/>
+<rect x="0.5" y="16.5" width="7" height="7" fill="rgba(34,197,94,0.1)" stroke="rgba(34,197,94,0.45)" stroke-width="0.3" stroke-dasharray="0.8 0.4"/>
+<g class="icon-core" stroke="#4EC9B0" stroke-width="1.5">
+<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="15 3 21 3 21 9" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="10" y1="14" x2="21" y2="3" stroke-linecap="round"/>
+</g>
+<g class="icon-badge" stroke="#22C55E" stroke-width="1.5">
+<polyline points="1.5,20 3.5,22.5 6.5,17.5" fill="none"
+stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+</svg>
+<div style="font-size:10px;color:var(--dim);text-align:center;line-height:1.7">
+TR: arrow (21,3) <span style="color:var(--red)">●</span><br>
+BR: phone M22,16.92 <span style="color:var(--red)">●</span><br>
+TL: phone arc (4.11,2) <span style="color:var(--red)">●</span><br>
+BL: empty <span style="color:var(--green)">●</span> → badge here
+</div>
+</div></div>
+<p class="col-note">All three preferred corners blocked by actual path coordinates. Only BL is free. This is determined by arithmetic, not visual impression.</p>
+</div>
+<div class="col col-wrong">
+<div class="col-head"><span class="pill pill-bad">✗ WRONG</span></div>
+<div class="icon-stage"><div style="display:flex;gap:12px;flex-wrap:wrap;align-items:flex-start">
+<div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+<div class="svg-wrap">
+<svg viewBox="0 0 24 24" width="88" height="88" style="display:block"><g class="icon-core" stroke="#4EC9B0" stroke-width="1.5">
+<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="15 3 21 3 21 9" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="10" y1="14" x2="21" y2="3" stroke-linecap="round"/>
+</g>
+<g class="icon-badge" stroke="#22C55E" stroke-width="1.5">
+<polyline points="17.5,4 19.5,6.5 22.5,1.5" fill="none"
+stroke-linecap="round" stroke-linejoin="round"/>
+</g></svg>
+
+</div>
+<span style="font-size:10px;color:var(--red)">TR — arrow is right there</span>
+</div>
+<div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+<div class="svg-wrap">
+<svg viewBox="0 0 24 24" width="88" height="88" style="display:block"><g class="icon-core" stroke="#4EC9B0" stroke-width="1.5">
+<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="15 3 21 3 21 9" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="10" y1="14" x2="21" y2="3" stroke-linecap="round"/>
+</g>
+<g class="icon-badge" stroke="#22C55E" stroke-width="1.5">
+<polyline points="17.5,20 19.5,22.5 22.5,17.5" fill="none"
+stroke-linecap="round" stroke-linejoin="round"/>
+</g></svg>
+
+</div>
+<span style="font-size:10px;color:var(--red)">BR — phone M22,16.92</span>
+</div>
+</div></div>
+<p class="col-note">TR: collision with arrow. BR: collision with phone start point M22,16.92 — a non-obvious trap. Both wrong for different reasons.</p>
+</div>
+</div>
+<p class="extra-note">The key insight: <code>M22 16.92</code> is not just the starting position of the cursor — it is a real coordinate that occupies the BR exclusion zone (x>16.5, y>16.5). Likewise, the arc endpoint <code>4.11 2</code> occupies TL. You must check every coordinate, not just the visually dominant paths.</p>
+</div>
+
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+BADGE CATALOG
+═══════════════════════════════════════════════════════════════ -->
+<section id="s3"><h2 class="section-title">Badge Glyph Catalog</h2><p class="section-sub">All badge types shown at full size. Each badge is in the top-right corner (default). Semantic color is independent of the icon core color.</p>
+
+<div class="badge-grid">
+<div class="badge-item">
+<svg viewBox="0 0 24 24" width="64" height="64" fill="none" stroke-linecap="round" stroke-linejoin="round">
+<g class="icon-core" stroke="#4EC9B0" stroke-width="1.5">
+<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" fill="none"/>
+</g>
+<g class="icon-badge" stroke="#22C55E" stroke-width="1.5">
+<polyline points="17.5,4 19.5,6.5 22.5,1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+</svg>
+<span class="badge-name">✓ check</span>
+<span class="badge-desc">answered · success</span>
+</div><div class="badge-item">
+<svg viewBox="0 0 24 24" width="64" height="64" fill="none" stroke-linecap="round" stroke-linejoin="round">
+<g class="icon-core" stroke="#4EC9B0" stroke-width="1.5">
+<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" fill="none"/>
+</g>
+<g class="icon-badge" stroke="#EF4444" stroke-width="1.5">
+<line x1="17.5" y1="1.5" x2="22.5" y2="6.5" stroke-linecap="round"/><line x1="22.5" y1="1.5" x2="17.5" y2="6.5" stroke-linecap="round"/>
+</g>
+</svg>
+<span class="badge-name">× cross</span>
+<span class="badge-desc">missed · failed</span>
+</div><div class="badge-item">
+<svg viewBox="0 0 24 24" width="64" height="64" fill="none" stroke-linecap="round" stroke-linejoin="round">
+<g class="icon-core" stroke="#4EC9B0" stroke-width="1.5">
+<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" fill="none"/>
+</g>
+<g class="icon-badge" stroke="#F59E0B" stroke-width="1.5">
+<line x1="18" y1="7" x2="22" y2="1" stroke-linecap="round"/>
+</g>
+</svg>
+<span class="badge-name">/ slash</span>
+<span class="badge-desc">dropped · degraded</span>
+</div><div class="badge-item">
+<svg viewBox="0 0 24 24" width="64" height="64" fill="none" stroke-linecap="round" stroke-linejoin="round">
+<g class="icon-core" stroke="#4EC9B0" stroke-width="1.5">
+<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" fill="none"/>
+</g>
+<g class="icon-badge" stroke="#22C55E" stroke-width="1.5">
+<line x1="20" y1="1.5" x2="20" y2="6.5" stroke-linecap="round"/><line x1="17.5" y1="4" x2="22.5" y2="4" stroke-linecap="round"/>
+</g>
+</svg>
+<span class="badge-name">+ plus</span>
+<span class="badge-desc">add · new</span>
+</div><div class="badge-item">
+<svg viewBox="0 0 24 24" width="64" height="64" fill="none" stroke-linecap="round" stroke-linejoin="round">
+<g class="icon-core" stroke="#4EC9B0" stroke-width="1.5">
+<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" fill="none"/>
+</g>
+<g class="icon-badge" stroke="#858585" stroke-width="1.5">
+<line x1="17.5" y1="4" x2="22.5" y2="4" stroke-linecap="round"/>
+</g>
+</svg>
+<span class="badge-name">− minus</span>
+<span class="badge-desc">unpicked · none</span>
+</div><div class="badge-item">
+<svg viewBox="0 0 24 24" width="64" height="64" fill="none" stroke-linecap="round" stroke-linejoin="round">
+<g class="icon-core" stroke="#4EC9B0" stroke-width="1.5">
+<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" fill="none"/>
+</g>
+<g class="icon-badge" stroke="#EF4444" stroke-width="1.5">
+<line x1="20" y1="7" x2="20" y2="1.5" stroke-linecap="round"/><polyline points="17.5,4 20,1.5 22.5,4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+</svg>
+<span class="badge-name">↑ up</span>
+<span class="badge-desc">escalated</span>
+</div><div class="badge-item">
+<svg viewBox="0 0 24 24" width="64" height="64" fill="none" stroke-linecap="round" stroke-linejoin="round">
+<g class="icon-core" stroke="#4EC9B0" stroke-width="1.5">
+<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" fill="none"/>
+</g>
+<g class="icon-badge" stroke="#F59E0B" stroke-width="1.5">
+<line x1="20" y1="1" x2="20" y2="6.5" stroke-linecap="round"/><polyline points="17.5,4 20,6.5 22.5,4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+</svg>
+<span class="badge-name">↓ down</span>
+<span class="badge-desc">dropped · descending</span>
+</div><div class="badge-item">
+<svg viewBox="0 0 24 24" width="64" height="64" fill="none" stroke-linecap="round" stroke-linejoin="round">
+<g class="icon-core" stroke="#4EC9B0" stroke-width="1.5">
+<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" fill="none"/>
+</g>
+<g class="icon-badge" stroke="#22C55E" stroke-width="1.5">
+<line x1="17.5" y1="4" x2="23" y2="4" stroke-linecap="round"/><polyline points="20.5,1.5 23,4 20.5,6.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+</svg>
+<span class="badge-name">→ right</span>
+<span class="badge-desc">converted · forwarded</span>
+</div><div class="badge-item">
+<svg viewBox="0 0 24 24" width="64" height="64" fill="none" stroke-linecap="round" stroke-linejoin="round">
+<g class="icon-core" stroke="#4EC9B0" stroke-width="1.5">
+<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" fill="none"/>
+</g>
+<g class="icon-badge" stroke="#EF4444" stroke-width="1.5">
+<line x1="22.5" y1="4" x2="17" y2="4" stroke-linecap="round"/><polyline points="19.5,1.5 17,4 19.5,6.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+</svg>
+<span class="badge-name">← left</span>
+<span class="badge-desc">abandoned · returned</span>
+</div><div class="badge-item">
+<svg viewBox="0 0 24 24" width="64" height="64" fill="none" stroke-linecap="round" stroke-linejoin="round">
+<g class="icon-core" stroke="#4EC9B0" stroke-width="1.5">
+<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" fill="none"/>
+</g>
+<g class="icon-badge" stroke="#22C55E" stroke-width="1.5">
+<circle cx="20" cy="4" r="2" stroke="none" fill="#22C55E"/>
+</g>
+</svg>
+<span class="badge-name">● dot</span>
+<span class="badge-desc">live · active · online</span>
+</div>
+</div>
+
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+EXCLUSION ZONES
+═══════════════════════════════════════════════════════════════ -->
+<section id="s4"><h2 class="section-title">Exclusion Zones &amp; Symbol Boxes</h2><p class="section-sub">The exclusion zone (red dashed, 7×7) is the area that must be clear of icon core strokes before a badge can be placed there. The symbol box (amber dashed, 5×5) is the area the badge glyph must stay within.</p>
+
+<div class="rule-row">
+<div class="rule-label">All four corners — zones visualised</div>
+<div style="display:flex;gap:20px;flex-wrap:wrap;padding:16px;background:var(--s2);border-radius:6px;border:1px solid var(--s4)">
+
+<div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+<span class="pill pill-ok">Top-right (default)</span>
+<svg viewBox="0 0 24 24" width="100" height="100" fill="none">
+<rect x="0.5" y="0.5" width="23" height="23" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="0.3"/>
+<rect x="16.5" y="0.5" width="7" height="7" fill="rgba(239,68,68,0.1)" stroke="rgba(239,68,68,0.5)" stroke-width="0.35" stroke-dasharray="1 0.5"/>
+<rect x="17.5" y="1.5" width="5" height="5" fill="none" stroke="rgba(245,158,11,0.7)" stroke-width="0.3" stroke-dasharray="0.6 0.4"/>
+<circle cx="20" cy="4" r="0.6" fill="rgba(239,68,68,0.8)" stroke="none"/>
+<text x="20" y="11.5" text-anchor="middle" font-size="1.8" fill="rgba(255,255,255,0.3)" font-family="monospace">(20,4)</text>
+<g stroke="#4EC9B0" stroke-width="1.5">
+<polyline points="17.5,4 19.5,6.5 22.5,1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+</svg>
+<div style="font-size:10px;color:var(--dim);text-align:center">
+<span style="color:var(--red)">■</span> exclusion 16.5–23.5 × 0.5–7.5<br>
+<span style="color:var(--amber)">■</span> symbol 17.5–22.5 × 1.5–6.5
+</div>
+</div>
+
+<div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+<span class="pill pill-amber">Bottom-right (2nd)</span>
+<svg viewBox="0 0 24 24" width="100" height="100" fill="none">
+<rect x="0.5" y="0.5" width="23" height="23" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="0.3"/>
+<rect x="16.5" y="16.5" width="7" height="7" fill="rgba(239,68,68,0.1)" stroke="rgba(239,68,68,0.5)" stroke-width="0.35" stroke-dasharray="1 0.5"/>
+<rect x="17.5" y="17.5" width="5" height="5" fill="none" stroke="rgba(245,158,11,0.7)" stroke-width="0.3" stroke-dasharray="0.6 0.4"/>
+<circle cx="20" cy="20" r="0.6" fill="rgba(239,68,68,0.8)" stroke="none"/>
+<text x="20" y="15" text-anchor="middle" font-size="1.8" fill="rgba(255,255,255,0.3)" font-family="monospace">(20,20)</text>
+<g stroke="#22C55E" stroke-width="1.5">
+<polyline points="17.5,20 19.5,22.5 22.5,17.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+</svg>
+<div style="font-size:10px;color:var(--dim);text-align:center">
+<span style="color:var(--red)">■</span> exclusion 16.5–23.5 × 16.5–23.5<br>
+<span style="color:var(--amber)">■</span> symbol 17.5–22.5 × 17.5–22.5
+</div>
+</div>
+
+<div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+<span class="pill pill-amber">Top-left (3rd)</span>
+<svg viewBox="0 0 24 24" width="100" height="100" fill="none">
+<rect x="0.5" y="0.5" width="23" height="23" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="0.3"/>
+<rect x="0.5" y="0.5" width="7" height="7" fill="rgba(239,68,68,0.1)" stroke="rgba(239,68,68,0.5)" stroke-width="0.35" stroke-dasharray="1 0.5"/>
+<rect x="1.5" y="1.5" width="5" height="5" fill="none" stroke="rgba(245,158,11,0.7)" stroke-width="0.3" stroke-dasharray="0.6 0.4"/>
+<circle cx="4" cy="4" r="0.6" fill="rgba(239,68,68,0.8)" stroke="none"/>
+<text x="4" y="11.5" text-anchor="middle" font-size="1.8" fill="rgba(255,255,255,0.3)" font-family="monospace">(4,4)</text>
+<g stroke="#22C55E" stroke-width="1.5">
+<polyline points="1.5,4 3.5,6.5 6.5,1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+</svg>
+<div style="font-size:10px;color:var(--dim);text-align:center">
+<span style="color:var(--red)">■</span> exclusion 0.5–7.5 × 0.5–7.5<br>
+<span style="color:var(--amber)">■</span> symbol 1.5–6.5 × 1.5–6.5
+</div>
+</div>
+
+<div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+<span class="pill pill-amber">Bottom-left (4th)</span>
+<svg viewBox="0 0 24 24" width="100" height="100" fill="none">
+<rect x="0.5" y="0.5" width="23" height="23" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="0.3"/>
+<rect x="0.5" y="16.5" width="7" height="7" fill="rgba(239,68,68,0.1)" stroke="rgba(239,68,68,0.5)" stroke-width="0.35" stroke-dasharray="1 0.5"/>
+<rect x="1.5" y="17.5" width="5" height="5" fill="none" stroke="rgba(245,158,11,0.7)" stroke-width="0.3" stroke-dasharray="0.6 0.4"/>
+<circle cx="4" cy="20" r="0.6" fill="rgba(239,68,68,0.8)" stroke="none"/>
+<text x="4" y="15" text-anchor="middle" font-size="1.8" fill="rgba(255,255,255,0.3)" font-family="monospace">(4,20)</text>
+<g fill="#22C55E">
+<circle cx="4" cy="20" r="2" stroke="none"/>
+</g>
+</svg>
+<div style="font-size:10px;color:var(--dim);text-align:center">
+<span style="color:var(--red)">■</span> exclusion 0.5–7.5 × 16.5–23.5<br>
+<span style="color:var(--amber)">■</span> symbol 1.5–6.5 × 17.5–22.5
+</div>
+</div>
+
+</div>
+</div>
+
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+PRINCIPLE 4 — Semantic Color
+═══════════════════════════════════════════════════════════════ -->
+<section id="p4"><h2 class="section-title">P4 — Semantic Color</h2><p class="section-sub">Color carries meaning, not aesthetics. Badge color is always independent of icon core color. The same icon core can carry different badges with different semantic colors.</p>
+
+<div class="principle">
+<strong>Rule:</strong> A red badge always means failure/error. A green badge means success.
+Amber means warning. Grey means neutral/inactive. Badge color is set on
+<code>&lt;g class="icon-badge" stroke="&lt;semantic-color&gt;"&gt;</code>,
+never derived from the core color.
+</div>
+
+
+<div class="rule-row">
+<div class="rule-label">Badge color independent of core color</div>
+<div class="rule-cols">
+<div class="col col-correct">
+<div class="col-head"><span class="pill pill-ok">✓ CORRECT</span></div>
+<div class="icon-stage"><div style="display:flex;gap:14px;flex-wrap:wrap;align-items:center;">
+<div class="svg-wrap">
+<svg viewBox="0 0 24 24" width="72" height="72" style="display:block"><g class="icon-core" stroke="#4EC9B0" stroke-width="1.5">
+<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<g class="icon-badge" stroke="#22C55E" stroke-width="1.5">
+<polyline points="17.5,4 19.5,6.5 22.5,1.5" fill="none"
+stroke-linecap="round" stroke-linejoin="round"/>
+</g></svg>
+<div class="svg-label">green ✓<br>answered</div>
+</div>
+<div class="svg-wrap">
+<svg viewBox="0 0 24 24" width="72" height="72" style="display:block"><g class="icon-core" stroke="#4EC9B0" stroke-width="1.5">
+<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<g class="icon-badge" stroke="#EF4444" stroke-width="1.5">
+<line x1="17.5" y1="1.5" x2="22.5" y2="6.5" stroke-linecap="round"/>
+<line x1="22.5" y1="1.5" x2="17.5" y2="6.5" stroke-linecap="round"/>
+</g></svg>
+<div class="svg-label">red ×<br>missed</div>
+</div>
+<div class="svg-wrap">
+<svg viewBox="0 0 24 24" width="72" height="72" style="display:block"><g class="icon-core" stroke="#4EC9B0" stroke-width="1.5">
+<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<g class="icon-badge" stroke="#F59E0B" stroke-width="1.5">
+<line x1="18" y1="7" x2="22" y2="1" stroke-linecap="round"/>
+</g></svg>
+<div class="svg-label">amber /<br>dropped</div>
+</div>
+<div class="svg-wrap">
+<svg viewBox="0 0 24 24" width="72" height="72" style="display:block"><g class="icon-core" stroke="#4EC9B0" stroke-width="1.5">
+<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<g class="icon-badge" stroke="#EF4444" stroke-width="1.5">
+<line x1="20" y1="7" x2="20" y2="1.5" stroke-linecap="round"/>
+<polyline points="17.5,4 20,1.5 22.5,4" fill="none"
+stroke-linecap="round" stroke-linejoin="round"/>
+</g></svg>
+<div class="svg-label">red ↑<br>escalated</div>
+</div>
+</div></div>
+<p class="col-note">Each badge uses its own semantic color. The teal core is constant. Badge color encodes the state.</p>
+</div>
+<div class="col col-wrong">
+<div class="col-head"><span class="pill pill-bad">✗ WRONG</span></div>
+<div class="icon-stage"><div class="svg-wrap">
+<svg viewBox="0 0 24 24" width="88" height="88" style="display:block"><g class="icon-core" stroke="#4EC9B0" stroke-width="1.5">
+<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<g class="icon-badge" stroke="#4EC9B0" stroke-width="1.5">
+<line x1="17.5" y1="1.5" x2="22.5" y2="6.5" stroke-linecap="round"/>
+<line x1="22.5" y1="1.5" x2="17.5" y2="6.5" stroke-linecap="round"/>
+</g></svg>
+
+</div></div>
+<p class="col-note">Badge uses the same teal as the core. The × cross is invisible at small sizes and carries no semantic meaning through color.</p>
+</div>
+</div>
+
+</div>
+
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+PRINCIPLE 5 — Strokes Only
+═══════════════════════════════════════════════════════════════ -->
+<section id="p5"><h2 class="section-title">P5 — Strokes Only · Uniform stroke-width</h2><p class="section-sub">All icon paths use strokes, not fills. stroke-width is uniformly 1.5 for all icon paths and badge paths. No compensated weights.</p>
+
+<div class="principle">
+<strong>Rule:</strong> <code>stroke-width="1.5"</code> everywhere. Set on the <code>&lt;g&gt;</code> group
+and inherited by children. The old compensated value <code>2.2</code> (from the scaled-core era) is
+obsolete and must never appear.
+</div>
+
+
+<div class="rule-row">
+<div class="rule-label">Stroke weight: uniform 1.5 vs compensated 2.2</div>
+<div class="rule-cols">
+<div class="col col-correct">
+<div class="col-head"><span class="pill pill-ok">✓ CORRECT</span></div>
+<div class="icon-stage"><div class="svg-wrap">
+<svg viewBox="0 0 24 24" width="88" height="88" style="display:block"><g class="icon-core" stroke="#4EC9B0" stroke-width="1.5">
+<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<g class="icon-badge" stroke="#22C55E" stroke-width="1.5">
+<polyline points="17.5,4 19.5,6.5 22.5,1.5" fill="none"
+stroke-linecap="round" stroke-linejoin="round"/>
+</g></svg>
+<div class="svg-label">1.5 core / 1.5 badge</div>
+</div><div class="svg-wrap">
+<svg viewBox="0 0 24 24" width="88" height="88" style="display:block"><g class="icon-core" stroke="#4EC9B0" stroke-width="1.5">
+<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</g></svg>
+<div class="svg-label">1.5 solo</div>
+</div></div>
+<p class="col-note"><code>stroke-width='1.5'</code> on both groups. Core and badge weights match. Solo and badged cores are visually identical weight.</p>
+</div>
+<div class="col col-wrong">
+<div class="col-head"><span class="pill pill-bad">✗ WRONG</span></div>
+<div class="icon-stage"><div class="svg-wrap">
+<svg viewBox="0 0 24 24" width="88" height="88" style="display:block"><g transform="scale(0.68) translate(0,1.5)" stroke="#4EC9B0" stroke-width="2.2">
+<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<g class="icon-badge" stroke="#22C55E" stroke-width="1.5">
+<polyline points="17.5,4 19.5,6.5 22.5,1.5" fill="none" stroke-linecap="round"/>
+</g></svg>
+<div class="svg-label">2.2 core / 1.5 badge</div>
+</div></div>
+<p class="col-note">Core inside <code>scale(0.68)</code> uses <code>stroke-width='2.2'</code> as compensation. Stroke weight bloated at large sizes, mismatches badge.</p>
+</div>
+</div>
+
+</div>
+
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+PRINCIPLE 6 — No Invisible Mass
+═══════════════════════════════════════════════════════════════ -->
+<section id="p6"><h2 class="section-title">P6 — No Invisible Mass</h2><p class="section-sub">Badges carry no bounding shapes. No circles, rectangles, or filled containers behind the badge glyph. Every pixel of markup must be visible ink.</p>
+
+<div class="principle">
+<strong>Rule:</strong> The badge group contains only the glyph strokes — no container shape behind it.
+Containers occlude the icon core at small sizes and add visual noise that fights the icon's rounded strokes.
+</div>
+
+
+<div class="rule-row">
+<div class="rule-label">Badge container: raw strokes vs circle container</div>
+<div class="rule-cols">
+<div class="col col-correct">
+<div class="col-head"><span class="pill pill-ok">✓ CORRECT</span></div>
+<div class="icon-stage"><div class="svg-wrap">
+<svg viewBox="0 0 24 24" width="88" height="88" style="display:block"><g class="icon-core" stroke="#4EC9B0" stroke-width="1.5">
+<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<g class="icon-badge" stroke="#22C55E" stroke-width="1.5">
+<polyline points="17.5,4 19.5,6.5 22.5,1.5" fill="none"
+stroke-linecap="round" stroke-linejoin="round"/>
+</g></svg>
+
+</div></div>
+<p class="col-note">Raw polyline strokes only. No shape behind the badge. Clean at all sizes.</p>
+</div>
+<div class="col col-wrong">
+<div class="col-head"><span class="pill pill-bad">✗ WRONG</span></div>
+<div class="icon-stage"><div class="svg-wrap">
+<svg viewBox="0 0 24 24" width="88" height="88" style="display:block"><g class="icon-core" stroke="#4EC9B0" stroke-width="1.5">
+<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<circle cx="20" cy="4" r="4.5" fill="#22C55E" fill-opacity="0.25" stroke="#22C55E" stroke-width="1"/>
+<polyline points="17.5,4 19.5,6.5 22.5,1.5" stroke="#22C55E" stroke-width="1.5" fill="none"
+stroke-linecap="round" stroke-linejoin="round"/></svg>
+
+</div></div>
+<p class="col-note">A circle with <code>fill-opacity</code> sits behind the checkmark. At small sizes it occludes the icon core and adds a halo that disrupts visual weight.</p>
+</div>
+</div>
+
+</div>
+
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+CSS ADDRESSABILITY DEMO
+═══════════════════════════════════════════════════════════════ -->
+<section id="a1"><h2 class="section-title">CSS Targeting — icon-core &amp; icon-badge</h2><p class="section-sub">Because core and badge are in named groups, any CSS rule can target them independently. Toggle the controls below to see live CSS class manipulation.</p>
+
+<div class="css-demo-wrap">
+<div class="css-demo-title">Live demo — CSS class applied to parent, targeting child groups</div>
+<div class="controls" id="css-controls">
+<button class="ctrl-btn" data-state="state-dim-core">Dim core (.icon-core opacity: 0.3)</button>
+<button class="ctrl-btn" data-state="state-hide-badge">Hide badge (.icon-badge display: none)</button>
+<button class="ctrl-btn" data-state="state-pulse-badge">Pulse badge (animation on .icon-badge)</button>
+<button class="ctrl-btn" data-state="state-color-swap">Swap badge color (.icon-badge stroke: purple)</button>
+<button class="ctrl-btn" id="css-reset-btn">Reset</button>
+</div>
+<div class="css-demo-row" id="css-demo-icons">
+
+<div class="css-demo-card" id="css-card-answered">
+<svg class="css-demo-svg icon-answered" viewBox="0 0 24 24" width="56" height="56"
+fill="none" stroke-linecap="round" stroke-linejoin="round">
+<g class="icon-core" stroke="#4EC9B0" stroke-width="1.5">
+<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" fill="none"/>
+</g>
+<g class="icon-badge" stroke="#22C55E" stroke-width="1.5">
+<polyline points="17.5,4 19.5,6.5 22.5,1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+</svg>
+<span class="css-demo-label">answered</span>
+</div>
+<div class="css-demo-card" id="css-card-missed">
+<svg class="css-demo-svg icon-missed" viewBox="0 0 24 24" width="56" height="56"
+fill="none" stroke-linecap="round" stroke-linejoin="round">
+<g class="icon-core" stroke="#4EC9B0" stroke-width="1.5">
+<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" fill="none"/>
+</g>
+<g class="icon-badge" stroke="#EF4444" stroke-width="1.5">
+<line x1="17.5" y1="1.5" x2="22.5" y2="6.5" stroke-linecap="round"/><line x1="22.5" y1="1.5" x2="17.5" y2="6.5" stroke-linecap="round"/>
+</g>
+</svg>
+<span class="css-demo-label">missed</span>
+</div>
+<div class="css-demo-card" id="css-card-dropped">
+<svg class="css-demo-svg icon-dropped" viewBox="0 0 24 24" width="56" height="56"
+fill="none" stroke-linecap="round" stroke-linejoin="round">
+<g class="icon-core" stroke="#4EC9B0" stroke-width="1.5">
+<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" fill="none"/>
+</g>
+<g class="icon-badge" stroke="#F59E0B" stroke-width="1.5">
+<line x1="18" y1="7" x2="22" y2="1" stroke-linecap="round"/>
+</g>
+</svg>
+<span class="css-demo-label">dropped</span>
+</div>
+<div class="css-demo-card" id="css-card-active">
+<svg class="css-demo-svg icon-active" viewBox="0 0 24 24" width="56" height="56"
+fill="none" stroke-linecap="round" stroke-linejoin="round">
+<g class="icon-core" stroke="#4EC9B0" stroke-width="1.5">
+<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" fill="none"/>
+</g>
+<g class="icon-badge" stroke="#22C55E" stroke-width="1.5">
+<circle cx="20" cy="4" r="2" stroke="none" fill="currentColor"/>
+</g>
+</svg>
+<span class="css-demo-label">active</span>
+</div>
+</div>
+<div style="font-size:11px;color:var(--dim)">
+None of the above requires touching the SVG markup. The CSS selector does the work via the class names on the groups.
+</div>
+</div>
+
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+JS / ANIMATION DEMO
+═══════════════════════════════════════════════════════════════ -->
+<section id="a2"><h2 class="section-title">JavaScript Targeting &amp; Animation</h2><p class="section-sub">Named groups are queryable with standard DOM APIs. The badge and core can be animated, toggled, or recolored at runtime without touching SVG source.</p>
+
+<div class="js-demo-wrap">
+<div class="js-demo-left">
+<div class="js-demo-title">Icon under control</div>
+<svg id="demo-icon" viewBox="0 0 24 24" width="80" height="80"
+fill="none" stroke-linecap="round" stroke-linejoin="round">
+<g class="icon-core" stroke="#4EC9B0" stroke-width="1.5">
+<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" fill="none"/>
+</g>
+<g class="icon-badge" stroke="#22C55E" stroke-width="1.5">
+<polyline points="17.5,4 19.5,6.5 22.5,1.5" fill="none"
+stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+</svg>
+<div id="js-state-display" class="js-state-display">Idle</div>
+</div>
+<div class="js-demo-right">
+<div class="js-demo-title">Actions (querySelector + setAttribute)</div>
+<div class="js-controls">
+<button class="js-ctrl" id="js-toggle-badge">Toggle badge visibility</button>
+<button class="js-ctrl" id="js-badge-red">Badge → error (red ×)</button>
+<button class="js-ctrl" id="js-badge-green">Badge → success (green ✓)</button>
+<button class="js-ctrl" id="js-badge-amber">Badge → warning (amber /)</button>
+<button class="js-ctrl" id="js-dim-core">Dim core (opacity 0.35)</button>
+<button class="js-ctrl" id="js-reset">Reset all</button>
+</div>
+</div>
+</div>
+
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+ANTI-PATTERNS
+═══════════════════════════════════════════════════════════════ -->
+<section id="ap1"><h2 class="section-title">❌ Anti-pattern 1 — Scaling the Icon Core</h2><p class="section-sub">Never use scale() or translate() on the icon core group to make room for a badge. The core must always be full canvas size.</p>
+
+
+<div class="rule-row">
+<div class="rule-label">Scaled core vs full-size core</div>
+<div class="rule-cols">
+<div class="col col-correct">
+<div class="col-head"><span class="pill pill-ok">✓ CORRECT</span></div>
+<div class="icon-stage"><div class="svg-wrap">
+<svg viewBox="0 0 24 24" width="88" height="88" style="display:block"><g class="icon-core" stroke="#4EC9B0" stroke-width="1.5">
+<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<g class="icon-badge" stroke="#22C55E" stroke-width="1.5">
+<polyline points="17.5,4 19.5,6.5 22.5,1.5" fill="none"
+stroke-linecap="round" stroke-linejoin="round"/>
+</g></svg>
+
+</div></div>
+<p class="col-note">Core at full canvas size. Badge overlaid. No transform on core group.</p>
+</div>
+<div class="col col-wrong">
+<div class="col-head"><span class="pill pill-bad">✗ WRONG</span></div>
+<div class="icon-stage"><div class="svg-wrap">
+<svg viewBox="0 0 24 24" width="88" height="88" style="display:block"><g transform="scale(0.68) translate(0,1.5)" stroke="#4EC9B0" stroke-width="2.2">
+<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<polyline points="17.5,4 19.5,6.5 22.5,1.5" stroke="#22C55E" stroke-width="1.5" fill="none"
+stroke-linecap="round" stroke-linejoin="round"/></svg>
+
+</div></div>
+<p class="col-note"><code>transform='scale(0.68) translate(0,1.5)'</code> on the core. Core is visibly smaller than a solo icon, breaking size consistency.</p>
+</div>
+</div>
+
+</div>
+
+<pre class="code-block"><code>&lt;!-- ❌ WRONG --&gt;
+&lt;g class=&quot;icon-core&quot; transform=&quot;scale(0.68) translate(0,1.5)&quot; stroke-width=&quot;2.2&quot;&gt;
+&lt;path d=&quot;M22 16.92v3 ... z&quot;/&gt;
+&lt;/g&gt;
+
+&lt;!-- ✅ CORRECT --&gt;
+&lt;g class=&quot;icon-core&quot; stroke=&quot;#4EC9B0&quot; stroke-width=&quot;1.5&quot;&gt;
+&lt;path d=&quot;M22 16.92v3 ... z&quot;/&gt;
+&lt;/g&gt;</code></pre>
+
+</section>
+
+<section id="ap2"><h2 class="section-title">❌ Anti-pattern 2 — Skipping a Free Higher-Priority Corner</h2><p class="section-sub">Always use the highest-priority corner that is genuinely empty. Never use TR if it's occupied; never skip TR if it's free.</p>
+
+
+<div class="rule-row">
+<div class="rule-label">Skipping TR when it is empty</div>
+<div class="rule-cols">
+<div class="col col-correct">
+<div class="col-head"><span class="pill pill-ok">✓ CORRECT</span></div>
+<div class="icon-stage"><div class="svg-wrap">
+<svg viewBox="0 0 24 24" width="88" height="88" style="display:block"><g class="icon-core" stroke="#4EC9B0" stroke-width="1.5">
+<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<g class="icon-badge" stroke="#22C55E" stroke-width="1.5">
+<polyline points="17.5,4 19.5,6.5 22.5,1.5" fill="none"
+stroke-linecap="round" stroke-linejoin="round"/>
+</g></svg>
+
+</div></div>
+<p class="col-note">Phone body leaves TR exclusion zone completely clear. Badge correctly placed at TR anchor (20,4).</p>
+</div>
+<div class="col col-wrong">
+<div class="col-head"><span class="pill pill-bad">✗ WRONG</span></div>
+<div class="icon-stage"><div class="svg-wrap">
+<svg viewBox="0 0 24 24" width="88" height="88" style="display:block"><g class="icon-core" stroke="#4EC9B0" stroke-width="1.5">
+<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<g class="icon-badge" stroke="#22C55E" stroke-width="1.5">
+<polyline points="1.5,4 3.5,6.5 6.5,1.5" fill="none"
+stroke-linecap="round" stroke-linejoin="round"/>
+</g></svg>
+
+</div></div>
+<p class="col-note">Badge placed in TL even though TR zone has zero existing strokes. Wastes the default position and breaks visual consistency across the icon family.</p>
+</div>
+</div>
+
+</div>
+
+<pre class="code-block"><code>&lt;!-- ❌ WRONG: TL badge when TR zone is completely empty --&gt;
+&lt;g class=&quot;icon-badge&quot; stroke=&quot;#22C55E&quot; stroke-width=&quot;1.5&quot;&gt;
+&lt;polyline points=&quot;1.5,4 3.5,6.5 6.5,1.5&quot; .../&gt; &lt;!-- TL anchor --&gt;
+&lt;/g&gt;
+
+&lt;!-- ✅ CORRECT: TR badge — TR zone had no existing strokes --&gt;
+&lt;g class=&quot;icon-badge&quot; stroke=&quot;#22C55E&quot; stroke-width=&quot;1.5&quot;&gt;
+&lt;polyline points=&quot;17.5,4 19.5,6.5 22.5,1.5&quot; .../&gt; &lt;!-- TR anchor --&gt;
+&lt;/g&gt;</code></pre>
+
+</section>
+
+<section id="ap2b"><h2 class="section-title">❌ Anti-pattern 2b — Badge in a Corner Already Occupied by Core Strokes</h2><p class="section-sub">The exclusion zone check covers ALL existing strokes. A single endpoint, baseline tick, or secondary element inside a zone blocks it as firmly as the main body. Check every corner against every drawn path.</p>
+
+<div class="principle">
+<strong>Rule:</strong> "Occupied" means any ink in the 7×7 exclusion zone — not just the visually dominant
+part of the icon. A bar's bottom endpoint, a waveform tick, or a baseline that grazes a corner all block
+that corner. Walk the priority order (TR → BR → TL → BL) and place the badge in the first zone with zero
+existing strokes.
+</div>
+
+
+<div class="rule-row">
+<div class="rule-label">Bar chart: right bar's bottom endpoint blocks BR — badge must go to TL</div>
+<div class="rule-cols">
+<div class="col col-correct">
+<div class="col-head"><span class="pill pill-ok">✓ CORRECT</span></div>
+<div class="icon-stage"><div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap;">
+<div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+<svg viewBox="0 0 24 24" width="96" height="96" fill="none" stroke-linecap="round" stroke-linejoin="round">
+<!-- TR zone: blocked (bar top at 18,4) -->
+<rect x="16.5" y="0.5" width="7" height="7" fill="rgba(239,68,68,0.08)" stroke="rgba(239,68,68,0.45)" stroke-width="0.28" stroke-dasharray="0.8 0.4"/>
+<!-- BR zone: blocked (bar bottom at 18,20) -->
+<rect x="16.5" y="16.5" width="7" height="7" fill="rgba(239,68,68,0.08)" stroke="rgba(239,68,68,0.45)" stroke-width="0.28" stroke-dasharray="0.8 0.4"/>
+<!-- TL zone: empty → badge goes here -->
+<rect x="0.5" y="0.5" width="7" height="7" fill="rgba(34,197,94,0.09)" stroke="rgba(34,197,94,0.45)" stroke-width="0.28" stroke-dasharray="0.8 0.4"/>
+<g class="icon-core" stroke="#DCDCAA" stroke-width="1.5">
+<line x1="18" y1="20" x2="18" y2="4" stroke-linecap="round"/>
+<line x1="12" y1="20" x2="12" y2="8" stroke-linecap="round"/>
+<line x1="6" y1="20" x2="6" y2="14" stroke-linecap="round"/>
+<line x1="2" y1="20" x2="22" y2="20"/>
+</g>
+<!-- TR blocked (bar top). BR blocked (bar bottom at 18,20 inside BR zone).
+TL zone is empty → badge correctly placed in TL -->
+<g class="icon-badge" stroke="#22C55E" stroke-width="1.5">
+<line x1="4" y1="1.5" x2="4" y2="6.5" stroke-linecap="round"/>
+<line x1="1.5" y1="4" x2="6.5" y2="4" stroke-linecap="round"/>
+</g>
+<!-- highlight endpoints that block corners -->
+<circle cx="18" cy="4" r="1.2" fill="none" stroke="rgba(239,68,68,0.8)" stroke-width="0.4"/>
+<circle cx="18" cy="20" r="1.2" fill="none" stroke="rgba(239,68,68,0.8)" stroke-width="0.4"/>
+</svg>
+<span style="font-size:10px;color:var(--dim);text-align:center">Circled endpoints<br>block TR &amp; BR</span>
+</div>
+</div></div>
+<p class="col-note">TR is blocked (bar top at 18,4). BR is also blocked (bar bottom at 18,20 sits inside BR exclusion zone x:16.5–23.5, y:16.5–23.5). TL is empty — badge correctly placed at TL anchor (4,4).</p>
+</div>
+<div class="col col-wrong">
+<div class="col-head"><span class="pill pill-bad">✗ WRONG</span></div>
+<div class="icon-stage"><div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+<svg viewBox="0 0 24 24" width="96" height="96" fill="none" stroke-linecap="round" stroke-linejoin="round">
+<!-- BR zone occupied but badge forced here anyway -->
+<rect x="16.5" y="16.5" width="7" height="7" fill="rgba(239,68,68,0.12)" stroke="rgba(239,68,68,0.6)" stroke-width="0.28" stroke-dasharray="0.8 0.4"/>
+<g class="icon-core" stroke="#DCDCAA" stroke-width="1.5">
+<line x1="18" y1="20" x2="18" y2="4" stroke-linecap="round"/>
+<line x1="12" y1="20" x2="12" y2="8" stroke-linecap="round"/>
+<line x1="6" y1="20" x2="6" y2="14" stroke-linecap="round"/>
+<line x1="2" y1="20" x2="22" y2="20"/>
+</g>
+<!-- TR blocked (bar top at 18,4). Check BR: bar bottom at (18,20) IS inside BR zone -->
+<!-- but badge wrongly placed in BR anyway -->
+<g class="icon-badge" stroke="#22C55E" stroke-width="1.5">
+<polyline points="17.5,20 19.5,22.5 22.5,17.5" fill="none"
+stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<!-- bar bottom endpoint -->
+<circle cx="18" cy="20" r="1.2" fill="none" stroke="rgba(239,68,68,0.9)" stroke-width="0.4"/>
+</svg>
+<span style="font-size:10px;color:var(--dim);text-align:center">Bar bottom (18,20)<br>inside BR zone</span>
+</div></div>
+<p class="col-note">Bar bottom endpoint (18,20) is inside the BR exclusion zone but badge is forced into BR anyway. Badge and core stroke visually collide.</p>
+</div>
+</div>
+<p class="extra-note">The key insight: it is the <strong>bar's bottom endpoint</strong> — a secondary, non-dominant element — that blocks BR. The check must cover every coordinate of every path, not just the visually prominent part.</p>
+</div>
+
+<pre class="code-block"><code>&lt;!-- ❌ WRONG: badge in BR even though bar bottom (18,20) is inside BR zone --&gt;
+&lt;g class=&quot;icon-core&quot; stroke=&quot;#DCDCAA&quot; stroke-width=&quot;1.5&quot;&gt;
+&lt;line x1=&quot;18&quot; y1=&quot;20&quot; x2=&quot;18&quot; y2=&quot;4&quot;/&gt; &lt;!-- top (18,4) blocks TR --&gt;
+&lt;!-- bottom (18,20) blocks BR --&gt;
+&lt;line x1=&quot;12&quot; y1=&quot;20&quot; x2=&quot;12&quot; y2=&quot;8&quot;/&gt;
+&lt;line x1=&quot;6&quot; y1=&quot;20&quot; x2=&quot;6&quot; y2=&quot;14&quot;/&gt;
+&lt;line x1=&quot;2&quot; y1=&quot;20&quot; x2=&quot;22&quot; y2=&quot;20&quot;/&gt;
+&lt;/g&gt;
+&lt;g class=&quot;icon-badge&quot; stroke=&quot;#22C55E&quot; stroke-width=&quot;1.5&quot;&gt;
+&lt;polyline points=&quot;17.5,20 19.5,22.5 22.5,17.5&quot; fill=&quot;none&quot;/&gt; &lt;!-- BR — OCCUPIED --&gt;
+&lt;/g&gt;
+
+&lt;!-- ✅ CORRECT: TR blocked, BR blocked → TL is the first empty corner --&gt;
+&lt;g class=&quot;icon-core&quot; stroke=&quot;#DCDCAA&quot; stroke-width=&quot;1.5&quot;&gt;
+&lt;line x1=&quot;18&quot; y1=&quot;20&quot; x2=&quot;18&quot; y2=&quot;4&quot;/&gt;
+&lt;line x1=&quot;12&quot; y1=&quot;20&quot; x2=&quot;12&quot; y2=&quot;8&quot;/&gt;
+&lt;line x1=&quot;6&quot; y1=&quot;20&quot; x2=&quot;6&quot; y2=&quot;14&quot;/&gt;
+&lt;line x1=&quot;2&quot; y1=&quot;20&quot; x2=&quot;22&quot; y2=&quot;20&quot;/&gt;
+&lt;/g&gt;
+&lt;g class=&quot;icon-badge&quot; stroke=&quot;#22C55E&quot; stroke-width=&quot;1.5&quot;&gt;
+&lt;line x1=&quot;4&quot; y1=&quot;1.5&quot; x2=&quot;4&quot; y2=&quot;6.5&quot; stroke-linecap=&quot;round&quot;/&gt; &lt;!-- TL plus --&gt;
+&lt;line x1=&quot;1.5&quot; y1=&quot;4&quot; x2=&quot;6.5&quot; y2=&quot;4&quot; stroke-linecap=&quot;round&quot;/&gt;
+&lt;/g&gt;</code></pre>
+
+</section>
+
+<section id="ap3"><h2 class="section-title">❌ Anti-pattern 3 — Loose Paths Without Named Groups</h2><p class="section-sub">All paths must be inside either <code>icon-core</code> or <code>icon-badge</code>. Loose paths in the symbol cannot be targeted independently.</p>
+
+
+<div class="rule-row">
+<div class="rule-label">Group structure</div>
+<div class="rule-cols">
+<div class="col col-correct">
+<div class="col-head"><span class="pill pill-ok">✓ CORRECT</span></div>
+<div class="icon-stage"><div class="svg-wrap">
+<svg viewBox="0 0 24 24" width="88" height="88" style="display:block"><g class="icon-core" stroke="#4EC9B0" stroke-width="1.5">
+<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<g class="icon-badge" stroke="#22C55E" stroke-width="1.5">
+<polyline points="17.5,4 19.5,6.5 22.5,1.5" fill="none"
+stroke-linecap="round" stroke-linejoin="round"/>
+</g></svg>
+
+</div></div>
+<p class="col-note">Two named groups. Each group is the public API: CSS and JS can select, animate, or override each independently.</p>
+</div>
+<div class="col col-wrong">
+<div class="col-head"><span class="pill pill-bad">✗ WRONG</span></div>
+<div class="icon-stage"><div class="svg-wrap">
+<svg viewBox="0 0 24 24" width="88" height="88" style="display:block"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" stroke="#4EC9B0" stroke-width="1.5" fill="none"
+stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="17.5,4 19.5,6.5 22.5,1.5" stroke="#22C55E" stroke-width="1.5" fill="none"
+stroke-linecap="round" stroke-linejoin="round"/></svg>
+
+</div></div>
+<p class="col-note">Paths loose inside <code>&lt;symbol&gt;</code>. <code>document.querySelector('.icon-badge')</code> returns null. Animation and CSS overrides require knowing internal path indices.</p>
+</div>
+</div>
+
+</div>
+
+<pre class="code-block"><code>&lt;!-- ❌ WRONG: loose paths --&gt;
+&lt;symbol id=&quot;answered-calls&quot; ...&gt;
+&lt;path d=&quot;...&quot; stroke=&quot;#4EC9B0&quot;/&gt; &lt;!-- which is core? which is badge? --&gt;
+&lt;polyline points=&quot;...&quot; stroke=&quot;#22C55E&quot;/&gt;
+&lt;/symbol&gt;
+
+&lt;!-- ✅ CORRECT: named groups --&gt;
+&lt;symbol id=&quot;answered-calls&quot; ...&gt;
+&lt;g class=&quot;icon-core&quot; stroke=&quot;#4EC9B0&quot; stroke-width=&quot;1.5&quot;&gt;
+&lt;path d=&quot;...&quot;/&gt;
+&lt;/g&gt;
+&lt;g class=&quot;icon-badge&quot; stroke=&quot;#22C55E&quot; stroke-width=&quot;1.5&quot;&gt;
+&lt;polyline points=&quot;...&quot; fill=&quot;none&quot;/&gt;
+&lt;/g&gt;
+&lt;/symbol&gt;</code></pre>
+
+</section>
+
+<section id="ap4"><h2 class="section-title">❌ Anti-pattern 4 — Badge Container (Bounding Shape)</h2><p class="section-sub">Badges must never have a background shape. No circle, rect, or ellipse behind the badge glyph.</p>
+
+
+<div class="rule-row">
+<div class="rule-label">Badge container</div>
+<div class="rule-cols">
+<div class="col col-correct">
+<div class="col-head"><span class="pill pill-ok">✓ CORRECT</span></div>
+<div class="icon-stage"><div class="svg-wrap">
+<svg viewBox="0 0 24 24" width="88" height="88" style="display:block"><g class="icon-core" stroke="#4EC9B0" stroke-width="1.5">
+<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<g class="icon-badge" stroke="#22C55E" stroke-width="1.5">
+<polyline points="17.5,4 19.5,6.5 22.5,1.5" fill="none"
+stroke-linecap="round" stroke-linejoin="round"/>
+</g></svg>
+
+</div></div>
+<p class="col-note">Raw strokes only. Badge is pure ink — no background. Reads cleanly at 16px and 64px.</p>
+</div>
+<div class="col col-wrong">
+<div class="col-head"><span class="pill pill-bad">✗ WRONG</span></div>
+<div class="icon-stage"><div class="svg-wrap">
+<svg viewBox="0 0 24 24" width="88" height="88" style="display:block"><g class="icon-core" stroke="#4EC9B0" stroke-width="1.5">
+<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<circle cx="20" cy="4" r="4.5" fill="#22C55E" fill-opacity="0.25" stroke="#22C55E" stroke-width="1"/>
+<polyline points="17.5,4 19.5,6.5 22.5,1.5" stroke="#22C55E" stroke-width="1.5" fill="none"
+stroke-linecap="round" stroke-linejoin="round"/></svg>
+
+</div></div>
+<p class="col-note">Circle with <code>fill-opacity=0.25</code> behind the checkmark. Creates a halo, occludes icon core, adds optical weight.</p>
+</div>
+</div>
+
+</div>
+
+<pre class="code-block"><code>&lt;!-- ❌ WRONG: container behind badge --&gt;
+&lt;g class=&quot;icon-badge&quot;&gt;
+&lt;circle cx=&quot;20&quot; cy=&quot;4&quot; r=&quot;4.5&quot; fill=&quot;#22C55E&quot; fill-opacity=&quot;0.25&quot; stroke=&quot;#22C55E&quot;/&gt;
+&lt;polyline points=&quot;17.5,4 19.5,6.5 22.5,1.5&quot; stroke=&quot;#22C55E&quot; fill=&quot;none&quot;/&gt;
+&lt;/g&gt;
+
+&lt;!-- ✅ CORRECT: raw strokes, no container --&gt;
+&lt;g class=&quot;icon-badge&quot; stroke=&quot;#22C55E&quot; stroke-width=&quot;1.5&quot;&gt;
+&lt;polyline points=&quot;17.5,4 19.5,6.5 22.5,1.5&quot; fill=&quot;none&quot;
+stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/&gt;
+&lt;/g&gt;</code></pre>
+
+</section>
+
+<section id="ap5"><h2 class="section-title">❌ Anti-pattern 5 — Compensated Stroke Weight</h2><p class="section-sub">stroke-width='2.2' is a relic of the scaled-core era. The core is never scaled, so all paths use stroke-width='1.5' uniformly.</p>
+
+
+<div class="rule-row">
+<div class="rule-label">Stroke weight: 1.5 vs 2.2</div>
+<div class="rule-cols">
+<div class="col col-correct">
+<div class="col-head"><span class="pill pill-ok">✓ CORRECT</span></div>
+<div class="icon-stage"><div class="svg-wrap">
+<svg viewBox="0 0 24 24" width="88" height="88" style="display:block"><g class="icon-core" stroke="#4EC9B0" stroke-width="1.5">
+<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<g class="icon-badge" stroke="#22C55E" stroke-width="1.5">
+<polyline points="17.5,4 19.5,6.5 22.5,1.5" fill="none"
+stroke-linecap="round" stroke-linejoin="round"/>
+</g></svg>
+
+</div></div>
+<p class="col-note">Uniform <code>stroke-width='1.5'</code> on both groups. Visual weight matches solo icon perfectly.</p>
+</div>
+<div class="col col-wrong">
+<div class="col-head"><span class="pill pill-bad">✗ WRONG</span></div>
+<div class="icon-stage"><div class="svg-wrap">
+<svg viewBox="0 0 24 24" width="88" height="88" style="display:block"><g transform="scale(0.68) translate(0,1.5)" stroke="#4EC9B0" stroke-width="2.2">
+<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<g class="icon-badge" stroke="#22C55E" stroke-width="1.5">
+<polyline points="17.5,4 19.5,6.5 22.5,1.5" fill="none" stroke-linecap="round"/>
+</g></svg>
+
+</div></div>
+<p class="col-note"><code>stroke-width='2.2'</code> inside a <code>scale(0.68)</code> group. Bloated stroke at large sizes, incompatible with system.</p>
+</div>
+</div>
+
+</div>
+
+<pre class="code-block"><code>&lt;!-- ❌ WRONG: compensated stroke from scaled-core era --&gt;
+&lt;g class=&quot;icon-core&quot; transform=&quot;scale(0.68)&quot; stroke-width=&quot;2.2&quot;&gt; ... &lt;/g&gt;
+
+&lt;!-- ✅ CORRECT: uniform weight, no transform --&gt;
+&lt;g class=&quot;icon-core&quot; stroke-width=&quot;1.5&quot;&gt; ... &lt;/g&gt;
+&lt;g class=&quot;icon-badge&quot; stroke-width=&quot;1.5&quot;&gt; ... &lt;/g&gt;</code></pre>
+
+</section>
+
+<section id="ap6"><h2 class="section-title">❌ Anti-pattern 6 — Status Dot Embedded in Icon Body</h2><p class="section-sub">A status indicator (active, live, online) must be a proper badge in an <code>icon-badge</code> group. It must never be embedded inside the <code>icon-core</code> group at coordinates inside an exclusion zone.</p>
+
+
+<div class="rule-row">
+<div class="rule-label">Active call dot: badge vs embedded</div>
+<div class="rule-cols">
+<div class="col col-correct">
+<div class="col-head"><span class="pill pill-ok">✓ CORRECT</span></div>
+<div class="icon-stage"><div class="svg-wrap">
+<svg viewBox="0 0 24 24" width="88" height="88" style="display:block"><g class="icon-core" stroke="#4EC9B0" stroke-width="1.5">
+<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<g class="icon-badge" fill="#22C55E">
+<circle cx="20" cy="4" r="2" stroke="none"/>
+</g></svg>
+
+</div></div>
+<p class="col-note">Green dot is <code>&lt;circle cx='20' cy='4' r='2'&gt;</code> inside a separate <code>icon-badge</code> group. CSS/JS can show/hide it independently.</p>
+</div>
+<div class="col col-wrong">
+<div class="col-head"><span class="pill pill-bad">✗ WRONG</span></div>
+<div class="icon-stage"><div class="svg-wrap">
+<svg viewBox="0 0 24 24" width="88" height="88" style="display:block"><g class="icon-core" stroke="#4EC9B0" stroke-width="1.5">
+<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="19" cy="5" r="2" fill="#22C55E" stroke="none"/>
+</g></svg>
+
+</div></div>
+<p class="col-note">Green dot at <code>cx='19' cy='5'</code> is inside the <code>icon-core</code> group, inside the TR exclusion zone. Cannot be independently toggled. Violates single-responsibility of the core group.</p>
+</div>
+</div>
+
+</div>
+
+<pre class="code-block"><code>&lt;!-- ❌ WRONG: dot inside core, inside exclusion zone --&gt;
+&lt;g class=&quot;icon-core&quot; stroke=&quot;#4EC9B0&quot; stroke-width=&quot;1.5&quot;&gt;
+&lt;path d=&quot;M22 16.92v3 ... z&quot;/&gt;
+&lt;circle cx=&quot;19&quot; cy=&quot;5&quot; r=&quot;2&quot; fill=&quot;#22C55E&quot;/&gt; &lt;!-- in exclusion zone, in core --&gt;
+&lt;/g&gt;
+
+&lt;!-- ✅ CORRECT: dot as badge in its own group --&gt;
+&lt;g class=&quot;icon-core&quot; stroke=&quot;#4EC9B0&quot; stroke-width=&quot;1.5&quot;&gt;
+&lt;path d=&quot;M22 16.92v3 ... z&quot;/&gt;
+&lt;/g&gt;
+&lt;g class=&quot;icon-badge&quot; fill=&quot;#22C55E&quot;&gt;
+&lt;circle cx=&quot;20&quot; cy=&quot;4&quot; r=&quot;2&quot; stroke=&quot;none&quot;/&gt; &lt;!-- badge group, at anchor --&gt;
+&lt;/g&gt;</code></pre>
+
+</section>
+
+<section id="ap7"><h2 class="section-title">❌ Anti-pattern 7 — Sub-half-unit Coordinates</h2><p class="section-sub">All coordinates must snap to 0.5-unit grid. Values like 17.3, 4.1, 22.7 cause sub-pixel rendering artefacts, especially at 16–24px render sizes.</p>
+
+
+<div class="rule-row">
+<div class="rule-label">Coordinate precision</div>
+<div class="rule-cols">
+<div class="col col-correct">
+<div class="col-head"><span class="pill pill-ok">✓ CORRECT</span></div>
+<div class="icon-stage"><div class="svg-wrap">
+<svg viewBox="0 0 24 24" width="88" height="88" style="display:block"><g class="icon-core" stroke="#4EC9B0" stroke-width="1.5">
+<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<g class="icon-badge" stroke="#22C55E" stroke-width="1.5">
+<polyline points="17.5,4 19.5,6.5 22.5,1.5" fill="none"
+stroke-linecap="round" stroke-linejoin="round"/>
+</g></svg>
+
+</div></div>
+<p class="col-note">All coordinates on the 0.5 grid: <code>17.5, 4, 19.5, 6.5, 22.5, 1.5</code>. Crisp at any size.</p>
+</div>
+<div class="col col-wrong">
+<div class="col-head"><span class="pill pill-bad">✗ WRONG</span></div>
+<div class="icon-stage"><div class="svg-wrap">
+<svg viewBox="0 0 24 24" width="88" height="88" style="display:block"><g class="icon-core" stroke="#4EC9B0" stroke-width="1.5">
+<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<g class="icon-badge" stroke="#22C55E" stroke-width="1.5">
+<polyline points="17.3,4.1 19.4,6.6 22.6,1.4" fill="none" stroke-linecap="round"/>
+</g></svg>
+
+</div></div>
+<p class="col-note">Sub-pixel coords: <code>17.3, 4.1, 19.4, 6.6, 22.6, 1.4</code>. Badge strokes may blur or feather at small render sizes.</p>
+</div>
+</div>
+
+</div>
+
+<pre class="code-block"><code>&lt;!-- ❌ WRONG: sub-half-unit coordinates --&gt;
+&lt;polyline points=&quot;17.3,4.1 19.4,6.6 22.6,1.4&quot; .../&gt;
+
+&lt;!-- ✅ CORRECT: snapped to 0.5 grid --&gt;
+&lt;polyline points=&quot;17.5,4 19.5,6.5 22.5,1.5&quot; .../&gt;</code></pre>
+
+</section>
+
+<section id="ap8"><h2 class="section-title">❌ Anti-pattern 8 — Same Color for Badge and Core</h2><p class="section-sub">Badge color must be semantically distinct from the core color. A teal × cross on a teal phone is invisible and meaningless.</p>
+
+
+<div class="rule-row">
+<div class="rule-label">Badge color independence</div>
+<div class="rule-cols">
+<div class="col col-correct">
+<div class="col-head"><span class="pill pill-ok">✓ CORRECT</span></div>
+<div class="icon-stage"><div class="svg-wrap">
+<svg viewBox="0 0 24 24" width="88" height="88" style="display:block"><g class="icon-core" stroke="#4EC9B0" stroke-width="1.5">
+<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<g class="icon-badge" stroke="#EF4444" stroke-width="1.5">
+<line x1="17.5" y1="1.5" x2="22.5" y2="6.5" stroke-linecap="round"/>
+<line x1="22.5" y1="1.5" x2="17.5" y2="6.5" stroke-linecap="round"/>
+</g></svg>
+
+</div></div>
+<p class="col-note">Teal core, red badge. The × is immediately visible. Red communicates 'missed/failed' unambiguously.</p>
+</div>
+<div class="col col-wrong">
+<div class="col-head"><span class="pill pill-bad">✗ WRONG</span></div>
+<div class="icon-stage"><div class="svg-wrap">
+<svg viewBox="0 0 24 24" width="88" height="88" style="display:block"><g class="icon-core" stroke="#4EC9B0" stroke-width="1.5">
+<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<g class="icon-badge" stroke="#4EC9B0" stroke-width="1.5">
+<line x1="17.5" y1="1.5" x2="22.5" y2="6.5" stroke-linecap="round"/>
+<line x1="22.5" y1="1.5" x2="17.5" y2="6.5" stroke-linecap="round"/>
+</g></svg>
+
+</div></div>
+<p class="col-note">Teal badge on teal core. The × disappears into the background and carries no semantic meaning through color.</p>
+</div>
+</div>
+
+</div>
+
+<pre class="code-block"><code>&lt;!-- ❌ WRONG: badge inherits/reuses core color --&gt;
+&lt;g class=&quot;icon-core&quot; stroke=&quot;#4EC9B0&quot; stroke-width=&quot;1.5&quot;&gt; ... &lt;/g&gt;
+&lt;g class=&quot;icon-badge&quot; stroke=&quot;#4EC9B0&quot; stroke-width=&quot;1.5&quot;&gt; &lt;!-- same teal — meaningless --&gt;
+&lt;line x1=&quot;17.5&quot; y1=&quot;1.5&quot; x2=&quot;22.5&quot; y2=&quot;6.5&quot; stroke-linecap=&quot;round&quot;/&gt;
+&lt;/g&gt;
+
+&lt;!-- ✅ CORRECT: badge uses its own semantic color --&gt;
+&lt;g class=&quot;icon-core&quot; stroke=&quot;#4EC9B0&quot; stroke-width=&quot;1.5&quot;&gt; ... &lt;/g&gt;
+&lt;g class=&quot;icon-badge&quot; stroke=&quot;#EF4444&quot; stroke-width=&quot;1.5&quot;&gt; &lt;!-- red = missed/failed --&gt;
+&lt;line x1=&quot;17.5&quot; y1=&quot;1.5&quot; x2=&quot;22.5&quot; y2=&quot;6.5&quot; stroke-linecap=&quot;round&quot;/&gt;
+&lt;/g&gt;</code></pre>
+
+</section>
+
+<section id="ap9"><h2 class="section-title">❌ Anti-pattern 9 — Ignoring a Secondary Element That Occupies a Corner</h2><p class="section-sub">The exclusion zone check is not a visual impression test. Check every anchor coordinate and every arc curve against all four zones. A single endpoint or arc bulge inside a zone blocks that corner regardless of how minor it looks.</p>
+
+<div class="principle">
+<strong>Rule:</strong> For each corner, check <em>every</em> path coordinate in <code>icon-core</code> —
+including <code>M</code> start points, arc endpoints, and for <code>A/a</code> arcs also the curve itself.
+If <em>any</em> part of any path falls inside a corner's 7×7 exclusion zone, that corner is off-limits.
+Arc curves can bulge into a zone even when their start and end points are outside it.
+</div>
+
+<div class="rule-row">
+<div class="rule-label">Common secondary elements that silently occupy corners</div>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;padding:4px 0">
+
+<div class="col" style="border-color:rgba(239,68,68,.2)">
+<div class="col-head"><span class="pill pill-bad">Baseline endpoint in BR</span></div>
+<div class="icon-stage">
+<svg viewBox="0 0 24 24" width="80" height="80" fill="none" stroke-linecap="round" stroke-linejoin="round">
+<rect x="16.5" y="16.5" width="7" height="7" fill="rgba(239,68,68,0.09)" stroke="rgba(239,68,68,0.5)" stroke-width="0.3" stroke-dasharray="0.8 0.4"/>
+<g class="icon-core" stroke="#DCDCAA" stroke-width="1.5">
+<line x1="8" y1="18" x2="8" y2="6"/>
+<line x1="14" y1="18" x2="14" y2="10"/>
+<line x1="2" y1="20" x2="22" y2="20"/>
+</g>
+<!-- highlight the offending endpoint -->
+<circle cx="22" cy="20" r="1.4" fill="none" stroke="rgba(239,68,68,0.9)" stroke-width="0.4"/>
+</svg>
+</div>
+<p class="col-note">Baseline endpoint <code>(22,20)</code> is inside BR zone (x>16.5, y>16.5). Circled. BR is blocked even though no bar touches it directly.</p>
+</div>
+
+<div class="col" style="border-color:rgba(239,68,68,.2)">
+<div class="col-head"><span class="pill pill-bad">Arc curve bulges into TR</span></div>
+<div class="icon-stage">
+<svg viewBox="0 0 24 24" width="80" height="80" fill="none" stroke-linecap="round" stroke-linejoin="round">
+<rect x="16.5" y="0.5" width="7" height="7" fill="rgba(239,68,68,0.09)" stroke="rgba(239,68,68,0.5)" stroke-width="0.3" stroke-dasharray="0.8 0.4"/>
+<g class="icon-core" stroke="#4EC9B0" stroke-width="1.5">
+<path d="M14.05 2a9 9 0 0 1 8 7.94" fill="none"/>
+<path d="M14.05 6A5 5 0 0 1 18 10" fill="none"/>
+</g>
+<!-- note: arc endpoints are at (22.05,9.94) and (18,10) — both y>7.5, outside TR -->
+<!-- but the arc curve itself visually passes through TR -->
+</svg>
+</div>
+<p class="col-note">Arc endpoints at <code>(22,9.94)</code> and <code>(18,10)</code> are outside TR (y>7.5). But the arc <em>curve</em> bulges rightward and upward, visually passing through TR. Endpoint check alone is not enough for arcs — inspect the rendered curve.</p>
+</div>
+
+<div class="col" style="border-color:rgba(34,197,94,.15)">
+<div class="col-head"><span class="pill pill-ok">Full check → correct corner</span></div>
+<div class="icon-stage">
+<svg viewBox="0 0 24 24" width="80" height="80" fill="none" stroke-linecap="round" stroke-linejoin="round">
+<!-- TR: arc curve passes through it (arc check) -->
+<rect x="16.5" y="0.5" width="7" height="7" fill="rgba(239,68,68,0.07)" stroke="rgba(239,68,68,0.35)" stroke-width="0.3" stroke-dasharray="0.8 0.4"/>
+<!-- BR: phone M22,16.92 occupies it -->
+<rect x="16.5" y="16.5" width="7" height="7" fill="rgba(239,68,68,0.07)" stroke="rgba(239,68,68,0.35)" stroke-width="0.3" stroke-dasharray="0.8 0.4"/>
+<!-- TL: phone arc endpoint (4.11,2) occupies it -->
+<rect x="0.5" y="0.5" width="7" height="7" fill="rgba(239,68,68,0.07)" stroke="rgba(239,68,68,0.35)" stroke-width="0.3" stroke-dasharray="0.8 0.4"/>
+<!-- BL: free -->
+<rect x="0.5" y="16.5" width="7" height="7" fill="rgba(34,197,94,0.09)" stroke="rgba(34,197,94,0.45)" stroke-width="0.3" stroke-dasharray="0.8 0.4"/>
+<g class="icon-core" stroke="#4EC9B0" stroke-width="1.5">
+<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" fill="none"/>
+<path d="M14.05 2a9 9 0 0 1 8 7.94" fill="none"/>
+<path d="M14.05 6A5 5 0 0 1 18 10" fill="none"/>
+</g>
+<g class="icon-badge" stroke="#22C55E" stroke-width="1.5">
+<polyline points="1.5,20 3.5,22.5 6.5,17.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+</svg>
+</div>
+<p class="col-note">
+TR: arc curve bulges through it ✗<br>
+BR: phone <code>M22,16.92</code> ✗<br>
+TL: phone arc endpoint <code>(4.11,2)</code> ✗<br>
+BL: no coordinates → <strong>badge goes BL</strong> ✓
+</p>
+</div>
+
+</div>
+</div>
+
+</section>
+
+</main>
+</div><!-- /layout -->
+
+<script>
+// ── CSS Controls ──────────────────────────────────────────────────────────────
+const cssIcons = document.querySelectorAll('.css-demo-card svg');
+const cssButtons = document.querySelectorAll('#css-controls .ctrl-btn[data-state]');
+const activeStates = new Set();
+
+cssButtons.forEach(btn => {
+btn.addEventListener('click', () => {
+const state = btn.dataset.state;
+if (activeStates.has(state)) {
+activeStates.delete(state);
+btn.classList.remove('active');
+} else {
+activeStates.add(state);
+btn.classList.add('active');
+}
+applyStates();
+});
+});
+
+document.getElementById('css-reset-btn').addEventListener('click', () => {
+activeStates.clear();
+cssButtons.forEach(b => b.classList.remove('active'));
+applyStates();
+});
+
+function applyStates() {
+cssIcons.forEach(icon => {
+icon.className.baseVal = icon.className.baseVal
+.replace(/\s+state-\S+/g, '').trim();
+activeStates.forEach(s => {
+icon.className.baseVal += ' ' + s;
+});
+});
+}
+
+// ── JS Controls ──────────────────────────────────────────────────────────────
+const demoIcon = document.getElementById('demo-icon');
+const demoCore = demoIcon.querySelector('.icon-core');
+const demoBadge = demoIcon.querySelector('.icon-badge');
+const stateDisp = document.getElementById('js-state-display');
+
+const PHONE_PATH = "M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z";
+const BADGES = {
+green: {
+stroke: '#22C55E',
+html: `<polyline points="17.5,4 19.5,6.5 22.5,1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>`,
+label: 'success ✓'
+},
+red: {
+stroke: '#EF4444',
+html: `<line x1="17.5" y1="1.5" x2="22.5" y2="6.5" stroke-linecap="round"/>
+<line x1="22.5" y1="1.5" x2="17.5" y2="6.5" stroke-linecap="round"/>`,
+label: 'error ×'
+},
+amber: {
+stroke: '#F59E0B',
+html: `<line x1="18" y1="7" x2="22" y2="1" stroke-linecap="round"/>`,
+label: 'warning /'
+}
+};
+
+function setState(msg) { stateDisp.textContent = msg; }
+
+document.getElementById('js-toggle-badge').addEventListener('click', () => {
+const hidden = demoBadge.style.display === 'none';
+demoBadge.style.display = hidden ? '' : 'none';
+setState(hidden ? 'badge.style.display = ""' : 'badge.style.display = "none"');
+});
+
+['red','green','amber'].forEach(key => {
+document.getElementById('js-badge-' + key).addEventListener('click', () => {
+const b = BADGES[key];
+demoBadge.setAttribute('stroke', b.stroke);
+demoBadge.innerHTML = b.html;
+demoBadge.style.display = '';
+setState(`badge → ${b.label}\nbadge.setAttribute('stroke', '${b.stroke}')`);
+});
+});
+
+document.getElementById('js-dim-core').addEventListener('click', () => {
+const dimmed = demoCore.style.opacity === '0.35';
+demoCore.style.opacity = dimmed ? '1' : '0.35';
+setState(dimmed ? 'core.style.opacity = "1"' : 'core.style.opacity = "0.35"');
+});
+
+document.getElementById('js-reset').addEventListener('click', () => {
+demoCore.style.opacity = '1';
+demoBadge.style.display = '';
+demoBadge.setAttribute('stroke', '#22C55E');
+demoBadge.innerHTML = BADGES.green.html;
+setState('Reset');
+});
+</script>
+</body>
+</html>

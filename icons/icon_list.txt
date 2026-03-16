@@ -1,0 +1,435 @@
+# 1. Core Navigation & Workspace
+
+| Icon | Description |
+| ---------------- | --------------------------------------------- |
+| home | Main landing page of the system. |
+| dashboard | Overall system dashboard showing key metrics. |
+| workspace | Main working environment for users. |
+| overview | High level summary of system status. |
+| activity | System activity feed. |
+| recent | Recently accessed records. |
+| favorites | Bookmarked items. |
+| notifications | System notifications center. |
+| announcements | Broadcast announcements panel. |
+| messages | Internal messaging system. |
+| tasks | Assigned tasks list. |
+| task-complete | Completed task indicator. |
+| task-pending | Pending task indicator. |
+| task-overdue | Overdue task indicator. |
+| timeline | Chronological timeline of events. |
+| shortcuts | Quick shortcuts panel. |
+| quick-actions | Quick action menu. |
+| command-palette | Command palette search interface. |
+| workspace-switch | Switch between workspaces. |
+| organization | Organization overview. |
+
+---
+
+# 2. Call Operations
+
+| Icon | Description |
+| ----------------- | ------------------------------- |
+| calls | Call management module. |
+| make-call | Initiate outbound call. |
+| incoming-call | Incoming call indicator. |
+| outgoing-call | Outbound call indicator. |
+| active-call | Currently active call. |
+| call-ringing | Call ringing state. |
+| call-connecting | Call connection in progress. |
+| call-connected | Call successfully connected. |
+| call-ended | Call completed normally. |
+| call-failed | Call failed to connect. |
+| call-missed | Missed call indicator. |
+| call-declined | Call rejected by user. |
+| call-dropped | Dropped call due to network. |
+| call-unanswered | Customer did not answer. |
+| call-retry | Retry a failed call. |
+| call-callback | Schedule callback request. |
+| call-forward | Forward call to another number. |
+| call-transfer | Transfer call to another agent. |
+| call-conference | Conference call session. |
+| call-merge | Merge calls together. |
+| call-split | Split conference call. |
+| call-queue | Call waiting in queue. |
+| call-routing | Call routing configuration. |
+| call-distribution | Automatic call distribution. |
+| call-monitor | Supervisor monitoring call. |
+| call-whisper | Supervisor whisper coaching. |
+| call-barge | Supervisor barging into call. |
+| call-coaching | Coaching session during call. |
+| call-pause | Pause active call. |
+| call-resume | Resume paused call. |
+| call-hold | Put call on hold. |
+| call-unhold | Resume call from hold. |
+| call-mute | Mute microphone during call. |
+| call-unmute | Unmute microphone. |
+| call-volume | Call audio volume control. |
+| call-keypad | Dial pad interface. |
+| call-duration | Call duration timer. |
+| call-summary | Summary of call conversation. |
+| call-tags | Tags assigned to call. |
+| call-notes | Notes recorded during call. |
+| call-rating | Call quality rating. |
+
+---
+
+# 3. Call Analytics & Metrics
+
+| Icon | Description |
+| --------------------- | -------------------------------- |
+| total-calls | Total number of calls. |
+| answered-calls | Successfully answered calls. |
+| missed-calls | Calls missed by agents. |
+| failed-calls | Calls that failed. |
+| dropped-calls | Calls dropped mid conversation. |
+| abandoned-calls | Calls abandoned in queue. |
+| unpicked-calls | Calls not picked by customer. |
+| converted-calls | Calls converted into sales. |
+| recovered-leads | Leads recovered after follow-up. |
+| escalated-calls | Calls escalated to supervisor. |
+| call-success-rate | Percentage of successful calls. |
+| call-resolution-rate | First call resolution metric. |
+| avg-call-duration | Average call duration. |
+| avg-wait-time | Average queue wait time. |
+| queue-length | Number of callers waiting. |
+| peak-call-time | Peak traffic hour indicator. |
+| live-calls | Number of live calls. |
+| calls-per-agent | Calls handled per agent. |
+| calls-per-minute | Call throughput rate. |
+| sla-compliance | SLA compliance metric. |
+| customer-satisfaction | Customer satisfaction score. |
+| sentiment-score | Sentiment analysis score. |
+
+---
+
+# 4. Customers & CRM
+
+| Icon | Description |
+| ------------------ | -------------------------------- |
+| customers | Customer management module. |
+| customer | Single customer entity. |
+| customer-profile | Detailed customer profile. |
+| customer-add | Add new customer. |
+| customer-edit | Edit customer record. |
+| customer-delete | Delete customer record. |
+| customer-search | Search customers database. |
+| customer-history | Interaction history of customer. |
+| customer-contact | Customer contact information. |
+| customer-location | Geographic location of customer. |
+| customer-notes | Notes attached to customer. |
+| customer-feedback | Customer feedback records. |
+| customer-support | Customer support case. |
+| customer-segment | Customer segmentation. |
+| customer-tag | Tags applied to customer. |
+| customer-priority | VIP or high priority customer. |
+| customer-blacklist | Blocked customer. |
+| customer-loyalty | Loyalty program membership. |
+| customer-journey | Customer journey visualization. |
+
+---
+
+# 5. Leads & Sales
+
+| Icon | Description |
+| ----------------- | ----------------------------- |
+| leads | Lead management module. |
+| lead | Individual lead record. |
+| lead-add | Add new lead. |
+| lead-edit | Edit lead details. |
+| lead-delete | Remove lead. |
+| lead-qualified | Lead qualified by agent. |
+| lead-unqualified | Lead disqualified. |
+| lead-contacted | Lead contacted by agent. |
+| lead-followup | Follow-up scheduled. |
+| lead-converted | Lead converted into customer. |
+| lead-lost | Lost lead indicator. |
+| lead-score | Lead scoring metric. |
+| lead-source | Origin of lead. |
+| lead-pipeline | Lead pipeline stage view. |
+| sales-funnel | Visual sales funnel. |
+| sales-opportunity | Sales opportunity stage. |
+| sales-target | Sales target assigned. |
+| sales-achieved | Sales goal achieved. |
+| sales-revenue | Revenue tracking indicator. |
+| sales-report | Sales analytics report. |
+| sales-growth | Revenue growth trend. |
+
+---
+
+# 6. Agents & Workforce
+
+| Icon | Description |
+| ------------------ | --------------------------------- |
+| agents | List of all agents. |
+| agent | Individual agent profile. |
+| agent-online | Agent available for calls. |
+| agent-offline | Agent offline. |
+| agent-busy | Agent currently busy. |
+| agent-away | Agent away from desk. |
+| agent-on-call | Agent handling call. |
+| agent-break | Agent on break. |
+| agent-performance | Agent performance metrics. |
+| agent-ranking | Ranking of agents by performance. |
+| agent-training | Agent training modules. |
+| agent-evaluation | Agent evaluation results. |
+| agent-coaching | Coaching tools for supervisors. |
+| agent-availability | Agent availability calendar. |
+| agent-schedule | Agent work schedule. |
+| agent-shift | Assigned work shift. |
+| agent-team | Team assignment for agents. |
+| agent-supervisor | Supervisor managing agents. |
+
+---
+
+# 7. AI & Automation
+
+| Icon | Description |
+| ----------------- | --------------------------------- |
+| ai | Artificial intelligence features. |
+| ai-agent | AI powered calling agent. |
+| ai-assistant | AI assistant supporting agents. |
+| ai-training | Training AI models. |
+| ai-prediction | Predictive analytics engine. |
+| ai-recommendation | AI recommended actions. |
+| ai-automation | Automated workflows. |
+| ai-insights | Insights generated by AI. |
+| ai-listening | AI listening during call. |
+| ai-analysis | AI conversation analysis. |
+| ai-summarization | AI generated summaries. |
+| ai-transcription | Automatic transcription. |
+| ai-sentiment | Sentiment detection engine. |
+| ai-intent | Intent detection model. |
+| ai-classification | Classification model. |
+| ai-optimization | AI system optimization. |
+
+---
+
+# 8. Voice AI Stack
+
+| Icon | Description |
+| ----------------- | --------------------------- |
+| voice | Voice communication system. |
+| voice-bot | Automated voice bot. |
+| voice-recognition | Speech recognition engine. |
+| voice-synthesis | Speech synthesis engine. |
+| voice-model | Voice model configuration. |
+| voice-language | Voice language selection. |
+| voice-accent | Voice accent settings. |
+| voice-quality | Audio quality control. |
+| voice-volume | Voice output volume. |
+| voice-settings | Voice AI configuration. |
+
+---
+
+# 9. NLP & LLM
+
+| Icon | Description |
+| --------------- | ----------------------------------- |
+| nlp | Natural language processing system. |
+| nlp-entity | Named entity recognition. |
+| nlp-intent | Intent classification. |
+| nlp-keywords | Keyword extraction. |
+| nlp-parser | Language parser engine. |
+| nlp-summary | NLP generated summary. |
+| nlp-translation | Language translation model. |
+| llm | Large language model engine. |
+| llm-chat | LLM chat interface. |
+| llm-prompt | Prompt configuration. |
+| llm-response | Model response generation. |
+| llm-context | Context memory storage. |
+| llm-evaluation | Model evaluation metrics. |
+
+---
+
+# 10. Analytics & Reporting
+
+| Icon | Description |
+| ---------------- | ------------------------------ |
+| analytics | Analytics dashboard. |
+| reports | Reports module. |
+| charts | Data visualization charts. |
+| bar-chart | Bar chart visualization. |
+| line-chart | Line chart visualization. |
+| pie-chart | Pie chart visualization. |
+| heatmap | Heatmap visualization. |
+| trend-up | Upward trend indicator. |
+| trend-down | Downward trend indicator. |
+| forecast | Predictive forecast analytics. |
+| comparison | Compare metrics across time. |
+| export-report | Export analytics report. |
+| scheduled-report | Scheduled report generation. |
+| data-table | Tabular data display. |
+
+---
+
+# 11. Infrastructure & Monitoring
+
+| Icon | Description |
+| ------------- | -------------------------- |
+| system-health | Overall system health. |
+| server | Server instance indicator. |
+| database | Database system. |
+| network | Network infrastructure. |
+| load-balancer | Load balancing node. |
+| api | API service endpoint. |
+| api-latency | API latency metric. |
+| uptime | System uptime metric. |
+| downtime | System downtime indicator. |
+| cpu-usage | CPU utilization metric. |
+| memory-usage | Memory usage metric. |
+| disk-usage | Disk storage utilization. |
+| error-rate | System error rate. |
+
+---
+
+# 12. Logs & Auditing
+
+| Icon | Description |
+| ------------ | -------------------------- |
+| logs | System logs. |
+| audit-log | Audit trail of actions. |
+| activity-log | Activity logs for users. |
+| security-log | Security related logs. |
+| api-log | API request logs. |
+| error-log | Error event logs. |
+| warning-log | Warning level logs. |
+| debug-log | Debug logs for developers. |
+| log-search | Search log entries. |
+| log-filter | Filter logs by criteria. |
+
+---
+
+# 13. Integrations
+
+| Icon | Description |
+| ---------------------- | -------------------------------- |
+| integrations | Integration hub. |
+| api-integration | API based integration. |
+| webhook | Webhook configuration. |
+| crm-integration | CRM system integration. |
+| payment-integration | Payment gateway integration. |
+| email-integration | Email service integration. |
+| sms-integration | SMS provider integration. |
+| voip-integration | VOIP provider integration. |
+| chat-integration | Chat platform integration. |
+| automation-integration | Workflow automation integration. |
+
+---
+
+# 14. Scheduling & Time
+
+| Icon | Description |
+| ---------------- | ---------------------- |
+| scheduler | Scheduling system. |
+| calendar | Calendar view. |
+| appointment | Scheduled appointment. |
+| reminder | Reminder notification. |
+| meeting | Scheduled meeting. |
+| time-slot | Available time slot. |
+| shift-schedule | Agent shift schedule. |
+| holiday-calendar | Holiday calendar. |
+
+---
+
+# 15. Search & Filters
+
+| Icon | Description |
+| --------------- | ------------------------- |
+| search | Search system. |
+| advanced-search | Advanced search filters. |
+| filter | Filter results. |
+| sort | Sort records. |
+| group | Group items by attribute. |
+| tag | Tag classification. |
+| bookmark | Bookmark item. |
+
+---
+
+# 16. Settings & Administration
+
+| Icon | Description |
+| --------------- | ----------------------------- |
+| settings | System settings. |
+| preferences | User preferences. |
+| theme | Theme switch. |
+| dark-mode | Dark theme. |
+| light-mode | Light theme. |
+| user-profile | User account profile. |
+| user-management | Manage system users. |
+| roles | Role management. |
+| permissions | Access permissions. |
+| security | Security settings. |
+| authentication | Authentication system. |
+| api-keys | API key management. |
+| billing | Billing configuration. |
+| subscription | Subscription plan management. |
+
+---
+
+# 17. UI Utility Icons
+
+| Icon | Description |
+| --------------- | ---------------------- |
+| add | Add new item. |
+| edit | Edit existing item. |
+| delete | Delete item. |
+| save | Save changes. |
+| download | Download file. |
+| upload | Upload file. |
+| refresh | Refresh data. |
+| sync | Synchronize data. |
+| copy | Copy item. |
+| paste | Paste item. |
+| share | Share item. |
+| link | Link resource. |
+| unlink | Remove link. |
+| expand | Expand view. |
+| collapse | Collapse view. |
+| fullscreen | Enter fullscreen mode. |
+| exit-fullscreen | Exit fullscreen mode. |
+
+---
+
+# 18. Status Indicators
+
+| Icon | Description |
+| ---------- | ------------------------------- |
+| success | Successful operation indicator. |
+| warning | Warning indicator. |
+| error | Error indicator. |
+| info | Informational message. |
+| loading | Loading indicator. |
+| processing | Processing state. |
+| paused | Paused operation. |
+| completed | Completed operation. |
+| cancelled | Cancelled operation. |
+
+---
+
+# 19. Communication Channels
+
+| Icon | Description |
+| ------------ | ------------------------------- |
+| phone | Phone communication channel. |
+| email | Email communication channel. |
+| sms | SMS messaging channel. |
+| chat | Live chat channel. |
+| whatsapp | WhatsApp messaging integration. |
+| telegram | Telegram messaging integration. |
+| video-call | Video call communication. |
+| screen-share | Screen sharing session. |
+
+
+
+
+# 20. Timer icons
+
+| Icon | Description |
+| ------------ | ------------------------------- |
+| watch| Hand watch for time. |
+| stopclock| Stop clock icon for timer. |
+| sandglass| A sand glass / hour glass for timer. |
+| alarmclock| Alarm clock for countdown timer. |
+| scheduler| A calendar with a minimal clock face icon. |
+| scheduledcall| A phone icon with calendar badge. |
+| scheduledcalltime| A phone icon with watch badge. |
