@@ -2,6 +2,7 @@ import { AppConfigService } from 'src/common/config/app-config.service';
 import { AppLoggerService } from 'src/common/logger/app-logger.service';
 import { CorrelationIdService } from 'src/common/logger/correlation-id.service';
 import { FeatureExtractor } from 'src/ml/feature-extractor';
+import { GradientBoostedAssessmentModel } from 'src/ml/gradient-boosted.model';
 import { LogisticRegressionModel } from 'src/ml/logistic-regression.model';
 import { MockAssessmentModel } from 'src/ml/mock-assessment.model';
 import { ModelRegistry } from 'src/ml/model-registry';
@@ -14,7 +15,11 @@ describe('AccomplishmentAssessmentService', () => {
   const loggerFactory = new AppLoggerService(configService, new CorrelationIdService());
 
   it('returns a bounded conversion probability with recommendation', async () => {
-    const modelRegistry = new ModelRegistry(new LogisticRegressionModel(), new MockAssessmentModel());
+    const modelRegistry = new ModelRegistry(
+      new GradientBoostedAssessmentModel(),
+      new LogisticRegressionModel(),
+      new MockAssessmentModel(),
+    );
     const service = new AccomplishmentAssessmentService(
       new FeatureExtractor(new SentimentAnalyzerService()),
       modelRegistry,

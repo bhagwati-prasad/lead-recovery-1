@@ -45,6 +45,24 @@ export class AnalyticsPipeline {
       case 'lead.escalated':
         this.timeSeriesStore.append({ metric: 'calls.escalated', timestamp, value: 1, tags: this.extractTags(event.payload) });
         break;
+      case 'model.promoted': {
+        const aucRoc = this.readNumber(event.payload.aucRoc);
+        if (aucRoc !== undefined) {
+          this.aggregateStore.set('models.currentAucRoc', aucRoc);
+          this.timeSeriesStore.append({ metric: 'models.aucRoc', timestamp, value: aucRoc, tags: this.extractTags(event.payload) });
+        }
+
+        const precision = this.readNumber(event.payload.precision);
+        if (precision !== undefined) {
+          this.timeSeriesStore.append({ metric: 'models.precision', timestamp, value: precision, tags: this.extractTags(event.payload) });
+        }
+
+        const recall = this.readNumber(event.payload.recall);
+        if (recall !== undefined) {
+          this.timeSeriesStore.append({ metric: 'models.recall', timestamp, value: recall, tags: this.extractTags(event.payload) });
+        }
+        break;
+      }
       default:
         break;
     }
@@ -52,7 +70,7 @@ export class AnalyticsPipeline {
 
   private extractTags(payload: Record<string, unknown>): Record<string, string> {
     const tags: Record<string, string> = {};
-    for (const key of ['funnelId', 'stageId', 'productId']) {
+    for (const key of ['funnelId', 'stageId', 'productId', 'modelVersion']) {
       const value = this.readString(payload[key]);
       if (value) {
         tags[key] = value;

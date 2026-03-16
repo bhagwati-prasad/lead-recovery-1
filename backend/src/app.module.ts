@@ -3,7 +3,9 @@ import { IntegrationAdaptersModule } from './adapters/integration-adapters.modul
 import { AppConfigModule } from './common/config/app-config.module';
 import { LoggerModule } from './common/logger/logger.module';
 import { ModuleRegistryModule } from './common/registry/module-registry.module';
+import { FunnelsModule } from './funnels/funnels.module';
 import { HealthModule } from './health/health.module';
+import { LeadsModule } from './leads/leads.module';
 import { CRMAdapterModule } from './adapters/crm/crm-adapter.module';
 import { CallInitiationModule } from './modules/call-initiation/call-initiation.module';
 import { CallPreparationModule } from './modules/call-preparation/call-preparation.module';
@@ -16,6 +18,7 @@ import { ExceptionHandlingModule } from './modules/exception-handling/exception-
 import { EscalationModule } from './modules/escalation/escalation.module';
 import { ObjectionsModule } from './modules/objections/objections.module';
 import { ResponseProcessingModule } from './modules/response-processing/response-processing.module';
+import { SuggestionsModule } from './suggestions/suggestions.module';
 import { WelcomeMessageModule } from './modules/welcome-message/welcome-message.module';
 import { WorkflowModule } from './workflow/workflow.module';
 
@@ -23,6 +26,7 @@ import { WorkflowModule } from './workflow/workflow.module';
   imports: [
     AppConfigModule,
     LoggerModule,
+    FunnelsModule,
     CRMAdapterModule,
     IntegrationAdaptersModule,
     ModuleRegistryModule,
@@ -40,6 +44,8 @@ import { WorkflowModule } from './workflow/workflow.module';
     ConversationLoggingModule,
     EscalationModule,
     ObjectionsModule,
+    LeadsModule,
+    SuggestionsModule,
   ],
   exports: [ModuleRegistryModule, CRMAdapterModule],
 })

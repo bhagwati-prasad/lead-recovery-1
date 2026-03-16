@@ -7,6 +7,7 @@ export interface AnalyticsQuery {
     funnelId?: string;
     stageId?: string;
     productId?: string;
+    modelVersion?: string;
   };
 }
 

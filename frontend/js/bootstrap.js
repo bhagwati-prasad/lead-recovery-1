@@ -160,6 +160,10 @@ function buildRoutes() {
   ];
 }
 
+function resolveApiBaseUrl() {
+  return `https://verbose-broccoli-q6grrx4p95f49j5-3000.app.github.dev/api`;
+}
+
 async function start() {
   security.init();
   storage.init();
@@ -175,9 +179,10 @@ async function start() {
   events.init();
   await i18n.init('en');
   auth.init();
-  http.init('/api');
+  const apiBaseUrl = resolveApiBaseUrl();
+  http.init(apiBaseUrl);
   cache.init();
-  telemetry.init('/api/telemetry');
+  telemetry.init(`${apiBaseUrl}/telemetry`);
   ui.init();
   notifications.init();
 

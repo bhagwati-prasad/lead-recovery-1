@@ -8,6 +8,8 @@ export type AnalyticsEvent =
   | { type: 'goal.achieved'; payload: Record<string, unknown> }
   | { type: 'lead.recovered'; payload: Record<string, unknown> }
   | { type: 'lead.escalated'; payload: Record<string, unknown> }
+  | { type: 'model.promoted'; payload: Record<string, unknown> }
+  | { type: 'telemetry.client'; payload: Record<string, unknown> }
   | { type: 'workflow.failed'; payload: Record<string, unknown> };
 
 @Injectable()

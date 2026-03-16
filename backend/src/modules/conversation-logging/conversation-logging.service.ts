@@ -155,10 +155,14 @@ export class ConversationLoggingService
         payload: {
           logId,
           leadId: input.leadId,
+          customerId: input.customerId,
+          funnelId: input.funnelId,
+          stageId: input.stageId,
           callSessionId: input.callSessionId,
           providerCallId: input.providerCallId,
           endReason: input.endReason,
           outcome,
+          durationSeconds: this.computeDurationSeconds(input.transcript),
         },
       },
     ];
@@ -180,6 +184,8 @@ export class ConversationLoggingService
         payload: {
           logId,
           leadId: input.leadId,
+          funnelId: input.funnelId,
+          stageId: input.stageId,
           score: input.assessmentResult?.score,
         },
       });
@@ -191,6 +197,8 @@ export class ConversationLoggingService
         payload: {
           logId,
           leadId: input.leadId,
+          funnelId: input.funnelId,
+          stageId: input.stageId,
           reason: input.endReason,
         },
       });
@@ -202,6 +210,8 @@ export class ConversationLoggingService
         payload: {
           logId,
           leadId: input.leadId,
+          funnelId: input.funnelId,
+          stageId: input.stageId,
           objectionId: objection.id,
           title: objection.title,
         },
