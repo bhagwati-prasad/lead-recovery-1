@@ -4,6 +4,7 @@ import { IntegrationAdaptersModule } from './adapters/integration-adapters.modul
 import { AppConfigModule } from './common/config/app-config.module';
 import { LoggerModule } from './common/logger/logger.module';
 import { ModuleRegistryModule } from './common/registry/module-registry.module';
+import { CustomersModule } from './customers/customers.module';
 import { FunnelsModule } from './funnels/funnels.module';
 import { HealthModule } from './health/health.module';
 import { LeadsModule } from './leads/leads.module';
@@ -28,6 +29,7 @@ import { WorkflowModule } from './workflow/workflow.module';
     AppConfigModule,
     LoggerModule,
     AgentsModule,
+    CustomersModule,
     FunnelsModule,
     CRMAdapterModule,
     IntegrationAdaptersModule,

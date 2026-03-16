@@ -20,11 +20,13 @@ export class TelemetryController {
 
   @Post()
   ingest(@Body() payload: unknown) {
-    if (!isRecord(payload)) {
+    const normalizedPayload = normalizePayload(payload);
+
+    if (!isRecord(normalizedPayload)) {
       throw new BadRequestException('telemetry payload must be an object');
     }
 
-    const body = payload as TelemetryPayload;
+    const body = normalizedPayload as TelemetryPayload;
     this.eventBus.emit({
       type: 'telemetry.client',
       payload: {
@@ -42,4 +44,16 @@ export class TelemetryController {
 
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === 'object' && value !== null && !Array.isArray(value);
+}
+
+function normalizePayload(payload: unknown): unknown {
+  if (typeof payload !== 'string') {
+    return payload;
+  }
+
+  try {
+    return JSON.parse(payload) as unknown;
+  } catch {
+    return payload;
+  }
 }

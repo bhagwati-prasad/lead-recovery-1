@@ -7,7 +7,22 @@ export function init(nextEndpoint = '/api/telemetry') {
 }
 
 function send(payload) {
-  navigator.sendBeacon(endpoint, JSON.stringify(payload));
+  const body = JSON.stringify(payload);
+
+  // Prefer JSON fetch so backend receives a normal application/json payload.
+  void fetch(endpoint, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body,
+    keepalive: true,
+    credentials: 'include',
+  }).catch(() => {
+    // Fallback for unload-time best-effort delivery.
+    const blob = new Blob([body], { type: 'application/json' });
+    navigator.sendBeacon(endpoint, blob);
+  });
 }
 
 export function pageView(route) {
