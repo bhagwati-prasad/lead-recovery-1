@@ -9,6 +9,10 @@ export function init(nextBaseUrl = '/api') {
   baseUrl = nextBaseUrl;
 }
 
+export function resolveUrl(path) {
+  return `${baseUrl}${path}`;
+}
+
 async function request(method, path, body, options = {}, retryCount = 0) {
   const url = `${baseUrl}${path}`;
   const cacheKey = `${method}:${url}`;

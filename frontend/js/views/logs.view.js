@@ -1,6 +1,7 @@
 import * as api from '../data/api.js';
 import { el } from '../utils/utility.js';
 import { sanitize } from '../utils/security.js';
+import { createPollingTask, createSseSubscription } from '../utils/live-updates.js';
 
 function formatTimestamp(value) {
   if (!value) {
@@ -125,9 +126,11 @@ export function renderLogsView() {
   const clearBtn = root.querySelector('#logClearBtn');
   const logsBody = root.querySelector('#logsBody');
   const logCountLabel = root.querySelector('#logCountLabel');
+  const logLiveLabel = root.querySelector('#logLiveLabel');
 
-  let pollingTimer = null;
+  let sseHandle = null;
   let previousFirstId = null;
+  let currentRows = [];
 
   function toIsoFromDateTimeLocal(raw) {
     if (!raw) {
@@ -152,6 +155,7 @@ export function renderLogsView() {
   }
 
   function renderRows(items) {
+    currentRows = items;
     if (!Array.isArray(items) || items.length === 0) {
       logsBody.innerHTML = '<tr><td colspan="8" class="muted">No logs found</td></tr>';
       logCountLabel.textContent = '0 rows';
@@ -172,6 +176,16 @@ export function renderLogsView() {
     }
   }
 
+  function insertLiveLog(log) {
+    if (!log || typeof log !== 'object' || typeof log.id !== 'string') {
+      return;
+    }
+
+    const nextRows = [log, ...currentRows.filter((entry) => entry.id !== log.id)].slice(0, 200);
+    previousFirstId = nextRows[0]?.id || null;
+    renderRows(nextRows);
+  }
+
   async function handleRefresh(forceRender = true) {
     try {
       await loadAndRender(forceRender);
@@ -180,10 +194,46 @@ export function renderLogsView() {
     }
   }
 
+  const poller = createPollingTask({
+    intervalMs: 2000,
+    task: async () => {
+      await handleRefresh(false);
+    },
+  });
+
+  function closeSse() {
+    if (sseHandle) {
+      sseHandle.close();
+      sseHandle = null;
+    }
+  }
+
+  function openSse() {
+    closeSse();
+    const streamUrl = api.getLogsStreamUrl(currentFilters());
+    sseHandle = createSseSubscription({
+      url: streamUrl,
+      eventName: 'log',
+      onOpen: () => {
+        logLiveLabel.textContent = 'Live: SSE connected';
+        poller.stop();
+      },
+      onError: () => {
+        logLiveLabel.textContent = 'Live: SSE reconnecting (polling fallback active)';
+        poller.start();
+      },
+      onMessage: (eventData) => {
+        const log = eventData && typeof eventData === 'object' ? eventData.log : null;
+        insertLiveLog(log);
+      },
+    });
+  }
+
   function bindFilterInput(element, eventName = 'change') {
     element.addEventListener(eventName, () => {
       previousFirstId = null;
       void handleRefresh(true);
+      openSse();
     });
   }
 
@@ -199,6 +249,7 @@ export function renderLogsView() {
   refreshBtn.addEventListener('click', () => {
     previousFirstId = null;
     void handleRefresh(true);
+    openSse();
   });
 
   clearBtn.addEventListener('click', () => {
@@ -212,19 +263,18 @@ export function renderLogsView() {
     toFilter.value = '';
     previousFirstId = null;
     void handleRefresh(true);
+    openSse();
   });
 
   void handleRefresh(true);
-  pollingTimer = window.setInterval(() => {
-    void handleRefresh(false);
-  }, 2000);
+  openSse();
+  poller.start();
 
   return {
     element: root,
     cleanup: () => {
-      if (pollingTimer !== null) {
-        window.clearInterval(pollingTimer);
-      }
+      closeSse();
+      poller.stop();
     },
   };
 }
