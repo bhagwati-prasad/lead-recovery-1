@@ -3,6 +3,7 @@ import { randomUUID } from 'crypto';
 import { existsSync, mkdirSync } from 'fs';
 import { dirname, join } from 'path';
 import { DatabaseSync } from 'node:sqlite';
+import { Observable, Subject } from 'rxjs';
 import { CorrelationIdService } from '../common/logger/correlation-id.service';
 
 export type CallEventCategory = 'analytics' | 'workflow' | 'system-api' | 'webhook' | 'third-party-api';
@@ -63,14 +64,25 @@ export interface StoredCallEvent {
   callSessionId?: string;
   providerCallId?: string;
   occurredAt: string;
+  createdAt: string;
+  namespace: string;
   relatedStartedAt?: string;
   durationMs?: number;
   payload?: Record<string, unknown>;
 }
 
+export interface LiveLogMessage {
+  namespace: string;
+  createdAt: string;
+  module?: string;
+  reason?: string;
+  log: StoredCallEvent;
+}
+
 @Injectable()
 export class CallEventStoreService {
   private readonly database: DatabaseSync;
+  private readonly liveEvents$ = new Subject<LiveLogMessage>();
 
   constructor(private readonly correlationIdService: CorrelationIdService) {
     const dbPath = process.env.CALL_EVENT_DB_PATH ?? join(process.cwd(), 'data', 'call-events.sqlite');
@@ -111,6 +123,11 @@ export class CallEventStoreService {
   }
 
   recordEvent(input: CallEventRecordInput): void {
+    const id = randomUUID();
+    const occurredAt = input.occurredAt ?? new Date().toISOString();
+    const correlationId = input.correlationId ?? this.correlationIdService.getCorrelationId() ?? undefined;
+    const payload = input.payload === undefined ? undefined : this.maskSensitiveFields(input.payload);
+
     const statement = this.database.prepare(`
       INSERT INTO call_events (
         id,
@@ -156,7 +173,7 @@ export class CallEventStoreService {
     `);
 
     statement.run({
-      id: randomUUID(),
+      id,
       event_name: input.eventName,
       category: input.category,
       direction: input.direction,
@@ -167,15 +184,45 @@ export class CallEventStoreService {
       path: input.path ?? null,
       status_code: input.statusCode ?? null,
       success: typeof input.success === 'boolean' ? Number(input.success) : null,
-      correlation_id: input.correlationId ?? this.correlationIdService.getCorrelationId() ?? null,
+      correlation_id: correlationId ?? null,
       request_id: input.requestId ?? null,
       call_session_id: input.callSessionId ?? null,
       provider_call_id: input.providerCallId ?? null,
-      occurred_at: input.occurredAt ?? new Date().toISOString(),
+      occurred_at: occurredAt,
       related_started_at: input.relatedStartedAt ?? null,
       duration_ms: input.durationMs ?? null,
-      payload_json: input.payload === undefined ? null : JSON.stringify(this.maskSensitiveFields(input.payload)),
+      payload_json: payload === undefined ? null : JSON.stringify(payload),
     });
+
+    const storedEvent: StoredCallEvent = {
+      id,
+      eventName: input.eventName,
+      category: input.category,
+      direction: input.direction,
+      phase: input.phase,
+      provider: input.provider,
+      operation: input.operation,
+      method: input.method,
+      path: input.path,
+      statusCode: input.statusCode,
+      success: input.success,
+      correlationId,
+      requestId: input.requestId,
+      callSessionId: input.callSessionId,
+      providerCallId: input.providerCallId,
+      occurredAt,
+      createdAt: occurredAt,
+      namespace: this.buildNamespace(input.category, input.eventName, payload),
+      relatedStartedAt: input.relatedStartedAt,
+      durationMs: input.durationMs,
+      payload,
+    };
+
+    this.liveEvents$.next(this.toLiveLogMessage(storedEvent));
+  }
+
+  observeLiveEvents(): Observable<LiveLogMessage> {
+    return this.liveEvents$.asObservable();
   }
 
   listEvents(options: CallEventQueryOptions): StoredCallEvent[] {
@@ -303,10 +350,42 @@ export class CallEventStoreService {
       callSessionId: this.readOptionalString(row.call_session_id),
       providerCallId: this.readOptionalString(row.provider_call_id),
       occurredAt: String(row.occurred_at),
+      createdAt: String(row.occurred_at),
+      namespace: this.buildNamespace(
+        row.category as CallEventCategory,
+        String(row.event_name),
+        this.parseOptionalPayload(row.payload_json),
+      ),
       relatedStartedAt: this.readOptionalString(row.related_started_at),
       durationMs: this.readOptionalNumber(row.duration_ms),
       payload: this.parseOptionalPayload(row.payload_json),
     }));
+  }
+
+  private toLiveLogMessage(log: StoredCallEvent): LiveLogMessage {
+    const payload = log.payload && typeof log.payload === 'object' ? log.payload : {};
+    const module = this.readOptionalString(payload.module);
+    const reason = this.readOptionalString(payload.message) ?? `${log.eventName}${log.phase ? `:${log.phase}` : ''}`;
+    return {
+      namespace: log.namespace,
+      createdAt: log.createdAt,
+      module,
+      reason,
+      log,
+    };
+  }
+
+  private buildNamespace(category: CallEventCategory, eventName: string, payload?: Record<string, unknown>): string {
+    const modulePart = payload && typeof payload.module === 'string' ? payload.module : 'general';
+    const levelPart = payload && typeof payload.level === 'string' ? payload.level : 'na';
+    const normalized = ['logs', category, eventName, modulePart, levelPart]
+      .map((part) => this.normalizeNamespacePart(part))
+      .join('.');
+    return normalized;
+  }
+
+  private normalizeNamespacePart(value: string): string {
+    return value.toLowerCase().replace(/[^a-z0-9_.-]/g, '-');
   }
 
   private escapeLike(value: string): string {

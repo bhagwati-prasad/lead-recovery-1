@@ -1,6 +1,12 @@
-import { BadRequestException, Controller, Get, Query } from '@nestjs/common';
+import { BadRequestException, Controller, Get, MessageEvent, Query, Sse } from '@nestjs/common';
+import { Observable, filter, map } from 'rxjs';
 import { AggregateStore } from './aggregate-store';
-import { CallEventStoreService, CallEventCategory, CallEventDirection } from './call-event-store.service';
+import {
+  CallEventStoreService,
+  CallEventCategory,
+  CallEventDirection,
+  StoredCallEvent,
+} from './call-event-store.service';
 import { AnalyticsQuery } from './analytics.types';
 import { InMemoryAnalyticsStore } from './in-memory-analytics-store';
 import { TimeSeriesStore } from './time-series-store';
@@ -58,6 +64,48 @@ export class AnalyticsController {
       }),
       serverTime: new Date().toISOString(),
     };
+  }
+
+  @Sse('logs/stream')
+  streamLogs(
+    @Query('from') from?: string,
+    @Query('to') to?: string,
+    @Query('category') category?: CallEventCategory,
+    @Query('direction') direction?: CallEventDirection,
+    @Query('phase') phase?: string,
+    @Query('provider') provider?: string,
+    @Query('eventName') eventName?: string,
+    @Query('requestId') requestId?: string,
+    @Query('callSessionId') callSessionId?: string,
+    @Query('providerCallId') providerCallId?: string,
+    @Query('module') module?: string,
+    @Query('level') level?: string,
+    @Query('search') search?: string,
+  ): Observable<MessageEvent> {
+    this.validateOptionalDate(from, 'from');
+    this.validateOptionalDate(to, 'to');
+
+    return this.callEventStore.observeLiveEvents().pipe(
+      filter((entry) => this.matchesLogFilters(entry.log, {
+        from,
+        to,
+        category,
+        direction,
+        phase,
+        provider,
+        eventName,
+        requestId,
+        callSessionId,
+        providerCallId,
+        module,
+        level,
+        search,
+      })),
+      map((entry) => ({
+        type: 'log',
+        data: entry,
+      })),
+    );
   }
 
   @Get('summary')
@@ -449,6 +497,84 @@ export class AnalyticsController {
     if (Number.isNaN(parsed.getTime())) {
       throw new BadRequestException(`${label} must be a valid ISO date value`);
     }
+  }
+
+  private matchesLogFilters(
+    log: StoredCallEvent,
+    filters: {
+      from?: string;
+      to?: string;
+      category?: CallEventCategory;
+      direction?: CallEventDirection;
+      phase?: string;
+      provider?: string;
+      eventName?: string;
+      requestId?: string;
+      callSessionId?: string;
+      providerCallId?: string;
+      module?: string;
+      level?: string;
+      search?: string;
+    },
+  ): boolean {
+    const createdAt = new Date(log.createdAt).getTime();
+    if (filters.from && createdAt < new Date(filters.from).getTime()) {
+      return false;
+    }
+    if (filters.to && createdAt > new Date(filters.to).getTime()) {
+      return false;
+    }
+    if (filters.category && log.category !== filters.category) {
+      return false;
+    }
+    if (filters.direction && log.direction !== filters.direction) {
+      return false;
+    }
+    if (filters.phase && log.phase !== filters.phase) {
+      return false;
+    }
+    if (filters.provider && log.provider !== filters.provider) {
+      return false;
+    }
+    if (filters.eventName && log.eventName !== filters.eventName) {
+      return false;
+    }
+    if (filters.requestId && log.requestId !== filters.requestId) {
+      return false;
+    }
+    if (filters.callSessionId && log.callSessionId !== filters.callSessionId) {
+      return false;
+    }
+    if (filters.providerCallId && log.providerCallId !== filters.providerCallId) {
+      return false;
+    }
+
+    const payload = log.payload && typeof log.payload === 'object' ? log.payload : {};
+    const module = typeof payload.module === 'string' ? payload.module : '';
+    const level = typeof payload.level === 'string' ? payload.level : '';
+    if (filters.module && module !== filters.module) {
+      return false;
+    }
+    if (filters.level && level !== filters.level) {
+      return false;
+    }
+
+    if (filters.search) {
+      const query = filters.search.toLowerCase();
+      const candidate = JSON.stringify({
+        eventName: log.eventName,
+        category: log.category,
+        direction: log.direction,
+        phase: log.phase,
+        provider: log.provider,
+        payload,
+      }).toLowerCase();
+      if (!candidate.includes(query)) {
+        return false;
+      }
+    }
+
+    return true;
   }
 
   private inRange(date: Date | undefined, from: Date, to: Date): boolean {
