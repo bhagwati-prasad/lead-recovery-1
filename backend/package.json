@@ -22,7 +22,8 @@
     "ajv": "^8.17.1",
     "js-yaml": "^4.1.0",
     "reflect-metadata": "^0.2.2",
-    "rxjs": "^7.8.2"
+    "rxjs": "^7.8.2",
+    "twilio": "^5.3.6"
   },
   "devDependencies": {
     "@nestjs/testing": "^11.1.6",

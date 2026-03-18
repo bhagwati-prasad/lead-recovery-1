@@ -8,6 +8,7 @@ export function renderIntegrationsSection(root) {
     </div>
   `;
   const cards = root.querySelector('#integrationCards');
+  const surfaceById = new Map();
 
   const knownLabels = {
     'sarvam-ai': 'Sarvam AI',
@@ -17,19 +18,102 @@ export function renderIntegrationsSection(root) {
     'crm': 'CRM',
   };
 
-  function statusBadge(configured) {
-    return configured
-      ? `<span style="color:var(--color-success,#22c55e);">&#10003; Configured</span>`
-      : `<span style="color:var(--color-muted,#888);">&#x25CB; Not configured</span>`;
+  const defaultChecksByIntegration = {
+    'sarvam-ai': [{ id: 'credentials', title: 'Credentials present' }],
+    'eleven-labs': [{ id: 'credentials', title: 'Credentials present' }],
+    twilio: [
+      { id: 'credentials', title: 'Credentials present' },
+      { id: 'client', title: 'Twilio client auth check' },
+    ],
+    exotel: [{ id: 'credentials', title: 'Credentials present' }],
+    crm: [{ id: 'credentials', title: 'Adapter configured' }],
+  };
+
+  function asArray(value) {
+    return Array.isArray(value) ? value : [];
+  }
+
+  function normalizeChecks(integrationId, checks) {
+    const defaults = asArray(defaultChecksByIntegration[integrationId]);
+    const incoming = asArray(checks);
+    const byId = new Map(incoming.map((check) => [check.id, check]));
+
+    if (defaults.length === 0 && incoming.length > 0) {
+      return incoming;
+    }
+
+    return defaults.map((item) => ({
+      id: item.id,
+      title: item.title,
+      ok: null,
+      message: '',
+      ...(byId.get(item.id) ?? {}),
+    }));
+  }
+
+  function withSurfaceState(integration) {
+    const checks = normalizeChecks(integration.id, integration.checks).map((check) => {
+      if (check.id === 'credentials' && check.ok === null && typeof integration.configured === 'boolean') {
+        return {
+          ...check,
+          ok: integration.configured,
+          message: integration.message ?? check.message,
+        };
+      }
+
+      return check;
+    });
+
+    if (checks.length === 0 && typeof integration.configured === 'boolean') {
+      checks.push({
+        id: 'credentials',
+        title: 'Credentials present',
+        ok: integration.configured,
+        message: integration.message ?? '',
+      });
+    }
+
+    return checks;
+  }
+
+  function checkIcon(ok) {
+    if (ok === true) return '&#10003;';
+    if (ok === false) return '&#10007;';
+    return '&#9203;';
+  }
+
+  function checkIconClass(ok) {
+    if (ok === true) return 'integration-check-icon pass';
+    if (ok === false) return 'integration-check-icon fail';
+    return 'integration-check-icon wait';
+  }
+
+  function renderChecks(integrationId, checks) {
+    const list = normalizeChecks(integrationId, checks);
+    if (list.length === 0) return '';
+
+    return `
+      <ul class="integration-check-list" data-check-list="${integrationId}">
+        ${list
+          .map(
+            (check) => `
+            <li class="integration-check-item" data-check-id="${check.id}">
+              <span class="${checkIconClass(check.ok)}">${checkIcon(check.ok)}</span>
+              <span class="integration-check-title">${check.title}</span>
+            </li>`,
+          )
+          .join('')}
+      </ul>
+    `;
   }
 
   function renderCards(integrations) {
     cards.innerHTML = integrations
       .map(
-        ({ id, label, configured, message }) => `
+        ({ id, label, checks }) => `
         <div class="metric" data-integration="${id}">
           <h4>${label ?? knownLabels[id] ?? id}</h4>
-          <p class="muted status-text">${statusBadge(configured)} &mdash; ${message}</p>
+          <div class="integration-checks">${renderChecks(id, checks)}</div>
           <button class="ghost" data-test="${id}">Test connection</button>
         </div>`,
       )
@@ -39,14 +123,28 @@ export function renderIntegrationsSection(root) {
   // Fallback: render static cards if the API is unavailable
   function renderFallbackCards() {
     const ids = Object.keys(knownLabels);
-    renderCards(ids.map((id) => ({ id, label: knownLabels[id], configured: false, message: 'Status unavailable' })));
+    renderCards(ids.map((id) => ({ id, label: knownLabels[id], checks: [] })));
+  }
+
+  function paintCheckStates(card, integrationId, checks) {
+    const checksContainer = card?.querySelector('.integration-checks');
+    if (!checksContainer) return;
+    checksContainer.innerHTML = renderChecks(integrationId, checks);
   }
 
   api.getIntegrations().then((integrations) => {
     if (!Array.isArray(integrations) || integrations.length === 0) {
       renderFallbackCards();
     } else {
-      renderCards(integrations);
+      const hydrated = integrations.map((integration) => {
+        const withChecks = {
+          ...integration,
+          checks: withSurfaceState(integration),
+        };
+        surfaceById.set(integration.id, withChecks);
+        return withChecks;
+      });
+      renderCards(hydrated);
     }
   });
 
@@ -56,33 +154,16 @@ export function renderIntegrationsSection(root) {
 
     const id = target.dataset.test;
     const card = target.closest('[data-integration]');
-    const statusText = card?.querySelector('.status-text');
+    if (!card) return;
 
     target.disabled = true;
-    target.textContent = 'Testing…';
+    const currentSurface = surfaceById.get(id);
+    paintCheckStates(card, id, normalizeChecks(id, currentSurface?.checks));
 
     const result = await api.testIntegration(id);
 
     target.disabled = false;
-    target.textContent = 'Test connection';
-
-    if (result.ok) {
-      target.textContent = 'Test passed ✓';
-      if (statusText) {
-        statusText.innerHTML = `${statusBadge(true)} &mdash; ${result.message}`;
-      }
-    } else if (result.reason === 'not_configured') {
-      target.textContent = 'Test connection';
-      if (statusText) {
-        statusText.innerHTML = `${statusBadge(false)} &mdash; ${result.message}`;
-      }
-      alert(`Integration not configured: ${result.message}`);
-    } else {
-      target.textContent = 'Test failed';
-      if (statusText) {
-        statusText.innerHTML = `<span style="color:var(--color-error,#ef4444);">&#x26A0; Error</span> &mdash; ${result.message}`;
-      }
-    }
+    paintCheckStates(card, id, normalizeChecks(id, result.checks));
   });
 }
 
