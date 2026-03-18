@@ -26,6 +26,7 @@ import { WelcomeMessageModule } from './modules/welcome-message/welcome-message.
 import { WorkflowModule } from './workflow/workflow.module';
 import { RepositoriesModule } from './repositories/repositories.module';
 import { TelephonyModule } from './telephony/telephony.module';
+import { IntegrationsModule } from './integrations/integrations.module';
 
 @Module({
   imports: [
@@ -42,6 +43,7 @@ import { TelephonyModule } from './telephony/telephony.module';
     HealthModule,
     WorkflowModule,
     TelephonyModule,
+    IntegrationsModule,
     AccomplishmentAssessmentModule,
     CustomerDataRetrievalModule,
     CustomerContextAcquisitionModule,

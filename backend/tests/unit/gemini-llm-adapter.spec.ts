@@ -3,6 +3,7 @@ import { MockLLMAdapter } from 'src/adapters/llm/mock-llm-adapter';
 import { AppConfigService } from 'src/common/config/app-config.service';
 import { ResolvedConfig } from 'src/common/config/config.schema';
 import { AppLoggerService } from 'src/common/logger/app-logger.service';
+import { OutboundApiTracerService } from 'src/analytics/outbound-api-tracer.service';
 
 const createConfig = (maxPromptTokens = 4000): ResolvedConfig => ({
   app: { name: 'lead-recovery', environment: 'test', port: 3001 },
@@ -102,7 +103,8 @@ describe('GeminiLLMAdapter', () => {
       }),
     } as unknown as AppLoggerService;
 
-    const adapter = new GeminiLLMAdapter(configService, new MockLLMAdapter(), loggerFactory);
+    const apiTracer = { fetch: jest.fn() } as unknown as OutboundApiTracerService;
+    const adapter = new GeminiLLMAdapter(configService, new MockLLMAdapter(), apiTracer, loggerFactory);
 
     await expect(
       adapter.complete({
@@ -129,7 +131,8 @@ describe('GeminiLLMAdapter', () => {
       }),
     } as unknown as AppLoggerService;
 
-    const adapter = new GeminiLLMAdapter(configService, new MockLLMAdapter(), loggerFactory);
+    const apiTracer = { fetch: jest.fn() } as unknown as OutboundApiTracerService;
+    const adapter = new GeminiLLMAdapter(configService, new MockLLMAdapter(), apiTracer, loggerFactory);
     const response = await adapter.complete({
       messages: [{ role: 'user', content: 'yes, continue' }],
       maxTokens: 60,

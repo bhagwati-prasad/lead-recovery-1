@@ -9,7 +9,7 @@ async function bootstrap(): Promise<void> {
   app.setGlobalPrefix('api');
 
   const allowedOrigins = [
-    'https://verbose-broccoli-q6grrx4p95f49j5-5173.app.github.dev',
+    'https://verbose-broccoli-q6grrx4p95f49j5-5137.app.github.dev',
     'http://localhost:5173',
     'http://127.0.0.1:5173',
   ];

@@ -1,6 +1,7 @@
 import { AppConfigService } from 'src/common/config/app-config.service';
 import { AppLoggerService } from 'src/common/logger/app-logger.service';
 import { CorrelationIdService } from 'src/common/logger/correlation-id.service';
+import { CallEventStoreService } from 'src/analytics/call-event-store.service';
 import { MockLLMAdapter } from 'src/adapters/llm/mock-llm-adapter';
 import { MockSTTAdapter } from 'src/adapters/stt/mock-stt-adapter';
 import { MockTelephonyAdapter } from 'src/adapters/telephony/mock-telephony-adapter';
@@ -25,6 +26,7 @@ describe('ConversationLoopService', () => {
       metadata: {},
     });
 
+    const callEventStore = { recordEvent: jest.fn() } as unknown as CallEventStoreService;
     const responseProcessing = new ResponseProcessingService(
       new MockSTTAdapter(),
       new MockLLMAdapter(),
@@ -33,6 +35,7 @@ describe('ConversationLoopService', () => {
       new LocalAudioCache(),
       new IntentClassifierService(),
       loggerFactory,
+      callEventStore,
     );
 
     const service = new ConversationLoopService(

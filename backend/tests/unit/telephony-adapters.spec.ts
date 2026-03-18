@@ -1,6 +1,7 @@
 import { ExotelTelephonyAdapter } from 'src/adapters/telephony/exotel-telephony-adapter';
 import { TwilioTelephonyAdapter } from 'src/adapters/telephony/twilio-telephony-adapter';
 import { AppConfigService } from 'src/common/config/app-config.service';
+import { OutboundApiTracerService } from 'src/analytics/outbound-api-tracer.service';
 import { testConfig } from './test-helpers';
 
 describe('Telephony adapters', () => {
@@ -56,7 +57,8 @@ describe('Telephony adapters', () => {
 
   it('Twilio adapter sends hangup request', async () => {
     const configService = { getConfig: () => testConfig } as AppConfigService;
-    const adapter = new TwilioTelephonyAdapter(configService);
+    const apiTracer = { fetch: jest.fn(global.fetch) } as unknown as OutboundApiTracerService;
+    const adapter = new TwilioTelephonyAdapter(configService, apiTracer);
 
     await adapter.hangUp('CA123');
 
@@ -68,7 +70,8 @@ describe('Telephony adapters', () => {
 
   it('Twilio adapter sends stream audio request', async () => {
     const configService = { getConfig: () => testConfig } as AppConfigService;
-    const adapter = new TwilioTelephonyAdapter(configService);
+    const apiTracer = { fetch: jest.fn(global.fetch) } as unknown as OutboundApiTracerService;
+    const adapter = new TwilioTelephonyAdapter(configService, apiTracer);
 
     await adapter.streamAudio('CA456', Buffer.from('hello'));
 
@@ -80,7 +83,8 @@ describe('Telephony adapters', () => {
 
   it('Exotel adapter sends hangup request', async () => {
     const configService = { getConfig: () => testConfig } as AppConfigService;
-    const adapter = new ExotelTelephonyAdapter(configService);
+    const apiTracer = { fetch: jest.fn(global.fetch) } as unknown as OutboundApiTracerService;
+    const adapter = new ExotelTelephonyAdapter(configService, apiTracer);
 
     await adapter.hangUp('EXO123');
 
@@ -92,7 +96,8 @@ describe('Telephony adapters', () => {
 
   it('Exotel adapter sends stream audio request', async () => {
     const configService = { getConfig: () => testConfig } as AppConfigService;
-    const adapter = new ExotelTelephonyAdapter(configService);
+    const apiTracer = { fetch: jest.fn(global.fetch) } as unknown as OutboundApiTracerService;
+    const adapter = new ExotelTelephonyAdapter(configService, apiTracer);
 
     await adapter.streamAudio('EXO456', Buffer.from('hello'));
 

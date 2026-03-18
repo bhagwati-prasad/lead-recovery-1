@@ -115,36 +115,12 @@ export function getTopLeads() {
   return tryFetch(() => http.get('/analytics/leads/top'), fallback.analytics.topLeads);
 }
 
-export function getLogs(filters = {}) {
-  const params = new URLSearchParams();
-  Object.entries(filters).forEach(([key, value]) => {
-    if (value === undefined || value === null || value === '') {
-      return;
-    }
-    params.set(key, String(value));
-  });
-
-  const query = params.toString();
-  const path = query.length > 0 ? `/analytics/logs?${query}` : '/analytics/logs';
-  return tryFetch(() => http.get(path, { skipCache: true }), { items: [] });
-}
-
-export function getLogsStreamUrl(filters = {}) {
-  const params = new URLSearchParams();
-  Object.entries(filters).forEach(([key, value]) => {
-    if (value === undefined || value === null || value === '') {
-      return;
-    }
-    params.set(key, String(value));
-  });
-
-  const query = params.toString();
-  const path = query.length > 0 ? `/analytics/logs/stream?${query}` : '/analytics/logs/stream';
-  return http.resolveUrl(path);
+export function getIntegrations() {
+  return tryFetch(() => http.get('/integrations'), []);
 }
 
 export function testIntegration(id) {
-  return tryFetch(() => http.post(`/integrations/${id}/test`, {}), { ok: true });
+  return tryFetch(() => http.post(`/integrations/${id}/test`, {}), { ok: false, reason: 'network_error', message: 'Could not reach the server' });
 }
 
 export function uploadLeads(formData) {
