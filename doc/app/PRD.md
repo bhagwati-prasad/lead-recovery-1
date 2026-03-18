@@ -3,6 +3,8 @@
 ## Overview
 The AI-Powered Lead Recovery System is an ancillary process designed to recover lost leads from sales funnels, thereby improving sales efficiency by increasing conversion rates and reducing lead losses. The system operates independently of the actual sales funnel and focuses on re-engaging dropped leads through AI-driven conversations.
 
+The backend application shall be implemented using NestJS. The frontend shall be implemented using HTML, CSS, and vanilla JavaScript.
+
 ## Business Objectives
 - Recover lost leads by addressing objections and guiding customers back into the sales funnel.
 - Improve overall sales efficiency through automated lead recovery.
@@ -24,7 +26,7 @@ The AI-Powered Lead Recovery System is an ancillary process designed to recover 
 8. **Reporting and Analytics**: Generate reports on conversion rates, call success, and system performance.
 
 ## UI/UX Requirements
-The user interface shall mimic the design and layout of Visual Studio Code (online version), featuring a responsive web application with a sidebar navigation, tabbed interface, and integrated panels. All icons must be sourced exclusively from Icons8. The UI shall be implemented using HTML and vanilla JavaScript only, without any frameworks or libraries.
+The user interface shall mimic the design and layout of Visual Studio Code (online version), featuring a responsive web application with a sidebar navigation, tabbed interface, and integrated panels. All icons must be sourced exclusively from Icons8. The UI shall be implemented using HTML, CSS, and vanilla JavaScript only, without frontend frameworks or libraries.
 
 ### Core Navigation and Layout
 - **Header Breadcrumb/Selector**: Display hierarchical navigation (Organization > Product > Funnel > Lead/Customer) for context awareness.

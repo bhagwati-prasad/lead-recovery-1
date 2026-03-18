@@ -1,0 +1,32 @@
+.top-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px;
+  background: var(--titlebar-bg);
+  color: var(--titlebar-fg);
+  border-bottom: 1px solid var(--panel-border);
+}
+
+.brand {
+  font-size: 12px;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--titlebar-fg);
+  font-weight: 400;
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--titlebar-fg);
+  opacity: 0.86;
+  font-size: 12px;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}

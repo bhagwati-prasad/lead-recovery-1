@@ -1,0 +1,30 @@
+.toast-region {
+  position: fixed;
+  right: 12px;
+  bottom: 28px;
+  display: grid;
+  gap: 6px;
+  z-index: 120;
+}
+
+lr-toast {
+  display: block;
+  min-width: 300px;
+  max-width: 420px;
+  padding: 8px 10px;
+  border-radius: 2px;
+  border: 1px solid var(--border);
+  background: var(--panel-bg);
+  color: var(--editor-fg);
+}
+
+.status-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 8px;
+  background: var(--statusbar-bg);
+  border-top: 0;
+  color: var(--statusbar-fg);
+  font-size: 12px;
+}

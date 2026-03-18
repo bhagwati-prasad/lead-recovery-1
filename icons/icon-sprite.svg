@@ -1,0 +1,393 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+  <defs>
+    <g id="_core-home"><path d="M3 10.5l9-7 9 7"/><path d="M5 9.5v11h14v-11"/><path d="M10 20.5v-6h4v6"/></g>
+    <g id="_core-grid"><rect x="3" y="3" width="8" height="8" rx="1"/><rect x="13" y="3" width="8" height="5" rx="1"/><rect x="13" y="10" width="8" height="11" rx="1"/><rect x="3" y="13" width="8" height="8" rx="1"/></g>
+    <g id="_core-bell"><path d="M6 17.5h12l-1.5-2v-4a4.5 4.5 0 0 0-9 0v4z"/><path d="M10 19.5a2 2 0 0 0 4 0"/></g>
+    <g id="_core-message"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 7l8.5 6 8.5-6"/></g>
+    <g id="_core-list"><line x1="6" y1="7" x2="20" y2="7"/><line x1="6" y1="12" x2="20" y2="12"/><line x1="6" y1="17" x2="20" y2="17"/><circle cx="4" cy="7" r="0.75" fill="currentColor" stroke="none"/><circle cx="4" cy="12" r="0.75" fill="currentColor" stroke="none"/><circle cx="4" cy="17" r="0.75" fill="currentColor" stroke="none"/></g>
+    <g id="_core-phone"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></g>
+    <g id="_core-phone-out"><use href="#_core-phone"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></g>
+    <g id="_core-phone-in"><use href="#_core-phone"/><polyline points="9 3 3 3 3 9"/><line x1="14" y1="14" x2="3" y2="3"/></g>
+    <g id="_core-phone-ring"><use href="#_core-phone"/><path d="M16.5 4.5a4 4 0 0 1 3 3"/><path d="M14.5 2.5a7 7 0 0 1 5 5"/></g>
+    <g id="_core-user"><circle cx="12" cy="8" r="3.5"/><path d="M5 20a7 7 0 0 1 14 0"/></g>
+    <g id="_core-user-headset"><use href="#_core-user"/><path d="M7 10.5a5 5 0 0 1 10 0"/><line x1="17" y1="12" x2="19" y2="12"/><line x1="19" y1="12" x2="19" y2="14"/></g>
+    <g id="_core-users"><circle cx="9" cy="8" r="3"/><circle cx="16" cy="9" r="2.5"/><path d="M3.5 20a6 6 0 0 1 11 0"/><path d="M12.5 20a5 5 0 0 1 8 0"/></g>
+    <g id="_core-robot"><rect x="6" y="6" width="12" height="10" rx="2"/><circle cx="10" cy="11" r="1" fill="currentColor" stroke="none"/><circle cx="14" cy="11" r="1" fill="currentColor" stroke="none"/><line x1="9" y1="14" x2="15" y2="14"/><line x1="12" y1="3" x2="12" y2="6"/><circle cx="12" cy="2.5" r="0.75" fill="currentColor" stroke="none"/></g>
+    <g id="_core-doc"><path d="M7 2.5h8l4 4v15H7z"/><path d="M15 2.5v4h4"/><line x1="9" y1="12" x2="17" y2="12"/><line x1="9" y1="16" x2="17" y2="16"/></g>
+    <g id="_core-bars"><line x1="4" y1="20" x2="20" y2="20"/><rect x="5" y="12" width="3" height="8" rx="0.5"/><rect x="10.5" y="9" width="3" height="11" rx="0.5"/><rect x="16" y="5" width="3" height="15" rx="0.5"/></g>
+    <g id="_core-line"><line x1="4" y1="20" x2="20" y2="20"/><polyline points="4,16 8,12 12,14 16,8 20,10"/><circle cx="8" cy="12" r="0.75" fill="currentColor" stroke="none"/><circle cx="12" cy="14" r="0.75" fill="currentColor" stroke="none"/><circle cx="16" cy="8" r="0.75" fill="currentColor" stroke="none"/></g>
+    <g id="_core-pie"><circle cx="12" cy="12" r="8.5"/><path d="M12 3.5v8.5h8.5"/></g>
+    <g id="_core-funnel"><path d="M3 4h18l-7 8v6l-4 2v-8z"/></g>
+    <g id="_core-tag"><path d="M3 11l8-8h8v8l-8 8z"/><circle cx="15.5" cy="8.5" r="1" fill="currentColor" stroke="none"/></g>
+    <g id="_core-gear"><circle cx="12" cy="12" r="3.5"/><path d="M12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M5 5l1.8 1.8M17.2 17.2 19 19M5 19l1.8-1.8M17.2 6.8 19 5"/></g>
+    <g id="_core-server"><rect x="4" y="4" width="16" height="6" rx="1"/><rect x="4" y="14" width="16" height="6" rx="1"/><circle cx="7" cy="7" r="0.8" fill="currentColor" stroke="none"/><circle cx="7" cy="17" r="0.8" fill="currentColor" stroke="none"/></g>
+    <g id="_core-db"><ellipse cx="12" cy="5" rx="7" ry="2.5"/><path d="M5 5v10c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5V5"/><path d="M5 10c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5"/></g>
+    <g id="_core-network"><circle cx="12" cy="4" r="2"/><circle cx="5" cy="18" r="2"/><circle cx="19" cy="18" r="2"/><line x1="12" y1="6" x2="6" y2="16"/><line x1="12" y1="6" x2="18" y2="16"/><line x1="7" y1="18" x2="17" y2="18"/></g>
+    <g id="_core-search"><circle cx="10.5" cy="10.5" r="5.5"/><line x1="14.5" y1="14.5" x2="20" y2="20"/></g>
+    <g id="_core-calendar"><rect x="3" y="5" width="18" height="16" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="8" y1="3" x2="8" y2="7"/><line x1="16" y1="3" x2="16" y2="7"/><rect x="8" y="12" width="3" height="3" rx="0.5"/><rect x="13" y="12" width="3" height="3" rx="0.5"/></g>
+    <g id="_core-clock"><circle cx="12" cy="12" r="8.5"/><line x1="12" y1="12" x2="12" y2="7"/><line x1="12" y1="12" x2="16" y2="14.5"/></g>
+    <g id="_core-card"><rect x="3" y="6" width="18" height="12" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="7" y1="15" x2="11" y2="15"/></g>
+    <g id="_core-org"><rect x="5" y="3" width="14" height="18" rx="1"/><line x1="9" y1="7" x2="9" y2="17"/><line x1="15" y1="7" x2="15" y2="17"/><line x1="5" y1="12" x2="19" y2="12"/></g>
+
+    <g id="_badge-check-tr"><polyline points="17.5,4 19.5,6.5 22.5,1.5"/></g>
+    <g id="_badge-cross-tr"><line x1="17.5" y1="1.5" x2="22.5" y2="6.5"/><line x1="22.5" y1="1.5" x2="17.5" y2="6.5"/></g>
+    <g id="_badge-slash-tr"><line x1="18" y1="7" x2="22" y2="1"/></g>
+    <g id="_badge-plus-tr"><line x1="20" y1="1.5" x2="20" y2="6.5"/><line x1="17.5" y1="4" x2="22.5" y2="4"/></g>
+    <g id="_badge-minus-tr"><line x1="17.5" y1="4" x2="22.5" y2="4"/></g>
+    <g id="_badge-up-tr"><line x1="20" y1="7" x2="20" y2="1.5"/><polyline points="17.5,4 20,1.5 22.5,4"/></g>
+    <g id="_badge-right-tr"><line x1="17.5" y1="4" x2="23" y2="4"/><polyline points="20.5,1.5 23,4 20.5,6.5"/></g>
+    <g id="_badge-clock-br"><circle cx="20" cy="20" r="2"/><line x1="20" y1="20" x2="20" y2="18.5"/><line x1="20" y1="20" x2="21.2" y2="20.8"/></g>
+    <g id="_badge-retry-br"><polyline points="17.5,20 19,17.8 20.2,20"/><polyline points="20,22.5 22.2,21.5 20.8,19.8"/><polyline points="17.8,22 19.8,22.5 20.5,20.5"/></g>
+  </defs>
+
+  <symbol id="home" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><g class="icon-core" stroke="#007ACC" stroke-width="1.5"><use href="#_core-home"/></g></symbol>
+  <symbol id="dashboard" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><g class="icon-core" stroke="#007ACC" stroke-width="1.5"><use href="#_core-grid"/></g></symbol>
+  <symbol id="workspace" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><g class="icon-core" stroke="#007ACC" stroke-width="1.5"><use href="#_core-grid"/></g></symbol>
+  <symbol id="overview" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><g class="icon-core" stroke="#007ACC" stroke-width="1.5"><use href="#_core-grid"/></g></symbol>
+  <symbol id="notifications" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><g class="icon-core" stroke="#007ACC" stroke-width="1.5"><use href="#_core-bell"/></g></symbol>
+  <symbol id="messages" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><g class="icon-core" stroke="#007ACC" stroke-width="1.5"><use href="#_core-message"/></g></symbol>
+  <symbol id="tasks" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><g class="icon-core" stroke="#007ACC" stroke-width="1.5"><use href="#_core-list"/></g></symbol>
+  <symbol id="timeline" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><g class="icon-core" stroke="#007ACC" stroke-width="1.5"><use href="#_core-list"/></g></symbol>
+  <symbol id="organization" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><g class="icon-core" stroke="#9CDCFE" stroke-width="1.5"><use href="#_core-org"/></g></symbol>
+
+  <symbol id="calls" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><g class="icon-core" stroke="#4EC9B0" stroke-width="1.5"><use href="#_core-phone"/></g></symbol>
+  <symbol id="call" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#calls"/></symbol>
+  <symbol id="make-call" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><g class="icon-core" stroke="#4EC9B0" stroke-width="1.5"><use href="#_core-phone-out"/></g></symbol>
+  <symbol id="incoming-call" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><g class="icon-core" stroke="#4EC9B0" stroke-width="1.5"><use href="#_core-phone-in"/></g></symbol>
+  <symbol id="outgoing-call" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><g class="icon-core" stroke="#4EC9B0" stroke-width="1.5"><use href="#_core-phone-out"/></g></symbol>
+  <symbol id="call-ringing" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><g class="icon-core" stroke="#4EC9B0" stroke-width="1.5"><use href="#_core-phone-ring"/></g></symbol>
+  <symbol id="call-connected" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><g class="icon-core" stroke="#4EC9B0" stroke-width="1.5"><use href="#_core-phone"/></g><g class="icon-badge" stroke="#22C55E" stroke-width="1.5"><use href="#_badge-check-tr"/></g></symbol>
+  <symbol id="call-failed" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><g class="icon-core" stroke="#4EC9B0" stroke-width="1.5"><use href="#_core-phone"/></g><g class="icon-badge" stroke="#EF4444" stroke-width="1.5"><use href="#_badge-cross-tr"/></g></symbol>
+  <symbol id="call-missed" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><g class="icon-core" stroke="#4EC9B0" stroke-width="1.5"><use href="#_core-phone"/></g><g class="icon-badge" stroke="#EF4444" stroke-width="1.5"><use href="#_badge-cross-tr"/></g></symbol>
+  <symbol id="call-dropped" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><g class="icon-core" stroke="#4EC9B0" stroke-width="1.5"><use href="#_core-phone"/></g><g class="icon-badge" stroke="#F59E0B" stroke-width="1.5"><use href="#_badge-slash-tr"/></g></symbol>
+  <symbol id="call-unanswered" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><g class="icon-core" stroke="#4EC9B0" stroke-width="1.5"><use href="#_core-phone"/></g><g class="icon-badge" stroke="#F59E0B" stroke-width="1.5"><use href="#_badge-slash-tr"/></g></symbol>
+  <symbol id="call-retry" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><g class="icon-core" stroke="#4EC9B0" stroke-width="1.5"><use href="#_core-phone"/></g><g class="icon-badge" stroke="#22C55E" stroke-width="1.5"><use href="#_badge-plus-tr"/></g><g class="icon-badge" stroke="#4FC1FF" stroke-width="1.5"><use href="#_badge-retry-br"/></g></symbol>
+  <symbol id="call-callback" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><g class="icon-core" stroke="#4EC9B0" stroke-width="1.5"><use href="#_core-phone"/></g><g class="icon-badge" stroke="#F59E0B" stroke-width="1.5"><use href="#_badge-clock-br"/></g></symbol>
+  <symbol id="call-forward" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><g class="icon-core" stroke="#4EC9B0" stroke-width="1.5"><use href="#_core-phone-out"/></g><g class="icon-badge" stroke="#22C55E" stroke-width="1.5"><use href="#_badge-right-tr"/></g></symbol>
+  <symbol id="call-transfer" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><g class="icon-core" stroke="#4EC9B0" stroke-width="1.5"><use href="#_core-phone-out"/></g><g class="icon-badge" stroke="#22C55E" stroke-width="1.5"><use href="#_badge-right-tr"/></g></symbol>
+  <symbol id="call-hold" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><g class="icon-core" stroke="#4EC9B0" stroke-width="1.5"><use href="#_core-phone"/></g><g class="icon-badge" stroke="#F59E0B" stroke-width="1.5"><use href="#_badge-minus-tr"/></g></symbol>
+  <symbol id="call-mute" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><g class="icon-core" stroke="#4EC9B0" stroke-width="1.5"><use href="#_core-phone"/></g><g class="icon-badge" stroke="#858585" stroke-width="1.5"><use href="#_badge-slash-tr"/></g></symbol>
+  <symbol id="call-duration" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><g class="icon-core" stroke="#4EC9B0" stroke-width="1.5"><use href="#_core-phone"/></g><g class="icon-badge" stroke="#F59E0B" stroke-width="1.5"><use href="#_badge-clock-br"/></g></symbol>
+  <symbol id="call-summary" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><g class="icon-core" stroke="#4EC9B0" stroke-width="1.5"><use href="#_core-phone"/></g><g class="icon-badge" stroke="#007ACC" stroke-width="1.5"><circle cx="20" cy="20" r="2"/><line x1="20" y1="19.2" x2="20" y2="21.3"/><line x1="20" y1="18" x2="20" y2="18"/></g></symbol>
+
+  <symbol id="answered-calls" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#call-connected"/></symbol>
+  <symbol id="missed-calls" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#call-missed"/></symbol>
+  <symbol id="failed-calls" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#call-failed"/></symbol>
+  <symbol id="dropped-calls" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#call-dropped"/></symbol>
+  <symbol id="live-calls" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><g class="icon-core" stroke="#4EC9B0" stroke-width="1.5"><use href="#_core-phone"/></g><g class="icon-badge" fill="#22C55E" stroke="none"><circle cx="20" cy="4" r="2"/></g></symbol>
+  <symbol id="converted-calls" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><g class="icon-core" stroke="#4EC9B0" stroke-width="1.5"><use href="#_core-phone"/></g><g class="icon-badge" stroke="#22C55E" stroke-width="1.5"><use href="#_badge-right-tr"/></g></symbol>
+
+  <symbol id="customers" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><g class="icon-core" stroke="#9CDCFE" stroke-width="1.5"><use href="#_core-users"/></g></symbol>
+  <symbol id="customer" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><g class="icon-core" stroke="#9CDCFE" stroke-width="1.5"><use href="#_core-user"/></g></symbol>
+  <symbol id="customer-add" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><g class="icon-core" stroke="#9CDCFE" stroke-width="1.5"><use href="#_core-user"/></g><g class="icon-badge" stroke="#22C55E" stroke-width="1.5"><use href="#_badge-plus-tr"/></g></symbol>
+  <symbol id="customer-delete" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><g class="icon-core" stroke="#9CDCFE" stroke-width="1.5"><use href="#_core-user"/></g><g class="icon-badge" stroke="#EF4444" stroke-width="1.5"><use href="#_badge-cross-tr"/></g></symbol>
+
+  <symbol id="leads" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><g class="icon-core" stroke="#CE9178" stroke-width="1.5"><use href="#_core-tag"/></g></symbol>
+  <symbol id="lead" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><g class="icon-core" stroke="#CE9178" stroke-width="1.5"><use href="#_core-tag"/></g></symbol>
+  <symbol id="lead-converted" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><g class="icon-core" stroke="#CE9178" stroke-width="1.5"><use href="#_core-tag"/></g><g class="icon-badge" stroke="#22C55E" stroke-width="1.5"><use href="#_badge-check-tr"/></g></symbol>
+  <symbol id="sales-funnel" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><g class="icon-core" stroke="#CE9178" stroke-width="1.5"><use href="#_core-funnel"/></g></symbol>
+
+  <symbol id="agents" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><g class="icon-core" stroke="#569CD6" stroke-width="1.5"><use href="#_core-users"/></g></symbol>
+  <symbol id="agent" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><g class="icon-core" stroke="#569CD6" stroke-width="1.5"><use href="#_core-user-headset"/></g></symbol>
+  <symbol id="agent-online" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><g class="icon-core" stroke="#569CD6" stroke-width="1.5"><use href="#_core-user-headset"/></g><g class="icon-badge" fill="#22C55E" stroke="none"><circle cx="20" cy="4" r="2"/></g></symbol>
+  <symbol id="agent-offline" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><g class="icon-core" stroke="#569CD6" stroke-width="1.5"><use href="#_core-user-headset"/></g><g class="icon-badge" stroke="#858585" stroke-width="1.5"><use href="#_badge-cross-tr"/></g></symbol>
+  <symbol id="agent-busy" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><g class="icon-core" stroke="#569CD6" stroke-width="1.5"><use href="#_core-user-headset"/></g><g class="icon-badge" stroke="#F59E0B" stroke-width="1.5"><use href="#_badge-slash-tr"/></g></symbol>
+
+  <symbol id="human-agent" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><g class="icon-core" stroke="#569CD6" stroke-width="1.5"><use href="#_core-user"/></g></symbol>
+  <symbol id="human-agent-headset" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><g class="icon-core" stroke="#569CD6" stroke-width="1.5"><use href="#_core-user-headset"/></g></symbol>
+  <symbol id="human-agent-no-headset" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><g class="icon-core" stroke="#569CD6" stroke-width="1.5"><use href="#_core-user"/></g></symbol>
+
+  <symbol id="ai-agent" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><g class="icon-core" stroke="#C586C0" stroke-width="1.5"><use href="#_core-robot"/></g></symbol>
+  <symbol id="ai-agent-headset" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><g class="icon-core" stroke="#C586C0" stroke-width="1.5"><use href="#_core-robot"/><path d="M4 13a8 8 0 0 1 16 0"/><rect x="3" y="12" width="3" height="6" rx="1"/><rect x="18" y="12" width="3" height="6" rx="1"/></g></symbol>
+  <symbol id="ai-agent-no-headset" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#ai-agent"/></symbol>
+
+  <symbol id="analytics" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><g class="icon-core" stroke="#DCDCAA" stroke-width="1.5"><use href="#_core-bars"/></g></symbol>
+  <symbol id="bar-chart" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><g class="icon-core" stroke="#DCDCAA" stroke-width="1.5"><use href="#_core-bars"/></g></symbol>
+  <symbol id="line-chart" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><g class="icon-core" stroke="#DCDCAA" stroke-width="1.5"><use href="#_core-line"/></g></symbol>
+  <symbol id="pie-chart" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><g class="icon-core" stroke="#DCDCAA" stroke-width="1.5"><use href="#_core-pie"/></g></symbol>
+  <symbol id="reports" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><g class="icon-core" stroke="#DCDCAA" stroke-width="1.5"><use href="#_core-doc"/></g></symbol>
+
+  <symbol id="server" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><g class="icon-core" stroke="#858585" stroke-width="1.5"><use href="#_core-server"/></g></symbol>
+  <symbol id="database" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><g class="icon-core" stroke="#858585" stroke-width="1.5"><use href="#_core-db"/></g></symbol>
+  <symbol id="network" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><g class="icon-core" stroke="#858585" stroke-width="1.5"><use href="#_core-network"/></g></symbol>
+  <symbol id="logs" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><g class="icon-core" stroke="#6A9955" stroke-width="1.5"><use href="#_core-doc"/></g></symbol>
+
+  <symbol id="search" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><g class="icon-core" stroke="#007ACC" stroke-width="1.5"><use href="#_core-search"/></g></symbol>
+  <symbol id="settings" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><g class="icon-core" stroke="#007ACC" stroke-width="1.5"><use href="#_core-gear"/></g></symbol>
+  <symbol id="calendar" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><g class="icon-core" stroke="#4EC9B0" stroke-width="1.5"><use href="#_core-calendar"/></g></symbol>
+  <symbol id="scheduler" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><g class="icon-core" stroke="#4EC9B0" stroke-width="1.5"><use href="#_core-calendar"/></g><g class="icon-badge" stroke="#F59E0B" stroke-width="1.5"><use href="#_badge-clock-br"/></g></symbol>
+  <symbol id="watch" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><g class="icon-core" stroke="#4EC9B0" stroke-width="1.5"><use href="#_core-clock"/></g></symbol>
+  <symbol id="stopclock" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><g class="icon-core" stroke="#F59E0B" stroke-width="1.5"><use href="#_core-clock"/></g><g class="icon-badge" stroke="#EF4444" stroke-width="1.5"><use href="#_badge-minus-tr"/></g></symbol>
+  <symbol id="alarmclock" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><g class="icon-core" stroke="#F59E0B" stroke-width="1.5"><use href="#_core-clock"/><polyline points="6,4 4,2 2.5,4"/><polyline points="18,4 20,2 21.5,4"/></g></symbol>
+  <symbol id="scheduledcall" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><g class="icon-core" stroke="#4EC9B0" stroke-width="1.5"><use href="#_core-phone"/></g><g class="icon-badge" stroke="#F59E0B" stroke-width="1.5"><use href="#_badge-clock-br"/></g></symbol>
+  <symbol id="scheduledcalltime" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#scheduledcall"/></symbol>
+
+  <symbol id="online-telephony" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><g class="icon-core" stroke="#4EC9B0" stroke-width="1.5"><use href="#_core-phone-ring"/></g><g class="icon-badge" fill="#22C55E" stroke="none"><circle cx="20" cy="4" r="2"/></g></symbol>
+  <symbol id="sip-trunk" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><g class="icon-core" stroke="#4EC9B0" stroke-width="1.5"><use href="#_core-server"/><line x1="12" y1="10" x2="12" y2="14"/></g></symbol>
+  <symbol id="ivr" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><g class="icon-core" stroke="#4EC9B0" stroke-width="1.5"><use href="#_core-phone"/><rect x="15" y="2" width="7" height="9" rx="1"/><line x1="16.5" y1="4.5" x2="20.5" y2="4.5"/><line x1="16.5" y1="7" x2="20.5" y2="7"/></g></symbol>
+  <symbol id="predictive-dialer" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><g class="icon-core" stroke="#4EC9B0" stroke-width="1.5"><use href="#_core-phone"/><use href="#_badge-up-tr"/></g></symbol>
+  <symbol id="softphone" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><g class="icon-core" stroke="#4EC9B0" stroke-width="1.5"><rect x="5" y="2.5" width="14" height="19" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><use href="#_core-phone"/></g></symbol>
+  <symbol id="voip-gateway" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><g class="icon-core" stroke="#4EC9B0" stroke-width="1.5"><use href="#_core-server"/><use href="#_badge-right-tr"/></g></symbol>
+
+  <symbol id="crm-org" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><g class="icon-core" stroke="#9CDCFE" stroke-width="1.5"><use href="#_core-org"/></g></symbol>
+  <symbol id="crm-products" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><g class="icon-core" stroke="#9CDCFE" stroke-width="1.5"><use href="#_core-card"/><line x1="15" y1="16" x2="18" y2="16"/></g></symbol>
+  <symbol id="finance-product" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><g class="icon-core" stroke="#CE9178" stroke-width="1.5"><use href="#_core-card"/></g></symbol>
+  <symbol id="product-loan" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><g class="icon-core" stroke="#CE9178" stroke-width="1.5"><use href="#_core-card"/><line x1="15" y1="13" x2="18" y2="13"/><line x1="16.5" y1="11.5" x2="16.5" y2="14.5"/></g></symbol>
+  <symbol id="product-credit-card" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><g class="icon-core" stroke="#CE9178" stroke-width="1.5"><use href="#_core-card"/></g></symbol>
+  <symbol id="funnel-sections" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><g class="icon-core" stroke="#CE9178" stroke-width="1.5"><use href="#_core-funnel"/><line x1="7" y1="8" x2="17" y2="8"/><line x1="9" y1="12" x2="15" y2="12"/></g></symbol>
+  <symbol id="contact-center" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><g class="icon-core" stroke="#569CD6" stroke-width="1.5"><use href="#_core-users"/><line x1="3" y1="4" x2="21" y2="4"/></g></symbol>
+
+  <symbol id="icon-call" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#call"/></symbol>
+
+  <symbol id="task-complete" viewBox="0 0 24 24" fill="none"><use href="#tasks"/></symbol>
+  <symbol id="task-pending" viewBox="0 0 24 24" fill="none"><use href="#tasks"/></symbol>
+  <symbol id="task-overdue" viewBox="0 0 24 24" fill="none"><use href="#tasks"/></symbol>
+  <symbol id="activity" viewBox="0 0 24 24" fill="none"><use href="#timeline"/></symbol>
+  <symbol id="recent" viewBox="0 0 24 24" fill="none"><use href="#timeline"/></symbol>
+  <symbol id="favorites" viewBox="0 0 24 24" fill="none"><use href="#home"/></symbol>
+  <symbol id="announcements" viewBox="0 0 24 24" fill="none"><use href="#notifications"/></symbol>
+  <symbol id="shortcuts" viewBox="0 0 24 24" fill="none"><use href="#tasks"/></symbol>
+  <symbol id="quick-actions" viewBox="0 0 24 24" fill="none"><use href="#tasks"/></symbol>
+  <symbol id="command-palette" viewBox="0 0 24 24" fill="none"><use href="#search"/></symbol>
+  <symbol id="workspace-switch" viewBox="0 0 24 24" fill="none"><use href="#organization"/></symbol>
+
+  <symbol id="active-call" viewBox="0 0 24 24" fill="none"><use href="#live-calls"/></symbol>
+  <symbol id="call-connecting" viewBox="0 0 24 24" fill="none"><use href="#call-ringing"/></symbol>
+  <symbol id="call-ended" viewBox="0 0 24 24" fill="none"><use href="#call-connected"/></symbol>
+  <symbol id="call-declined" viewBox="0 0 24 24" fill="none"><use href="#call-missed"/></symbol>
+  <symbol id="call-conference" viewBox="0 0 24 24" fill="none"><use href="#calls"/></symbol>
+  <symbol id="call-merge" viewBox="0 0 24 24" fill="none"><use href="#call-transfer"/></symbol>
+  <symbol id="call-split" viewBox="0 0 24 24" fill="none"><use href="#call-transfer"/></symbol>
+  <symbol id="call-queue" viewBox="0 0 24 24" fill="none"><use href="#call-callback"/></symbol>
+  <symbol id="call-routing" viewBox="0 0 24 24" fill="none"><use href="#call-forward"/></symbol>
+  <symbol id="call-distribution" viewBox="0 0 24 24" fill="none"><use href="#call-forward"/></symbol>
+  <symbol id="call-monitor" viewBox="0 0 24 24" fill="none"><use href="#calls"/></symbol>
+  <symbol id="call-whisper" viewBox="0 0 24 24" fill="none"><use href="#calls"/></symbol>
+  <symbol id="call-barge" viewBox="0 0 24 24" fill="none"><use href="#calls"/></symbol>
+  <symbol id="call-coaching" viewBox="0 0 24 24" fill="none"><use href="#calls"/></symbol>
+  <symbol id="call-pause" viewBox="0 0 24 24" fill="none"><use href="#call-hold"/></symbol>
+  <symbol id="call-resume" viewBox="0 0 24 24" fill="none"><use href="#call-connected"/></symbol>
+  <symbol id="call-unhold" viewBox="0 0 24 24" fill="none"><use href="#call-connected"/></symbol>
+  <symbol id="call-unmute" viewBox="0 0 24 24" fill="none"><use href="#call-connected"/></symbol>
+  <symbol id="call-volume" viewBox="0 0 24 24" fill="none"><use href="#calls"/></symbol>
+  <symbol id="call-keypad" viewBox="0 0 24 24" fill="none"><use href="#ivr"/></symbol>
+  <symbol id="call-tags" viewBox="0 0 24 24" fill="none"><use href="#calls"/></symbol>
+  <symbol id="call-notes" viewBox="0 0 24 24" fill="none"><use href="#call-summary"/></symbol>
+  <symbol id="call-rating" viewBox="0 0 24 24" fill="none"><use href="#call-summary"/></symbol>
+
+  <symbol id="total-calls" viewBox="0 0 24 24" fill="none"><use href="#calls"/></symbol>
+  <symbol id="abandoned-calls" viewBox="0 0 24 24" fill="none"><use href="#call-dropped"/></symbol>
+  <symbol id="unpicked-calls" viewBox="0 0 24 24" fill="none"><use href="#call-unanswered"/></symbol>
+  <symbol id="recovered-leads" viewBox="0 0 24 24" fill="none"><use href="#lead-converted"/></symbol>
+  <symbol id="escalated-calls" viewBox="0 0 24 24" fill="none"><use href="#call-forward"/></symbol>
+  <symbol id="call-success-rate" viewBox="0 0 24 24" fill="none"><use href="#analytics"/></symbol>
+  <symbol id="call-resolution-rate" viewBox="0 0 24 24" fill="none"><use href="#analytics"/></symbol>
+  <symbol id="avg-call-duration" viewBox="0 0 24 24" fill="none"><use href="#call-duration"/></symbol>
+  <symbol id="avg-wait-time" viewBox="0 0 24 24" fill="none"><use href="#call-duration"/></symbol>
+  <symbol id="queue-length" viewBox="0 0 24 24" fill="none"><use href="#analytics"/></symbol>
+  <symbol id="peak-call-time" viewBox="0 0 24 24" fill="none"><use href="#call-duration"/></symbol>
+  <symbol id="calls-per-agent" viewBox="0 0 24 24" fill="none"><use href="#agents"/></symbol>
+  <symbol id="calls-per-minute" viewBox="0 0 24 24" fill="none"><use href="#analytics"/></symbol>
+  <symbol id="sla-compliance" viewBox="0 0 24 24" fill="none"><use href="#analytics"/></symbol>
+  <symbol id="customer-satisfaction" viewBox="0 0 24 24" fill="none"><use href="#customer"/></symbol>
+  <symbol id="sentiment-score" viewBox="0 0 24 24" fill="none"><use href="#analytics"/></symbol>
+
+  <symbol id="customer-profile" viewBox="0 0 24 24" fill="none"><use href="#customer"/></symbol>
+  <symbol id="customer-edit" viewBox="0 0 24 24" fill="none"><use href="#customer"/></symbol>
+  <symbol id="customer-search" viewBox="0 0 24 24" fill="none"><use href="#search"/></symbol>
+  <symbol id="customer-history" viewBox="0 0 24 24" fill="none"><use href="#customer"/></symbol>
+  <symbol id="customer-contact" viewBox="0 0 24 24" fill="none"><use href="#customer"/></symbol>
+  <symbol id="customer-location" viewBox="0 0 24 24" fill="none"><use href="#customer"/></symbol>
+  <symbol id="customer-notes" viewBox="0 0 24 24" fill="none"><use href="#call-summary"/></symbol>
+  <symbol id="customer-feedback" viewBox="0 0 24 24" fill="none"><use href="#customer"/></symbol>
+  <symbol id="customer-support" viewBox="0 0 24 24" fill="none"><use href="#contact-center"/></symbol>
+  <symbol id="customer-segment" viewBox="0 0 24 24" fill="none"><use href="#customers"/></symbol>
+  <symbol id="customer-tag" viewBox="0 0 24 24" fill="none"><use href="#lead"/></symbol>
+  <symbol id="customer-priority" viewBox="0 0 24 24" fill="none"><use href="#customer"/></symbol>
+  <symbol id="customer-blacklist" viewBox="0 0 24 24" fill="none"><use href="#customer-delete"/></symbol>
+  <symbol id="customer-loyalty" viewBox="0 0 24 24" fill="none"><use href="#customer"/></symbol>
+  <symbol id="customer-journey" viewBox="0 0 24 24" fill="none"><use href="#line-chart"/></symbol>
+
+  <symbol id="lead-add" viewBox="0 0 24 24" fill="none"><use href="#lead"/></symbol>
+  <symbol id="lead-edit" viewBox="0 0 24 24" fill="none"><use href="#lead"/></symbol>
+  <symbol id="lead-delete" viewBox="0 0 24 24" fill="none"><use href="#lead"/></symbol>
+  <symbol id="lead-qualified" viewBox="0 0 24 24" fill="none"><use href="#lead-converted"/></symbol>
+  <symbol id="lead-unqualified" viewBox="0 0 24 24" fill="none"><use href="#lead"/></symbol>
+  <symbol id="lead-contacted" viewBox="0 0 24 24" fill="none"><use href="#call-connected"/></symbol>
+  <symbol id="lead-followup" viewBox="0 0 24 24" fill="none"><use href="#scheduledcall"/></symbol>
+  <symbol id="lead-lost" viewBox="0 0 24 24" fill="none"><use href="#lead"/></symbol>
+  <symbol id="lead-score" viewBox="0 0 24 24" fill="none"><use href="#analytics"/></symbol>
+  <symbol id="lead-source" viewBox="0 0 24 24" fill="none"><use href="#lead"/></symbol>
+  <symbol id="lead-pipeline" viewBox="0 0 24 24" fill="none"><use href="#sales-funnel"/></symbol>
+  <symbol id="sales-opportunity" viewBox="0 0 24 24" fill="none"><use href="#lead"/></symbol>
+  <symbol id="sales-target" viewBox="0 0 24 24" fill="none"><use href="#analytics"/></symbol>
+  <symbol id="sales-achieved" viewBox="0 0 24 24" fill="none"><use href="#lead-converted"/></symbol>
+  <symbol id="sales-revenue" viewBox="0 0 24 24" fill="none"><use href="#finance-product"/></symbol>
+  <symbol id="sales-report" viewBox="0 0 24 24" fill="none"><use href="#reports"/></symbol>
+  <symbol id="sales-growth" viewBox="0 0 24 24" fill="none"><use href="#line-chart"/></symbol>
+
+  <symbol id="agent-away" viewBox="0 0 24 24" fill="none"><use href="#agent-offline"/></symbol>
+  <symbol id="agent-on-call" viewBox="0 0 24 24" fill="none"><use href="#agent-online"/></symbol>
+  <symbol id="agent-break" viewBox="0 0 24 24" fill="none"><use href="#agent-offline"/></symbol>
+  <symbol id="agent-performance" viewBox="0 0 24 24" fill="none"><use href="#analytics"/></symbol>
+  <symbol id="agent-ranking" viewBox="0 0 24 24" fill="none"><use href="#analytics"/></symbol>
+  <symbol id="agent-training" viewBox="0 0 24 24" fill="none"><use href="#agent"/></symbol>
+  <symbol id="agent-evaluation" viewBox="0 0 24 24" fill="none"><use href="#analytics"/></symbol>
+  <symbol id="agent-coaching" viewBox="0 0 24 24" fill="none"><use href="#agent"/></symbol>
+  <symbol id="agent-availability" viewBox="0 0 24 24" fill="none"><use href="#scheduler"/></symbol>
+  <symbol id="agent-schedule" viewBox="0 0 24 24" fill="none"><use href="#scheduler"/></symbol>
+  <symbol id="agent-shift" viewBox="0 0 24 24" fill="none"><use href="#scheduler"/></symbol>
+  <symbol id="agent-team" viewBox="0 0 24 24" fill="none"><use href="#agents"/></symbol>
+  <symbol id="agent-supervisor" viewBox="0 0 24 24" fill="none"><use href="#agent"/></symbol>
+
+  <symbol id="ai" viewBox="0 0 24 24" fill="none"><use href="#ai-agent"/></symbol>
+  <symbol id="ai-assistant" viewBox="0 0 24 24" fill="none"><use href="#ai-agent"/></symbol>
+  <symbol id="ai-training" viewBox="0 0 24 24" fill="none"><use href="#ai-agent"/></symbol>
+  <symbol id="ai-prediction" viewBox="0 0 24 24" fill="none"><use href="#ai-agent"/></symbol>
+  <symbol id="ai-recommendation" viewBox="0 0 24 24" fill="none"><use href="#ai-agent"/></symbol>
+  <symbol id="ai-automation" viewBox="0 0 24 24" fill="none"><use href="#ai-agent"/></symbol>
+  <symbol id="ai-insights" viewBox="0 0 24 24" fill="none"><use href="#ai-agent"/></symbol>
+  <symbol id="ai-listening" viewBox="0 0 24 24" fill="none"><use href="#ai-agent"/></symbol>
+  <symbol id="ai-analysis" viewBox="0 0 24 24" fill="none"><use href="#ai-agent"/></symbol>
+  <symbol id="ai-summarization" viewBox="0 0 24 24" fill="none"><use href="#ai-agent"/></symbol>
+  <symbol id="ai-transcription" viewBox="0 0 24 24" fill="none"><use href="#ai-agent"/></symbol>
+  <symbol id="ai-sentiment" viewBox="0 0 24 24" fill="none"><use href="#ai-agent"/></symbol>
+  <symbol id="ai-intent" viewBox="0 0 24 24" fill="none"><use href="#ai-agent"/></symbol>
+  <symbol id="ai-classification" viewBox="0 0 24 24" fill="none"><use href="#ai-agent"/></symbol>
+  <symbol id="ai-optimization" viewBox="0 0 24 24" fill="none"><use href="#ai-agent"/></symbol>
+
+  <symbol id="voice" viewBox="0 0 24 24" fill="none"><use href="#calls"/></symbol>
+  <symbol id="voice-bot" viewBox="0 0 24 24" fill="none"><use href="#ai-agent"/></symbol>
+  <symbol id="voice-recognition" viewBox="0 0 24 24" fill="none"><use href="#voice"/></symbol>
+  <symbol id="voice-synthesis" viewBox="0 0 24 24" fill="none"><use href="#voice"/></symbol>
+  <symbol id="voice-model" viewBox="0 0 24 24" fill="none"><use href="#voice"/></symbol>
+  <symbol id="voice-language" viewBox="0 0 24 24" fill="none"><use href="#voice"/></symbol>
+  <symbol id="voice-accent" viewBox="0 0 24 24" fill="none"><use href="#voice"/></symbol>
+  <symbol id="voice-quality" viewBox="0 0 24 24" fill="none"><use href="#voice"/></symbol>
+  <symbol id="voice-volume" viewBox="0 0 24 24" fill="none"><use href="#voice"/></symbol>
+  <symbol id="voice-settings" viewBox="0 0 24 24" fill="none"><use href="#settings"/></symbol>
+
+  <symbol id="nlp" viewBox="0 0 24 24" fill="none"><use href="#ai-agent"/></symbol>
+  <symbol id="nlp-entity" viewBox="0 0 24 24" fill="none"><use href="#nlp"/></symbol>
+  <symbol id="nlp-intent" viewBox="0 0 24 24" fill="none"><use href="#nlp"/></symbol>
+  <symbol id="nlp-keywords" viewBox="0 0 24 24" fill="none"><use href="#nlp"/></symbol>
+  <symbol id="nlp-parser" viewBox="0 0 24 24" fill="none"><use href="#nlp"/></symbol>
+  <symbol id="nlp-summary" viewBox="0 0 24 24" fill="none"><use href="#nlp"/></symbol>
+  <symbol id="nlp-translation" viewBox="0 0 24 24" fill="none"><use href="#nlp"/></symbol>
+  <symbol id="llm" viewBox="0 0 24 24" fill="none"><use href="#ai-agent"/></symbol>
+  <symbol id="llm-chat" viewBox="0 0 24 24" fill="none"><use href="#ai-agent"/></symbol>
+  <symbol id="llm-prompt" viewBox="0 0 24 24" fill="none"><use href="#ai-agent"/></symbol>
+  <symbol id="llm-response" viewBox="0 0 24 24" fill="none"><use href="#ai-agent"/></symbol>
+  <symbol id="llm-context" viewBox="0 0 24 24" fill="none"><use href="#ai-agent"/></symbol>
+  <symbol id="llm-evaluation" viewBox="0 0 24 24" fill="none"><use href="#analytics"/></symbol>
+
+  <symbol id="charts" viewBox="0 0 24 24" fill="none"><use href="#bar-chart"/></symbol>
+  <symbol id="heatmap" viewBox="0 0 24 24" fill="none"><use href="#dashboard"/></symbol>
+  <symbol id="trend-up" viewBox="0 0 24 24" fill="none"><use href="#line-chart"/></symbol>
+  <symbol id="trend-down" viewBox="0 0 24 24" fill="none"><use href="#line-chart"/></symbol>
+  <symbol id="forecast" viewBox="0 0 24 24" fill="none"><use href="#line-chart"/></symbol>
+  <symbol id="comparison" viewBox="0 0 24 24" fill="none"><use href="#line-chart"/></symbol>
+  <symbol id="export-report" viewBox="0 0 24 24" fill="none"><use href="#reports"/></symbol>
+  <symbol id="scheduled-report" viewBox="0 0 24 24" fill="none"><use href="#reports"/></symbol>
+  <symbol id="data-table" viewBox="0 0 24 24" fill="none"><use href="#dashboard"/></symbol>
+
+  <symbol id="system-health" viewBox="0 0 24 24" fill="none"><use href="#server"/></symbol>
+  <symbol id="load-balancer" viewBox="0 0 24 24" fill="none"><use href="#network"/></symbol>
+  <symbol id="api" viewBox="0 0 24 24" fill="none"><use href="#server"/></symbol>
+  <symbol id="api-latency" viewBox="0 0 24 24" fill="none"><use href="#server"/></symbol>
+  <symbol id="uptime" viewBox="0 0 24 24" fill="none"><use href="#watch"/></symbol>
+  <symbol id="downtime" viewBox="0 0 24 24" fill="none"><use href="#stopclock"/></symbol>
+  <symbol id="cpu-usage" viewBox="0 0 24 24" fill="none"><use href="#server"/></symbol>
+  <symbol id="memory-usage" viewBox="0 0 24 24" fill="none"><use href="#server"/></symbol>
+  <symbol id="disk-usage" viewBox="0 0 24 24" fill="none"><use href="#server"/></symbol>
+  <symbol id="error-rate" viewBox="0 0 24 24" fill="none"><use href="#analytics"/></symbol>
+
+  <symbol id="audit-log" viewBox="0 0 24 24" fill="none"><use href="#logs"/></symbol>
+  <symbol id="activity-log" viewBox="0 0 24 24" fill="none"><use href="#logs"/></symbol>
+  <symbol id="security-log" viewBox="0 0 24 24" fill="none"><use href="#logs"/></symbol>
+  <symbol id="api-log" viewBox="0 0 24 24" fill="none"><use href="#logs"/></symbol>
+  <symbol id="error-log" viewBox="0 0 24 24" fill="none"><use href="#logs"/></symbol>
+  <symbol id="warning-log" viewBox="0 0 24 24" fill="none"><use href="#logs"/></symbol>
+  <symbol id="debug-log" viewBox="0 0 24 24" fill="none"><use href="#logs"/></symbol>
+  <symbol id="log-search" viewBox="0 0 24 24" fill="none"><use href="#search"/></symbol>
+  <symbol id="log-filter" viewBox="0 0 24 24" fill="none"><use href="#search"/></symbol>
+
+  <symbol id="integrations" viewBox="0 0 24 24" fill="none"><use href="#network"/></symbol>
+  <symbol id="api-integration" viewBox="0 0 24 24" fill="none"><use href="#integrations"/></symbol>
+  <symbol id="webhook" viewBox="0 0 24 24" fill="none"><use href="#integrations"/></symbol>
+  <symbol id="crm-integration" viewBox="0 0 24 24" fill="none"><use href="#integrations"/></symbol>
+  <symbol id="payment-integration" viewBox="0 0 24 24" fill="none"><use href="#integrations"/></symbol>
+  <symbol id="email-integration" viewBox="0 0 24 24" fill="none"><use href="#integrations"/></symbol>
+  <symbol id="sms-integration" viewBox="0 0 24 24" fill="none"><use href="#integrations"/></symbol>
+  <symbol id="voip-integration" viewBox="0 0 24 24" fill="none"><use href="#integrations"/></symbol>
+  <symbol id="chat-integration" viewBox="0 0 24 24" fill="none"><use href="#integrations"/></symbol>
+  <symbol id="automation-integration" viewBox="0 0 24 24" fill="none"><use href="#integrations"/></symbol>
+
+  <symbol id="appointment" viewBox="0 0 24 24" fill="none"><use href="#scheduler"/></symbol>
+  <symbol id="reminder" viewBox="0 0 24 24" fill="none"><use href="#scheduler"/></symbol>
+  <symbol id="meeting" viewBox="0 0 24 24" fill="none"><use href="#scheduler"/></symbol>
+  <symbol id="time-slot" viewBox="0 0 24 24" fill="none"><use href="#scheduler"/></symbol>
+  <symbol id="shift-schedule" viewBox="0 0 24 24" fill="none"><use href="#scheduler"/></symbol>
+  <symbol id="holiday-calendar" viewBox="0 0 24 24" fill="none"><use href="#calendar"/></symbol>
+
+  <symbol id="advanced-search" viewBox="0 0 24 24" fill="none"><use href="#search"/></symbol>
+  <symbol id="filter" viewBox="0 0 24 24" fill="none"><use href="#sales-funnel"/></symbol>
+  <symbol id="sort" viewBox="0 0 24 24" fill="none"><use href="#line-chart"/></symbol>
+  <symbol id="group" viewBox="0 0 24 24" fill="none"><use href="#customers"/></symbol>
+  <symbol id="tag" viewBox="0 0 24 24" fill="none"><use href="#lead"/></symbol>
+  <symbol id="bookmark" viewBox="0 0 24 24" fill="none"><use href="#home"/></symbol>
+
+  <symbol id="preferences" viewBox="0 0 24 24" fill="none"><use href="#settings"/></symbol>
+  <symbol id="theme" viewBox="0 0 24 24" fill="none"><use href="#settings"/></symbol>
+  <symbol id="dark-mode" viewBox="0 0 24 24" fill="none"><use href="#settings"/></symbol>
+  <symbol id="light-mode" viewBox="0 0 24 24" fill="none"><use href="#settings"/></symbol>
+  <symbol id="user-profile" viewBox="0 0 24 24" fill="none"><use href="#customer"/></symbol>
+  <symbol id="user-management" viewBox="0 0 24 24" fill="none"><use href="#customers"/></symbol>
+  <symbol id="roles" viewBox="0 0 24 24" fill="none"><use href="#settings"/></symbol>
+  <symbol id="permissions" viewBox="0 0 24 24" fill="none"><use href="#settings"/></symbol>
+  <symbol id="security" viewBox="0 0 24 24" fill="none"><use href="#settings"/></symbol>
+  <symbol id="authentication" viewBox="0 0 24 24" fill="none"><use href="#settings"/></symbol>
+  <symbol id="api-keys" viewBox="0 0 24 24" fill="none"><use href="#settings"/></symbol>
+  <symbol id="billing" viewBox="0 0 24 24" fill="none"><use href="#finance-product"/></symbol>
+  <symbol id="subscription" viewBox="0 0 24 24" fill="none"><use href="#finance-product"/></symbol>
+
+  <symbol id="add" viewBox="0 0 24 24" fill="none"><use href="#customer-add"/></symbol>
+  <symbol id="edit" viewBox="0 0 24 24" fill="none"><use href="#customer"/></symbol>
+  <symbol id="delete" viewBox="0 0 24 24" fill="none"><use href="#customer-delete"/></symbol>
+  <symbol id="save" viewBox="0 0 24 24" fill="none"><use href="#reports"/></symbol>
+  <symbol id="download" viewBox="0 0 24 24" fill="none"><use href="#reports"/></symbol>
+  <symbol id="upload" viewBox="0 0 24 24" fill="none"><use href="#reports"/></symbol>
+  <symbol id="refresh" viewBox="0 0 24 24" fill="none"><use href="#call-retry"/></symbol>
+  <symbol id="sync" viewBox="0 0 24 24" fill="none"><use href="#call-retry"/></symbol>
+  <symbol id="copy" viewBox="0 0 24 24" fill="none"><use href="#reports"/></symbol>
+  <symbol id="paste" viewBox="0 0 24 24" fill="none"><use href="#reports"/></symbol>
+  <symbol id="share" viewBox="0 0 24 24" fill="none"><use href="#network"/></symbol>
+  <symbol id="link" viewBox="0 0 24 24" fill="none"><use href="#network"/></symbol>
+  <symbol id="unlink" viewBox="0 0 24 24" fill="none"><use href="#network"/></symbol>
+  <symbol id="expand" viewBox="0 0 24 24" fill="none"><use href="#dashboard"/></symbol>
+  <symbol id="collapse" viewBox="0 0 24 24" fill="none"><use href="#dashboard"/></symbol>
+  <symbol id="fullscreen" viewBox="0 0 24 24" fill="none"><use href="#dashboard"/></symbol>
+  <symbol id="exit-fullscreen" viewBox="0 0 24 24" fill="none"><use href="#dashboard"/></symbol>
+
+  <symbol id="success" viewBox="0 0 24 24" fill="none"><use href="#call-connected"/></symbol>
+  <symbol id="warning" viewBox="0 0 24 24" fill="none"><use href="#call-dropped"/></symbol>
+  <symbol id="error" viewBox="0 0 24 24" fill="none"><use href="#call-failed"/></symbol>
+  <symbol id="info" viewBox="0 0 24 24" fill="none"><use href="#call-summary"/></symbol>
+  <symbol id="loading" viewBox="0 0 24 24" fill="none"><use href="#watch"/></symbol>
+  <symbol id="processing" viewBox="0 0 24 24" fill="none"><use href="#watch"/></symbol>
+  <symbol id="paused" viewBox="0 0 24 24" fill="none"><use href="#call-hold"/></symbol>
+  <symbol id="completed" viewBox="0 0 24 24" fill="none"><use href="#call-connected"/></symbol>
+  <symbol id="cancelled" viewBox="0 0 24 24" fill="none"><use href="#call-failed"/></symbol>
+
+  <symbol id="phone" viewBox="0 0 24 24" fill="none"><use href="#calls"/></symbol>
+  <symbol id="email" viewBox="0 0 24 24" fill="none"><use href="#messages"/></symbol>
+  <symbol id="sms" viewBox="0 0 24 24" fill="none"><use href="#messages"/></symbol>
+  <symbol id="chat" viewBox="0 0 24 24" fill="none"><use href="#messages"/></symbol>
+  <symbol id="whatsapp" viewBox="0 0 24 24" fill="none"><use href="#messages"/></symbol>
+  <symbol id="telegram" viewBox="0 0 24 24" fill="none"><use href="#messages"/></symbol>
+  <symbol id="video-call" viewBox="0 0 24 24" fill="none"><use href="#calls"/></symbol>
+  <symbol id="screen-share" viewBox="0 0 24 24" fill="none"><use href="#dashboard"/></symbol>
+
+  <symbol id="sandglass" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><g class="icon-core" stroke="#F59E0B" stroke-width="1.5"><path d="M7 3h10"/><path d="M7 21h10"/><path d="M8 3c0 4 3 4.5 4 6 1 1.5 0 2.5-1 3.5S8 14 8 21"/><path d="M16 3c0 4-3 4.5-4 6-1 1.5 0 2.5 1 3.5S16 14 16 21"/></g></symbol>
+</svg>

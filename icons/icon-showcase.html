@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Lead Recovery Icon Showcase</title>
+<style>
+:root {
+  --bg: #0f1720;
+  --surface: #152230;
+  --line: #24384a;
+  --text: #d7e6f5;
+  --muted: #8ea5ba;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: radial-gradient(circle at 10% 0%, #1f3142, #0f1720 55%);
+  color: var(--text);
+  font: 14px/1.4 "Segoe UI", system-ui, sans-serif;
+}
+.wrapper { max-width: 1320px; margin: 0 auto; padding: 24px; }
+h1 { margin: 0 0 8px; font-size: 24px; }
+p { margin: 0 0 16px; color: var(--muted); }
+input {
+  width: 360px;
+  max-width: 100%;
+  background: #0e1923;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  color: var(--text);
+  padding: 10px 12px;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: 12px;
+}
+.sections {
+  margin-top: 16px;
+  display: grid;
+  gap: 18px;
+}
+.section {
+  background: rgba(10, 17, 24, 0.35);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 14px;
+}
+.section h2 {
+  margin: 0 0 10px;
+  font-size: 15px;
+  color: #9fd4ff;
+}
+.toolbar {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.hint {
+  font-size: 12px;
+  color: var(--muted);
+}
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 10px;
+}
+.row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+.name { color: var(--muted); font-size: 12px; word-break: break-word; }
+.icon {
+  display: inline-flex;
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+}
+.icon svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  color: #9fd4ff;
+}
+</style>
+</head>
+<body>
+<div class="wrapper">
+  <h1>SVG Sprite Sheet Showcase</h1>
+  <p>Supports class usage: <span class="code">&lt;span class="icon icon-call"&gt;&lt;/span&gt;</span></p>
+  <div class="toolbar">
+    <input id="search" placeholder="Filter icons by name..." />
+    <span class="hint">Categories are parsed from icon_list.txt plus custom sections.</span>
+  </div>
+  <div id="sections" class="sections"></div>
+</div>
+
+<script>
+const EXTRA_CATEGORIES = [
+  {
+    title: 'Telephony (Custom)',
+    icons: ['online-telephony', 'sip-trunk', 'ivr', 'predictive-dialer', 'softphone', 'voip-gateway']
+  },
+  {
+    title: 'CRM Applications (Custom)',
+    icons: ['crm-org', 'organization', 'crm-products', 'finance-product', 'product-loan', 'product-credit-card', 'sales-funnel', 'funnel-sections']
+  },
+  {
+    title: 'Customer Contact Center (Custom)',
+    icons: [
+      'contact-center',
+      'human-agent', 'human-agent-headset', 'human-agent-no-headset',
+      'ai-agent', 'ai-agent-headset', 'ai-agent-no-headset',
+      'agent', 'agent-online', 'agent-offline', 'agent-busy', 'agent-on-call'
+    ]
+  }
+];
+
+function toSvg(iconName) {
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  svg.setAttribute('viewBox', '0 0 24 24');
+  svg.setAttribute('aria-hidden', 'true');
+  const use = document.createElementNS('http://www.w3.org/2000/svg', 'use');
+  use.setAttribute('href', 'icon-sprite.svg#' + iconName);
+  svg.appendChild(use);
+  return svg;
+}
+
+function mountSpanIcons(root = document) {
+  root.querySelectorAll('span.icon').forEach((el) => {
+    if (el.querySelector('svg')) return;
+    const iconClass = [...el.classList].find((c) => c.startsWith('icon-') && c !== 'icon');
+    if (!iconClass) return;
+    const iconName = iconClass.replace(/^icon-/, '');
+    el.appendChild(toSvg(iconName));
+  });
+}
+
+async function getSpriteIconIds() {
+  const response = await fetch('icon-sprite.svg');
+  const text = await response.text();
+  const ids = [...text.matchAll(/<symbol\s+id="([a-z0-9-]+)"/g)].map((m) => m[1]);
+  return [...new Set(ids)].sort();
+}
+
+async function parseIconListCategories() {
+  const response = await fetch('icon_list.txt');
+  const text = await response.text();
+  const lines = text.split(/\r?\n/);
+  const categories = [];
+  let current = null;
+
+  for (const line of lines) {
+    const header = line.match(/^#\s+\d+\.\s+(.+)$/);
+    if (header) {
+      current = { title: header[1].trim(), icons: [] };
+      categories.push(current);
+      continue;
+    }
+
+    const row = line.match(/^\|\s*([a-z0-9-]+)\s*\|/i);
+    if (!row || !current) {
+      continue;
+    }
+
+    const iconName = row[1].trim();
+    if (iconName.toLowerCase() === 'icon' || /^-+$/.test(iconName)) {
+      continue;
+    }
+    current.icons.push(iconName);
+  }
+
+  return categories.map((cat) => ({
+    title: cat.title,
+    icons: [...new Set(cat.icons)]
+  }));
+}
+
+function renderSections(categories, spriteIds, filter = '') {
+  const spriteSet = new Set(spriteIds);
+  const sectionsRoot = document.getElementById('sections');
+  sectionsRoot.innerHTML = '';
+  const q = filter.toLowerCase();
+
+  categories.forEach((category) => {
+    const filtered = category.icons
+      .filter((id) => spriteSet.has(id))
+      .filter((id) => id.includes(q));
+
+    if (filtered.length === 0) {
+      return;
+    }
+
+    const section = document.createElement('section');
+    section.className = 'section';
+
+    const title = document.createElement('h2');
+    title.textContent = category.title + ' (' + filtered.length + ')';
+    section.appendChild(title);
+
+    const grid = document.createElement('div');
+    grid.className = 'grid';
+
+    filtered.forEach((id) => {
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.innerHTML = '<div class="row"><span class="icon icon-' + id + '"></span><strong>' + id + '</strong></div>' +
+        '<div class="name">&lt;span class="icon icon-' + id + '"&gt;&lt;/span&gt;</div>';
+      grid.appendChild(card);
+    });
+
+    section.appendChild(grid);
+    sectionsRoot.appendChild(section);
+  });
+
+  mountSpanIcons(sectionsRoot);
+}
+
+async function init() {
+  const [spriteIds, listCategories] = await Promise.all([
+    getSpriteIconIds(),
+    parseIconListCategories()
+  ]);
+
+  const allCategories = [...listCategories, ...EXTRA_CATEGORIES];
+  renderSections(allCategories, spriteIds, '');
+
+  document.getElementById('search').addEventListener('input', (e) => {
+    renderSections(allCategories, spriteIds, e.target.value.trim());
+  });
+
+  mountSpanIcons(document);
+}
+
+init();
+</script>
+</body>
+</html>

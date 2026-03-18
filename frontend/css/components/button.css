@@ -1,0 +1,40 @@
+button,
+.btn {
+  border: 1px solid transparent;
+  border-radius: 2px;
+  background: var(--button-bg);
+  color: var(--button-fg);
+  font-weight: 400;
+  padding: 4px 12px;
+  min-height: 28px;
+  cursor: pointer;
+}
+
+button:hover,
+.btn:hover {
+  background: var(--button-hover);
+}
+
+button.ghost,
+.btn.ghost {
+  background: var(--button-secondary-bg);
+  color: var(--editor-fg);
+  border-color: var(--panel-border);
+}
+
+button.ghost:hover,
+.btn.ghost:hover {
+  background: var(--button-secondary-hover);
+}
+
+button.warn,
+.btn.warn {
+  background: var(--danger);
+  color: #ffffff;
+}
+
+button:disabled,
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

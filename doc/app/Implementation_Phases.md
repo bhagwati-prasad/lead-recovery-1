@@ -3,11 +3,14 @@
 ## Overview
 This implementation plan has been updated to incorporate the detailed [Call Workflow Plan](conversation.md), ensuring a modular, adaptable backend system for AI-driven conversations. The plan emphasizes granular workflow modules, composability, and third-party service integration while maintaining the original phased approach with enhanced detail.
 
+> **Detailed Phase Plans:** Each phase below has a dedicated implementation document with tasks, data models, interfaces, testing strategies, and acceptance criteria. See the [phases/ directory](phases/index.md) for the full set.
+
 ## Phase 1: Foundation and Infrastructure Setup
 **Duration:** 1-2 months  
+**Detailed Plan:** [phases/phase-1-foundation.md](phases/phase-1-foundation.md)
 **Objectives:** Establish core infrastructure, basic data handling, and initial workflow modules.  
 **Deliverables:**
-- Project scaffolding with modular architecture.
+- Project scaffolding with modular NestJS backend architecture.
 - Basic CRM integration (internal/external).
 - Initial workflow modules: Customer Data Retrieval, Customer Context Acquisition.
 - Configuration system foundation.
@@ -15,16 +18,17 @@ This implementation plan has been updated to incorporate the detailed [Call Work
 - Unit tests for core modules.
 
 **Milestones:**
-- Define module interfaces (`execute`, `validateInputs`, `isFusable`, `canSkip`).
+- Define module interfaces (`execute`, `validateInputs`, `getDependencies`, `isFusable`, `canSkip`).
 - Implement data models for customers, funnels, and conversations.
-- Set up dependency injection and module registry.
+- Set up NestJS dependency injection, application modules, and module registry.
 - Establish CI/CD pipeline for automated testing.
 
 ## Phase 2: Core Call Workflow Implementation
 **Duration:** 2-3 months  
+**Detailed Plan:** [phases/phase-2-core-call-workflow.md](phases/phase-2-core-call-workflow.md)
 **Objectives:** Build the primary conversation workflow modules.  
 **Deliverables:**
-- Workflow modules 3-6: Call Preparation, Call Initiation, Welcome Message Generation, Customer Response Processing.
+- Workflow modules 3-7: Call Preparation, Call Initiation, Welcome Message Generation, Customer Response Processing.
 - Basic speech-to-text and text-to-speech integrations (Eleven Labs, Sarvam AI).
 - Conversation loop management with simple state tracking.
 - Initial assessment mechanism (rule-based scoring).
@@ -39,6 +43,7 @@ This implementation plan has been updated to incorporate the detailed [Call Work
 
 ## Phase 3: Adaptability Framework and Orchestration
 **Duration:** 1-2 months  
+**Detailed Plan:** [phases/phase-3-adaptability-framework.md](phases/phase-3-adaptability-framework.md)
 **Objectives:** Enable dynamic step fusion, skippable steps, and workflow orchestration.  
 **Deliverables:**
 - Workflow Orchestrator component.
@@ -50,12 +55,13 @@ This implementation plan has been updated to incorporate the detailed [Call Work
 **Milestones:**
 - Implement step fusion logic (service-level and workflow-level).
 - Add skippable step support with pass-through/default outputs.
-- Develop configuration management UI components.
+- Develop configuration management REST API endpoints for orchestration inspection and dry runs.
 - Test hybrid workflows (internal + external services).
 - Validate composability with different service combinations.
 
 ## Phase 4: Advanced Conversation Features
 **Duration:** 2 months  
+**Detailed Plan:** [phases/phase-4-advanced-conversation.md](phases/phase-4-advanced-conversation.md)
 **Objectives:** Add sophisticated conversation management and assessment.  
 **Deliverables:**
 - Accomplishment assessment with ML-based scoring.
@@ -73,9 +79,10 @@ This implementation plan has been updated to incorporate the detailed [Call Work
 
 ## Phase 5: User Interface and Administration
 **Duration:** 2-3 months  
+**Detailed Plan:** [phases/phase-5-ui-administration.md](phases/phase-5-ui-administration.md)
 **Objectives:** Build the VS Code-inspired web interface for system management.  
 **Deliverables:**
-- Responsive HTML/vanilla JavaScript UI mimicking VS Code layout.
+- Responsive HTML/CSS/vanilla JavaScript UI mimicking VS Code layout.
 - Dashboard with key metrics and real-time monitoring.
 - Funnel configuration interface (drag-and-drop editor).
 - Customer management (tiny CRM) with search and filters.
@@ -84,13 +91,14 @@ This implementation plan has been updated to incorporate the detailed [Call Work
 
 **Milestones:**
 - Implement hierarchical navigation (Organization > Product > Funnel > Lead).
-- Create sidebar tabs: Dashboard, Customers, Products & Funnels, Calls, Agents, Analytics, Settings.
+- Create sidebar tabs: Dashboard, Customers, Products & Funnels, Calls, Agents, Analytics, Settings, User Account.
 - Add real-time call monitoring with transcript views.
-- Develop file upload support for lead ingestion (CSV/Excel).
+- Develop file upload support for lead ingestion (CSV/JSON/Excel).
 - Ensure mobile responsiveness and accessibility.
 
 ## Phase 6: Integration, Testing, and Optimization
 **Duration:** 2 months  
+**Detailed Plan:** [phases/phase-6-integration-testing.md](phases/phase-6-integration-testing.md)
 **Objectives:** Full system integration, comprehensive testing, and performance optimization.  
 **Deliverables:**
 - Complete third-party integrations (Sarvam AI, Eleven Labs, communication services).
@@ -108,6 +116,7 @@ This implementation plan has been updated to incorporate the detailed [Call Work
 
 ## Phase 7: Advanced Analytics and Self-Improvement
 **Duration:** Ongoing  
+**Detailed Plan:** [phases/phase-7-analytics-self-improvement.md](phases/phase-7-analytics-self-improvement.md)
 **Objectives:** Enable continuous learning and advanced reporting.  
 **Deliverables:**
 - ML-based conversion probability models.
@@ -132,9 +141,8 @@ This implementation plan has been updated to incorporate the detailed [Call Work
 - **User Adoption:** Involve stakeholders in iterative testing and feedback loops.
 
 ## Dependencies
-- Sarvam AI and Eleven Labs integrations must be finalized before Phase 2.
+- Mock implementations for Sarvam AI and Eleven Labs are sufficient through Phase 5; production integrations are finalized in Phase 6.
 - CRM API specifications needed for Phase 1.
-- Funnel definition structures required for Phase 3.
 - UI wireframes approved before Phase 5.
 
 ## Success Metrics

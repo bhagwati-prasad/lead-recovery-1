@@ -21,6 +21,8 @@
 2. The atomic steps should be composable, so that a third party service can be directly used in place of a set of steps or a single step.
 3. The system should be configurable. For example, users should be able to create a funnel (according to process), assign funnel and funnel stage features, assign potential objections for funnel.
 
-## Initial tech stack : The steps should be merged according to offerings of service providers listed below
-1. Sarvam AI
-2. Eleven lab
+## Initial tech stack
+1. NestJS for the backend application
+2. HTML, CSS, and vanilla JavaScript for the frontend application
+3. Sarvam AI
+4. Eleven lab
