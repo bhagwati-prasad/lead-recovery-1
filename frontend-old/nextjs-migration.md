@@ -9,6 +9,7 @@ Migrate the current vanilla JS frontend to Next.js with minimal business-logic r
 - Preserve UX parity first, optimize second.
 - Isolate API/data access behind a single client layer.
 - Add guardrails (tests, lint, type checks) as part of migration, not after.
+- Centralize telemetry and frontend log emission through `/frontend/instrumentation.ts`.
 
 ## Target Stack
 - Next.js (App Router)
@@ -24,6 +25,7 @@ Migrate the current vanilla JS frontend to Next.js with minimal business-logic r
 - `lib/api/` for HTTP client and endpoint wrappers
 - `lib/state/` for client state utilities (as needed)
 - `styles/` for global and module styles
+- `/frontend/instrumentation.ts` as the single frontend telemetry/log bootstrap and registration point
 
 ## Phasewise Plan
 
@@ -57,15 +59,18 @@ Tasks:
 2. Configure environment variables for backend base URL.
 3. Build shared API client layer (`lib/api/client.ts`).
 4. Add base layout shell (sidebar/header placeholders).
-5. Add linting/typecheck/test scripts.
+5. Add `/frontend/instrumentation.ts` and wire telemetry/log generation from app startup.
+6. Add linting/typecheck/test scripts.
 
 Deliverables:
 - Running Next.js app shell
 - Shared API client abstraction
+- Instrumentation bootstrap active for telemetry and frontend logs
 - CI-ready scripts for lint/typecheck/build
 
 Exit criteria:
 - App boots and can call backend health endpoint successfully.
+- Telemetry/log events are emitted via `/frontend/instrumentation.ts`.
 
 Estimated effort:
 - 1 to 1.5 days
@@ -120,10 +125,12 @@ Tasks:
 2. Migrate Logs page with SSE subscription and polling fallback.
 3. Keep query/filter semantics aligned with backend endpoints.
 4. Add client-side resilience for stream reconnect and errors.
+5. Route logs and telemetry for stream lifecycle events through `/frontend/instrumentation.ts`.
 
 Deliverables:
 - Next.js Integrations page
 - Next.js Logs page (SSE + fallback)
+- Instrumented stream/connectivity logs visible through centralized frontend telemetry
 
 Exit criteria:
 - Live logs and integration checks behave same or better than current UI.
@@ -159,7 +166,7 @@ Tasks:
 1. Introduce server rendering where beneficial.
 2. Optimize bundle splits and dynamic imports.
 3. Add caching strategy for API-heavy screens.
-4. Add monitoring for route and interaction performance.
+4. Add monitoring for route and interaction performance via `/frontend/instrumentation.ts`.
 5. Run accessibility and regression test pass.
 
 Deliverables:
@@ -178,7 +185,7 @@ Objective:
 
 Tasks:
 1. Deploy Next.js behind feature flag or staged rollout.
-2. Observe error/performance telemetry.
+2. Observe error/performance telemetry and frontend logs emitted from `/frontend/instrumentation.ts`.
 3. Remove old frontend assets and dead code.
 4. Update docs and onboarding guide.
 
@@ -215,14 +222,19 @@ This order prioritizes high-change and high-interaction views early.
 - Risk: Scope creep in design refresh during migration.
   - Mitigation: Freeze visual redesign until parity phase completes.
 
+- Risk: Fragmented telemetry/log implementations across routes.
+  - Mitigation: Enforce `/frontend/instrumentation.ts` as the only frontend telemetry/log registration point.
+
 ## Definition of Done (Project)
 - All major routes migrated to Next.js.
 - Existing backend endpoints fully supported.
 - Parity checklist passed for each migrated view.
 - Lint/typecheck/build/test gates are green.
+- Frontend telemetry and logs are emitted through `/frontend/instrumentation.ts`.
 - Legacy frontend entrypoints removed.
 
 ## Immediate Next Steps
 1. Create Next.js app scaffold under `frontend-next/` (or replace `frontend/` after alignment).
 2. Implement shared API client and environment config.
-3. Start Phase 3 with Customers view as first vertical slice.
+3. Add `/frontend/instrumentation.ts` for telemetry/log bootstrap and validate event flow.
+4. Start Phase 3 with Customers view as first vertical slice.
